@@ -1,0 +1,79 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  9.1 Step css
+/*----------------------------------------*/
+
+.tp-step {
+    &-bg-shape {
+        position: absolute;
+        top: 66%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: -1;
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+    }
+    &-wrapper {
+        &:hover {
+            & .tp-step-icon span img {
+                filter: brightness(0) invert(0);
+                transition: .4s;
+            }
+            & .tp-step-shap-1 {
+                visibility: visible;
+                opacity: 1;
+                transition: .4s;
+            }
+            & .tp-step-thumb > img {
+                visibility: hidden;
+                opacity: 0;
+                transition: .4s;
+            }
+            & .tp-step-shap-1 img {
+                animation: circle-animations 15s forwards infinite alternate;
+            }
+        }
+    }
+    &-title {
+        &:hover {
+            color: var(--tp-theme-primary);
+        }
+    }
+    &-icon {
+        & span {
+            & img {
+                transition: .4s;
+            }
+        }
+    }
+    &-thumb {
+        & > img {
+            transition: .4s;
+        }
+    }
+    &-shap {
+        &-1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+            transition: .4s;
+            & img {
+                @include transition;
+            }
+        }
+    }
+    &-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: 11;
+    }
+}

@@ -1,0 +1,22 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  8.0 Error css
+/*----------------------------------------*/
+
+.tp-error {
+    &-thumb {
+        & img {
+            @media #{$md,$xs} {
+                width: 100%;
+            }
+        }
+    }
+    &-title {
+        font-size: 18px;
+        color: var(--tp-common-black);
+        font-weight: 400;
+        font-family: var(--tp-ff-body);
+        margin-bottom: 60px;
+    }
+}

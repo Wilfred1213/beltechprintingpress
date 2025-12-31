@@ -1,0 +1,245 @@
+@use '../utils' as *;
+
+
+
+/*----------------------------------------*/
+/*  2.3 Buttons
+/*----------------------------------------*/
+
+
+// header btn
+.tp-header {
+    &-btn {
+        background: var(--tp-common-black);
+        color: var(--tp-common-white);
+        display: inline-block;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+        padding: 10px 43px;
+        transition: 0.3s;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 0%;
+            background: var(--tp-theme-primary);
+            left: 0;
+            top: 0;
+            z-index: -1;
+            transition: 0.5s;
+            transform: scale(0);
+            opacity: 0;
+        }
+        &:hover {
+            color: var(--tp-common-white);
+            &::before {
+                transform: scale(1);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+
+// tp btn
+.tp-btn {
+    background: var(--tp-theme-primary);
+    color: var(--tp-common-white);
+    display: inline-block;
+    padding: 15px 43px;
+    transition: 0.3s;
+    overflow: hidden;
+    font-weight: 700;
+    font-family: var(--tp-ff-heading);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    &::before {
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 0%;
+        background: var(--tp-common-black);
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: 0.5s;
+        transform: scale(0);
+        opacity: 0;
+    }
+    &:hover {
+        color: var(--tp-common-white);
+        &::before {
+            transform: scale(1);
+            opacity: 1;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+
+
+// secondary btn
+.tp-btn {
+    &-secondary {
+        background: var(--tp-theme-primary);
+        color: var(--tp-common-white);
+        display: inline-block;
+        padding: 15px 43px;
+        transition: 0.3s;
+        overflow: hidden;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+        position: relative;
+        z-index: 1;
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 0%;
+            background: var(--tp-common-black);
+            left: 0;
+            top: 0;
+            z-index: -1;
+            transition: 0.5s;
+            transform: scale(0);
+            opacity: 0;
+        }
+        &:hover {
+            color: var(--tp-common-white);
+            &::before {
+                transform: scale(1);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+// white btn
+.tp-btn {
+    &-white {
+        background: var(--tp-common-white);
+        color: var(--tp-common-black);
+        display: inline-block;
+        padding: 15px 43px;
+        transition: 0.3s;
+        overflow: hidden;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+        position: relative;
+        z-index: 1;
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 0%;
+            background: var(--tp-common-black);
+            left: 0;
+            top: 0;
+            z-index: -1;
+            transition: 0.5s;
+            transform: scale(0);
+            opacity: 0;
+        }
+        &:hover {
+            color: var(--tp-common-white);
+            &::before {
+                transform: scale(1);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+// white btn
+.tp-btn {
+    &-border {
+        background: transparent;
+        color: var(--tp-common-white);
+        border: 1px solid var(--tp-common-white);
+        display: inline-block;
+        padding: 14px 43px;
+        transition: 0.3s;
+        overflow: hidden;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+        position: relative;
+        z-index: 1;
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 0%;
+            background: var(--tp-common-white);
+            left: 0;
+            top: 0;
+            z-index: -1;
+            transition: 0.5s;
+            transform: scale(0);
+            opacity: 0;
+        }
+        &:hover {
+            color: var(--tp-common-black);
+            &::before {
+                transform: scale(1);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+// tp red btn 
+.tp-btn {
+    &-red {
+        background: var(--tp-theme-secondary);
+        color: var(--tp-common-white);
+        display: inline-block;
+        padding: 15px 43px;
+        transition: 0.3s;
+        overflow: hidden;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+        position: relative;
+        z-index: 1;
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 0%;
+            background: var(--tp-common-black);
+            left: 0;
+            top: 0;
+            z-index: -1;
+            transition: 0.5s;
+            transform: scale(0);
+            opacity: 0;
+        }
+        &:hover {
+            color: var(--tp-common-white);
+            &::before {
+                transform: scale(1);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+

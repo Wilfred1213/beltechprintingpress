@@ -1,0 +1,32 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  6.4 Footer Style 4
+/*----------------------------------------*/
+
+
+.tp-footer {
+    &-4 {
+        &-area {
+            background: #f3f5ff;
+        }
+        &-top {
+            padding: 120px 0 40px;
+        }
+        &-list {
+            & ul {
+                & li {
+                    &:hover {
+                        margin-left: 10px;
+                        color: var(--tp-theme-secondary);
+                    }
+                }
+            }
+        }
+        &-gallery-img {
+            &::before {
+                background-color: var(--tp-theme-secondary);
+            }
+        }
+    }
+}

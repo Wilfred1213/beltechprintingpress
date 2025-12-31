@@ -1,0 +1,348 @@
+
+{% extends 'beltechApp/base/base.html' %}
+{% load static %}
+
+{% block title %}Home Page {% endblock %}
+
+{% block content %}
+    
+    
+
+<div id="smooth-wrapper">
+    {% comment %} <div id="smooth-content"> {% endcomment %}
+        
+        <!-- breadcrumb area start -->
+        <section class="tp-breadcrumb-area tp-slider-spacing-inner p-relative z-index-1">
+            <div class="tp-breadcrumb-bg-shape">
+                {% for nav in navs %}
+                <img class="tp-breadcrumb-bg-shape-{{ forloop.counter }}" src="{{ nav.image.url }}" alt="shape">
+                {% endfor %}
+                
+            </div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-5">
+                        <div class="tp-breadcrumb-content">
+                            <h2 class="tp-breadcrumb-title">Our Service</h2>
+                            <p class="tp-breadcrumb-body"><span><a class="home" href="index.html">Home <span class="spacing">_</span> </a></span>Our Service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- breadcrumb area end -->
+
+        <!-- product-top area start -->
+        <section class="tp-product-2-area pt-120 pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="tp-section-title-wrapper mb-30">
+                        <h6 class="tp-section-sub-title">WE ALWYAS BELIEVE IN QUALITY</h6>
+                        <h3 class="tp-section-title mb-35 tp-split-text right">Explore All Catagories</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="tp-product-2-slider p-relative">
+                            <div class="tp-product-2-active swiper-container wow fadeInUp">
+                                <div class="swiper-wrapper">
+                                    <!-- Slide  -->
+                                    {% for category in categories %}
+                                    <div class="tp-product-2-wrapper tp-costom-wrapper-hover fix swiper-slide">
+                                        <div class="tp-product-2-thumb fix mb-15">
+                                            <div class="tp-costom-inner-hover">
+                                                <a href="shop-details.html"><img src="{{ category.image.url }}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="tp-product-2-content text-center">
+                                            <h4 class="tp-product-2-title"><a href="shop-details.html">{{ category.name }}</a></h4>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                            <div class="tp-product-2-arrow-box">
+                                <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+                                    <i class="fa-sharp fa-regular fa-arrow-left"></i>
+                                </button>
+                                <button class="slider-next" tabindex="0" aria-label="Next slide">
+                                    <i class="fa-sharp fa-regular fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product-top area end -->
+
+
+
+        <!-- product-center area start -->
+        <section class="tp-product-area pb-140">
+            <div class="container-fluid">
+                <div class="row tp-product-row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="tp-product-bg-overlay tp-product-3-bg-overlay fix wow fadeInUp">
+                            <div class="row align-items-center">
+                                <div class="col-xl-5 col-lg-7 col-md-5">
+                                    <div class="tp-product-left-wrapper">
+                                        <div class="tp-product-content p-relative z-index-11">
+                                            <h6 class="tp-product-sub-title">LATEST DESIGn</h6>
+                                            <h3 class="tp-product-title">Mockup Doy pack</h3>
+                                            <div class="tp-product-btn tp-product-3-btn">
+                                                <a class="tp-btn-border" href="cart.html"><span>Shop Now</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-7 col-lg-5 col-md-7">
+                                    <div class="tp-product-right-wrapper">
+                                        <div class="tp-product-right-img one p-relative z-index-1">
+                                            <img src="assets/img/product/product-3-img1.png" alt="">
+                                            <div class="tp-product-right-img-shape">
+                                                <img src="assets/img/product/product-box-shape1.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="tp-product-bg-overlay tp-product-3-bg-overlay two fix wow fadeInUp">
+                            <div class="row align-items-center">
+                                <div class="col-xl-4 col-lg-7 col-md-4">
+                                    <div class="tp-product-left-wrapper">
+                                        <div class="tp-product-content p-relative z-index-11">
+                                            <h6 class="tp-product-sub-title">LATEST DESIGn</h6>
+                                            <h3 class="tp-product-title">T-Shirt
+                                                Printing</h3>
+                                            <div class="tp-product-btn tp-product-3-btn two">
+                                                <a class="tp-btn-border" href="cart.html"><span>Shop Now</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-8 col-lg-5 col-md-8">
+                                    <div class="tp-product-right-wrapper">
+                                        <div class="tp-product-right-img two p-relative z-index-1">
+                                            <img src="assets/img/product/product-3-img2.png" alt="">
+                                            <div class="tp-product-right-img-shape-two">
+                                                <img src="assets/img/product/product-box-shape2.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product-center area end -->
+
+
+
+        <!-- shop area start -->
+        <section class="tp-product-area pb-40">
+            <div class="container">
+                <div class="row align-items-center mb-45">
+                    <div class="col-xl-8 col-lg-8">
+                        <div class="tp-product-3-coundown-wrapper d-flex">
+                            <div class="tp-product-3-coundown-title mr-30">
+                                <h3 class="tp-split-text right">Date of the Day</h3>
+                            </div>
+                            <div class="tp-product-3-countdown" data-countdown data-date="Dec 30 2026 20:20:12">
+                                <div class="tp-product-3-countdown-inner">
+                                    <ul>
+                                        <li><span data-days>0</span>:</li>
+                                        <li><span data-hours>0</span>:</li>
+                                        <li><span data-minutes>0</span>:</li>
+                                        <li><span data-seconds>0</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="tp-product-3-coundown-btn d-flex justify-content-end">
+                            <a class="tp-btn-border" href="cart.html"><span>View All Products</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-end mb-50">
+                    {% for product in products %}
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <div class="product_wrapper two mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                            <div class="product__item p-relative">
+                                <div class="product__top-brand d-flex justify-content-between mb-15">
+                                    <div class="product__top-name">
+                                        <i class="fas fa-folder"></i>
+                                        <span>{{ product.category.name|default:"Product" }}</span>
+                                    </div>
+                                    <div class="product__top-price">
+                                        <a href="cart.html">N{{ product.base_price }}</a>
+                                    </div>
+                                </div>
+                                <div class="product__thumb w-img p-relative fix mb-10">
+                                    <a href="shop-details.html">
+                                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="product__action d-flex flex-column flex-wrap">
+                                        <button type="button" class="product-action-btn">
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span class="product-action-tooltip">Add To Wishlist</span>
+                                        </button>
+                                        <button type="button" class="product-action-btn" data-bs-toggle="modal" data-bs-target="#productModal">
+                                            <i class="fa-regular fa-eye"></i>
+                                            <span class="product-action-tooltip">Quick view</span>
+                                        </button>
+                                    </div>
+                                    <div class="product__add transition-3">
+                                        <button type="button" class="product-add-cart-btn w-100">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product__content text-center">
+                                    <div class="product__content-wrapper">
+                                        <h3 class="product__title">
+                                            <a href="shop-details.html">{{ product.name }}</a>
+                                        </h3>
+                                    </div>
+                                    <div class="product__rating d-flex justify-content-center">
+                                        <span><i class="fa-solid fa-star"></i></span>
+                                        <span><i class="fa-solid fa-star"></i></span>
+                                        <span><i class="fa-solid fa-star"></i></span>
+                                        <span><i class="fa-solid fa-star"></i></span>
+                                        <span><i class="fa-solid fa-star"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- shop area end -->
+
+        <!-- blog area start -->
+        <section class="tp-blog-3-area pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="tp-section-title-wrapper mb-45 text-center">
+                        <h6 class="tp-section-sub-title">OUR LATEST BLOGS</h6>
+                        <h3 class="tp-section-title mb-35 tp-split-text right">Read Our Latest Blog Post</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="tp-blog-3-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                            <div class="tp-blog-3-thumb p-relative z-index-1 mb-15 not-hide-cursor" data-cursor="View<br>Demo">
+                                <a class="cursor-hide" href="blog-details.html"><img src="assets/img/blog/blog-3-thumb1.jpg" alt=""></a>
+                                <div class="tp-blog-3-date">
+                                    <span>15</span>
+                                    <span class="two">Mar</span>
+                                </div>
+                            </div>
+                            <div class="tp-blog-3-tag d-flex">
+                                <a href="blog-details.html">Printing</a>
+                                <a href="blog-details.html">Agency</a>
+                            </div>
+                            <div class="tp-blog-3-content">
+                                <h4 class="tp-blog-3-title"><a href="blog-details.html">What’s the Main Challange
+                                        of Printing Service</a></h4>
+                            </div>
+                            <div class="tp-blog-3-member-detalis d-flex align-items-center">
+                                <div class="tp-blog-3-member-thumb mr-15">
+                                    <img src="assets/img/blog/blog-3-member1.png" alt="">
+                                </div>
+                                <div class="tp-blog-3-name">
+                                    <h4>Janes Cooper</h4>
+                                    <span>August 3, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="tp-blog-3-wrapper mb-30 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
+                            <div class="tp-blog-3-thumb p-relative z-index-1 mb-15 not-hide-cursor" data-cursor="View<br>Demo">
+                                <a class="cursor-hide" href="blog-details.html"><img src="assets/img/blog/blog-3-thumb2.jpg" alt=""></a>
+                                <div class="tp-blog-3-date">
+                                    <span>15</span>
+                                    <span class="two">Mar</span>
+                                </div>
+                            </div>
+                            <div class="tp-blog-3-tag d-flex">
+                                <a href="blog-details.html">Printing</a>
+                                <a href="blog-details.html">Agency</a>
+                            </div>
+                            <div class="tp-blog-3-content">
+                                <h4 class="tp-blog-3-title"><a href="blog-details.html">Best 3D Printing Modern
+                                        Equipment Team</a></h4>
+                            </div>
+                            <div class="tp-blog-3-member-detalis d-flex align-items-center">
+                                <div class="tp-blog-3-member-thumb mr-15">
+                                    <img src="assets/img/blog/blog-3-member2.png" alt="">
+                                </div>
+                                <div class="tp-blog-3-name">
+                                    <h4>Laila Veni</h4>
+                                    <span>August 3, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="tp-blog-3-wrapper mb-30 wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
+                            <div class="tp-blog-3-thumb z-index-1 p-relative mb-15 not-hide-cursor" data-cursor="View<br>Demo">
+                                <a class="cursor-hide" href="blog-details.html"><img src="assets/img/blog/blog-3-thumb3.jpg" alt=""></a>
+                                <div class="tp-blog-3-date">
+                                    <span>15</span>
+                                    <span class="two">Mar</span>
+                                </div>
+                            </div>
+                            <div class="tp-blog-3-tag d-flex">
+                                <a href="blog-details.html">Printing</a>
+                                <a href="blog-details.html">Agency</a>
+                            </div>
+                            <div class="tp-blog-3-content">
+                                <h4 class="tp-blog-3-title"><a href="blog-details.html">What’s the Main Challange
+                                        of Printing Service</a></h4>
+                            </div>
+                            <div class="tp-blog-3-member-detalis d-flex align-items-center">
+                                <div class="tp-blog-3-member-thumb mr-15">
+                                    <img src="assets/img/blog/blog-3-member3.png" alt="">
+                                </div>
+                                <div class="tp-blog-3-name">
+                                    <h4>Anne Marry</h4>
+                                    <span>August 3, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- blog area end -->
+</div>
+
+
+
+        
+    
+    
+
+
+
+    
+
+
+
+
+
+
+{% endblock %}

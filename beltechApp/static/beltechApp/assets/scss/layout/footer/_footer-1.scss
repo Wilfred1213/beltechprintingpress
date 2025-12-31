@@ -1,0 +1,185 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  6.1 Footer Style 1
+/*----------------------------------------*/
+
+
+
+.tp-footer {
+    &-area {
+        background: #edeef2;
+        margin-top: -100px;      
+    }
+    &-top {
+        padding: 230px 0 45px;
+    }
+    &-widget-cutm-pdg {
+        &-2 {
+            @media #{$lg} {
+                padding-left: 20px;
+            }
+            @media #{$md,$xs} {
+                padding-left: 0;
+            }
+        }
+        &-3 {
+            @media #{$md,$xs} {
+                margin-left: 0;
+            }
+        }
+    }
+    &-two-item {
+        @media #{$lg} {
+            margin-left: 40px;
+        }
+        @media #{$md,$xs} {
+            margin-left: 0;
+        }
+    }
+    &-three-item {
+        margin-left: -11px;
+        @media #{$xs} {
+            margin-left: 0;
+        }
+    }
+    &-four-item {
+        margin-left: -50px;
+        @media #{$md,$xs} {
+            margin-left: 0;
+        }
+
+    }
+    &-logo {
+        margin-top: -10px;
+        margin-bottom: 32px;
+    }
+    &-text p {
+        line-height: 26px;
+        font-weight: 500;
+        margin-bottom: 28px;
+        @media #{$md} {
+            width: 84%;
+        }
+        @media #{$sm} {
+            font-size: 15px;
+        }
+        & br {
+            @media #{$xl,$lg,$sm,$xs} {
+                display: none;
+            }
+        }
+
+    }
+    &-title {
+        color: var(--tp-common-black);
+        margin-bottom: 36px;
+        margin-top: -8px;
+    }
+    &-list {
+        & ul {
+            & li {
+                list-style: none;
+                margin-bottom: 6px;
+                position: relative;
+                @include transition;
+                &::before {
+                    content: "\2b";
+                    position: absolute;
+                    left: -14px;
+                    top: 0;
+                    visibility: hidden;
+                    opacity: 0;
+                    font-weight: 700;
+                    @include transition;
+                }
+                & a {
+                    font-weight: 500;
+                }
+                &:hover {
+                    margin-left: 10px;
+                    color: var(--tp-theme-primary);
+                    &::before {
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+    &-call {
+        color: var(--tp-common-black);
+        font-weight: 500;
+        display: block;
+        margin-bottom: 4px;
+        & span {
+            margin-right: 8px;
+        }
+    }
+    &-gallery-img {
+        margin-right: 10px;
+        margin-bottom: 15px;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--tp-theme-primary);
+            -webkit-transition: all 0.5s 0s ease-out;
+            -moz-transition: all 0.5s 0s ease-out;
+            -ms-transition: all 0.5s 0s ease-out;
+            -o-transition: all 0.5s 0s ease-out;
+            transition: all 0.5s 0s ease-out;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1;
+        }
+        &:hover {
+            &::before {
+                width: 100%;
+                visibility: visible;
+                opacity: 1;
+            }
+            & .tp-footer-gallery-icon {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+    &-gallery-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 22px;
+        color: var(--tp-common-white);
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: all 0.5s 0s ease-out;
+        -moz-transition: all 0.5s 0s ease-out;
+        -ms-transition: all 0.5s 0s ease-out;
+        -o-transition: all 0.5s 0s ease-out;
+        transition: all 0.5s 0s ease-out;
+        z-index: 2;
+        &:hover {
+            color: var(--tp-common-black);
+        }
+    }
+    &-bg {
+        background: #252135;
+    }
+    &-copy-paragraph {
+        font-weight: 500;
+        font-family: var(--tp-ff-heading);
+        @media #{$xs} {
+            font-size: 15px;
+        }
+        & a {
+            color: var(--tp-theme-primary);
+        }
+
+    }
+}

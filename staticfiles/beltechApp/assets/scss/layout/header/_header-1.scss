@@ -1,0 +1,169 @@
+@use '../../utils' as *;
+
+
+
+
+/*----------------------------------------*/
+/*  3.1 Header Style 1
+/*----------------------------------------*/
+
+
+
+
+.tp-header {
+
+	// Header Top
+	&-top {
+		background: #daf1f6;
+		padding: 0 245px;
+		@media #{$xxl} {
+			padding: 0 90px;
+        }
+		@media #{$xl} {
+			padding: 0 60px;
+        }
+		&-address {
+			& span {
+				font-size: 14px;
+				color: var(--tp-common-black);
+				font-weight: 700;
+				& img {
+					margin-top: -3px;
+					margin-right: 6px;
+				}
+			}
+		}
+		&-text {
+			@media #{$xl} {
+				width: 106%;
+			}
+			& span {
+				font-size: 14px;
+				color: var(--tp-common-black);
+				font-weight: 700;
+				padding: 6px 0;
+				display: inline-block;
+			}
+		}
+		&-social {
+			& a {
+				color: #77a7b1;
+				margin-right: 16px;
+				font-size: 18px;
+				&:last-child {
+					margin-right: 0;
+				}
+				&:hover {
+					color: var(--tp-common-black);
+				}
+			}
+		}
+	}
+
+
+	// Header Center
+	&-center {
+		background: var(--tp-common-white);
+		border-bottom: 1px solid #ddd;
+		padding: 0 245px;
+		@media #{$xxl} {
+			padding: 0 90px;
+        }
+		@media #{$xl} {
+			padding: 0 60px;
+        }
+		&-search-input {
+			position: relative;
+			& input {
+				padding: 0 40px 0 0;
+				border: none;
+				&::placeholder {
+					font-size: 16px;
+					color: var(--tp-text-p);
+					font-weight: 400;
+					font-family: "Plus Jakarta Sans";
+				}
+			}
+			& span {
+				position: absolute;
+				top: 16px;
+				right: 5px;
+				color: var(--tp-common-black);
+				font-size: 24px;
+			}
+		}
+		&-logo {
+			& img {
+				padding: 32px 0;
+			}
+		}
+		&-user {
+			& button {
+				color: var(--tp-common-black);
+				font-size: 22px;
+				margin-right: 30px;
+				&:hover {
+					color: var(--tp-theme-primary);
+				}
+			}
+		}
+		&-shop {
+			& button {
+				color: var(--tp-common-black);
+				font-size: 22px;
+				margin-right: 30px;
+				&:hover {
+					color: var(--tp-theme-primary);
+				}
+			}
+		}
+		&-commerce {
+			& button {
+				color: var(--tp-common-black);
+				font-size: 22px;
+				&:hover {
+					color: var(--tp-theme-primary);
+				}
+			}
+		}
+	}
+
+
+	// Header Bottom
+
+	&-bottom {
+		background: var(--tp-common-white);
+		padding: 0 245px;
+		@media #{$xxl} {
+			padding: 0 90px;
+        }
+		@media #{$xl} {
+			padding: 0 60px;
+        }
+		@media #{$lg,$md} {
+			padding: 0px 40px;
+        }
+		@media #{$xs} {
+			padding: 0;
+        }
+		&-toggle {
+			& button {
+				width: 50px;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				display: inline-block;
+				background: #e9effb;
+			}
+		}
+	}
+
+
+
+
+}
+
+
+
+
+

@@ -1,0 +1,134 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  6.2 Footer Style 2
+/*----------------------------------------*/
+
+
+.tp-footer {
+    &-2 {
+        &-area {
+            background: var(--tp-common-black);
+        }
+        &-bg-shape {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
+        &-widget-4 {
+            margin-left: -30px;
+            @media #{$md} {
+                margin-left: 0;
+            }
+            @media #{$xs} {
+                margin-left: 0;
+            }
+        }
+        &-top {
+            padding: 120px 0 60px;
+            }
+            &-text {
+                & p {
+                    color: #a5acaf;
+                    }
+                    }
+        &-call {
+            color: #a5acaf;
+            &:hover {
+                color: var(--tp-common-white);
+            }
+        }
+        &-title {
+            color: var(--tp-common-white);
+        }
+        &-list {
+            & ul {
+                & li {
+                    & a {
+                        color: #a5acaf;
+                    }
+                    &:hover {
+                        color: var(--tp-common-white);
+                        & a {
+                            color: var(--tp-common-white);
+                        }
+                    }
+                }
+            }
+        }
+        &-form {
+            position: relative;
+            z-index: 1;
+            & input {
+                height: 62px;
+                border-radius: 30px;
+                padding-right: 70px;
+                &::placeholder {
+                    font-size: 16px;
+                    color: #767676;
+                    font-weight: 400;
+                    font-family: "DM Sans";
+                }
+            }
+        }
+        &-input-arrow {
+            width: 54px;
+            height: 54px;
+            line-height: 54px;
+            text-align: center;
+            display: inline-block;
+            background: var(--tp-theme-primary);
+            border-radius: 50%;
+            position: absolute;
+            right: 5px;
+            top: 4px;
+        }
+        &-copy-paragraph {
+            color: #a5acaf;
+            margin-bottom: 0;
+            @media #{$xs} {
+                text-align: center;
+            }
+            & a {
+                color: var(--tp-common-white);
+            }
+        }
+
+        // footer bottom
+
+        &-bottom {
+            border-top: 1px solid #32353b;
+            padding: 32px 0;
+        }
+        &-social {
+            display: flex;
+            justify-content: end;
+            @media #{$xs} {
+                justify-content: center;
+                margin-top: 30px;
+            }
+            & a {
+                width: 38px;
+                height: 38px;
+                line-height: 41px;
+                text-align: center;
+                display: inline-block;
+                background-color: #292929;
+                border-radius: 50%;
+                margin-right: 10px;
+                color: var(--tp-common-white);
+                font-size: 15px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                &:hover {
+                    background: var(--tp-theme-primary);
+                }
+            }
+        }
+
+
+
+    }
+}

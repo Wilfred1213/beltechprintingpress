@@ -1,0 +1,202 @@
+@use '../../utils' as *;
+
+
+
+/*----------------------------------------*/
+/*  7.7 Contact css
+/*----------------------------------------*/
+
+
+
+.tp-contact {
+    &-bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 783px;
+        height: 100%;
+        background: linear-gradient(183deg, #9df1fb 0%, #f7d1ef 100%);
+        z-index: -1;
+        @media #{$xl} {
+            width: 680px;
+        }
+        @media #{$lg,$md,$xs} {
+            width: 100%;
+        }
+    }
+    &-left-shape {
+        margin-left: 30px;
+        &-1 {
+            position: absolute;
+            left: -160px;
+            top: -55px;          
+            animation: moving 8s linear infinite;
+            @media #{$xxl} {
+                display: none;
+            }
+        }
+        &-2 {
+            position: absolute;
+            left: -165px;
+            bottom: 20px;
+            @media #{$md} {
+               display: none;
+            }
+        }
+        &-3 {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+    }
+    &-left-thumb {
+        @media #{$xs} {
+            margin-bottom: 30px;
+         }
+    }
+    &-tshart-img {
+        text-align: right;
+        @media #{$xs} {
+            text-align: left;
+        }
+    }
+    &-left-wrapper {
+        margin-left: -34px;
+        @media #{$lg,$md} {
+            margin-left: 0;
+        }
+        @media #{$xs} {
+            margin-left: 0;
+        }
+    }
+    &-call {
+        &-item {
+            background: var(--tp-common-white);
+            box-shadow: 0px 0px 60px 0px rgba(40, 31, 89, 0.08);
+            padding: 20px 28px 20px;
+            position: absolute;
+            bottom: -125px;
+            left: 0;
+            width: 310px;
+        }
+        &-icon {
+            margin-right: 20px;
+            & a {
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50px;
+                font-size: 20px;
+                color: var(--tp-common-white);
+                background: var(--tp-theme-primary);
+                &:hover {
+                    background: var(--tp-theme-primary);
+                    color: var(--tp-common-white);
+                }
+            }
+        }
+        &-number {
+            & span {
+                display: block;
+            }
+            & a {
+                color: var(--tp-common-black);
+                font-size: 18px;
+                font-weight: 700;
+                &:hover {
+                    color: var(--tp-theme-primary);
+                }
+            }
+        }
+    }
+    &-sub-title {
+        color: var(--tp-theme-primary);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+    &-title {
+        font-size: 30px;
+        letter-spacing: -1px;
+        margin-bottom: 34px;
+        @media #{$lg,$md,$xs} {
+            color: var(--tp-common-white);
+        }
+    }
+    &-right-wrapper {
+        @media #{$md} {
+            margin-left: 40px;
+        }
+        @media #{$xs} {
+            margin-bottom: 100px;
+        }
+    }
+    &-box {
+        @media #{$lg,$md,$xs} {
+            margin-left: 0;
+            margin-top: 80px;
+        }
+    }
+    &-form {
+        & input {
+            margin-bottom: 15px;
+            height: 58px;
+            background: #f4f4f4;
+            border-color: transparent;
+            &::placeholder {
+                color: #767676;
+            }
+            &:focus {
+                border: 1px solid var(--tp-theme-primary);
+            }
+        }
+    }
+    &-form {
+        & textarea {
+            margin-bottom: 15px;
+            border: 1px solid transparent;
+            height: 148px;
+            resize: none;
+            background: #f4f4f4;
+            &::placeholder {
+                color: #767676;
+            }
+            &:focus {
+                border: 1px solid var(--tp-theme-primary);
+            }
+        }
+    }
+    &-btn {
+        background: var(--tp-theme-primary);
+        color: var(--tp-common-white);
+        overflow: hidden;
+        transition: .3s;
+        @media #{$lg,$md,$xs} {
+            background: var(--tp-theme-primary);
+        }
+    }
+
+
+    // contact inner page
+
+    &-ip {
+        &-wrapper {
+            background: var(--tp-common-white);
+            box-shadow: 0px 0px 60px 0px rgba(21, 24, 32, 0.1);
+            padding: 50px 60px 28px;
+        }
+        &-img {
+            margin-bottom: 40px;
+        }
+        &-title {
+            font-size: 26px;
+            margin-bottom: 14px;
+        }
+        &-paragraph {
+            line-height: 24px;
+        }
+    }
+}

@@ -1,0 +1,92 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  3.3 Header Style 3
+/*----------------------------------------*/
+
+
+.tp-header {
+    &-3 {
+        &-top {
+            background: var(--tp-common-black);
+            padding: 11px 80px;
+            @media #{$xl} {
+                padding: 11px 10px;
+            }
+        }
+        &-social {
+            display: flex;
+            align-items: center;
+            & span {
+                color: #b5b5b5;
+                display: inline-block;
+                margin-right: 30px;
+            }
+            & a {
+                color: #aeaeae;
+                margin-right: 15px;
+                font-size: 17px;
+                transform: translateY(4px);
+                &:hover {
+                    color: var(--tp-common-white);
+                }
+            }
+        }
+        &-top-address {
+            & span {
+                color: #b5b5b5;
+                margin-right: 60px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                & i {
+                    color: var(--tp-common-white);
+                    margin-right: 10px;
+                }
+                &:hover {
+                    color: var(--tp-common-white);
+                }
+            }
+        }
+        &-main-menu {
+            margin-left: 40px !important;
+        }
+
+        // header-bottom 3
+
+        &-bottom {
+            background: #d8fff9;
+            padding: 0 80px;
+            border-bottom: 1px solid #b7e9e1;
+            position: relative;
+            z-index: 11;
+            @media #{$xxl} {
+                padding: 0 40px;
+            }
+            @media #{$xl} {
+                padding: 0 30px;
+            }
+            @media #{$lg,$md,$xs} {
+                padding: 0 40px;
+            }
+        }
+        &-search {
+            & button {
+                font-size: 24px;
+                color: var(--tp-common-black);
+                line-height: 67px;
+                margin-right: 30px;
+            }
+        }
+        &-bottom-toggle {
+            &::before {
+                background: #b7e9e1;
+            }
+        }
+
+
+
+
+    }
+}

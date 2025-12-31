@@ -1,0 +1,108 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  2.5 Preloader
+/*----------------------------------------*/
+
+.loader {
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.8s 1s ease;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+}
+.loader {
+  width: 106px;
+  height: 56px;
+  display: block;
+  margin: 30px auto;
+  background-image: linear-gradient(var(--tp-theme-primary) 50px, transparent 0), linear-gradient(var(--tp-theme-primary) 50px, transparent 0), linear-gradient(var(--tp-theme-primary) 50px, transparent 0), linear-gradient(var(--tp-theme-primary) 50px, transparent 0), radial-gradient(circle 14px, var(--tp-theme-primary) 100%, transparent 0);
+  background-size: 48px 15px , 15px 35px, 15px 35px, 25px 15px, 28px 28px;
+  background-position: 25px 5px, 58px 20px, 25px 17px, 2px 37px, 76px 0px;
+  background-repeat: no-repeat;
+  position: relative;
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+  z-index: 11;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border: 6px solid var(--tp-theme-primary);
+  border-radius: 50%;
+  left: -45px;
+  top: -10px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#FFF 64px, transparent 0), linear-gradient(#FFF 66px, transparent 0), radial-gradient(circle 4px, #FFF 100%, transparent 0);
+  background-size: 40px 1px , 1px 40px, 8px 8px;
+  background-position: center center;
+  box-sizing: border-box;
+  animation: rotation 0.3s linear infinite;
+}
+.loader::before {
+  left: 25px;
+  top: 60px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
+.loader-wrapper .loder-section {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #111;
+    z-index: 2;
+}
+
+.loader-wrapper .loder-section.left-section {
+    left: 0;
+    transition: 1s 1.4s ease;
+}
+
+.loader-wrapper .loder-section.right-section {
+    right: 0;
+    transition: 1s 1.4s ease;
+}
+
+/*/ When page loaded /*/
+
+.loaded .loder-section.left-section {
+    left: -100%;
+}
+
+.loaded .loder-section.right-section {
+    right: -100%;
+}
+
+.loaded .loader-wrapper {
+    visibility: hidden;
+}
+
+.loaded .loader {
+    top: -100%;
+    opacity: 0;
+}
+.loader-brand-icon {
+	position: fixed;
+	z-index: 2;
+}

@@ -1,0 +1,89 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  6.3 Footer Style 3
+/*----------------------------------------*/
+
+
+.tp-footer {
+    &-3 {
+        &-text {
+            & p {
+                color: #a5acaf;
+            }
+        }
+        &-bottom {
+            border-top: 1px solid #e6e6e6;
+        }
+        &-call {
+            color: var(--tp-text-p);
+            &:hover {
+                color: var(--tp-common-black);
+            }
+        }
+        &-copy-paragraph {
+            margin-bottom: 0;
+            & a {
+                color: var(--tp-common-black);
+            }
+        }
+        &-thumb {
+            margin-right: 20px;
+        }
+        &-thumb-date {
+            margin-top: -8px;
+            & span {
+                display: inline-block;
+                font-size: 14px;
+                color: var(--tp-common-black);
+                font-weight: 500;
+                font-family: var(--tp-ff-heading);
+                & i {
+                    color: var(--tp-theme-primary);
+                    margin-right: 7px;
+                }
+            }
+            & p {
+                margin-bottom: 0;
+                font-size: 14px;
+                line-height: 26px;
+            }
+            &.five {
+                & span {
+                    & i {
+                        color: var(--tp-theme-secondary);
+                    }
+                }
+            }
+        }
+        &-bg-shape {
+            &-1 {
+                position: absolute;
+                top: 130px;
+                left: 130px;
+                z-index: -1;
+                @media #{$xl,$lg} {
+                    top: 60px;
+                    left: 130px;
+                }
+                @media #{$md,$xs} {
+                    top: 60px;
+                    left: 60px;
+                }
+            }
+            &-2 {
+                position: absolute;
+                right: 200px;
+                bottom: 165px;
+                z-index: -1;
+            }
+            &-3 {
+                position: absolute;
+                right: 0;
+                top: 0;
+                z-index: -1;
+            }
+        }
+    }
+}
