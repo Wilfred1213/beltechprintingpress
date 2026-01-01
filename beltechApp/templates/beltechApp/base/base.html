@@ -361,7 +361,7 @@
                 </a>
             </div>
             <div class="tpoffcanvas__title">
-                <p>Presvila is the partner of choice for many of the world’s leading enterprises.
+                <p>Beltech is the partner of choice for many of the world’s leading enterprises.
                     We help businesses development.</p>
             </div>
             <div class="tp-main-menu-mobile d-xl-none"></div>
@@ -813,6 +813,33 @@
             
         }, 1000);
     });
+
+
+{% comment %} new script {% endcomment %}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Target the class from your HTML
+    var swiper = new Swiper('.tp-project-active', {
+        slidesPerView: 3,        // How many slides show at once
+        spaceBetween: 30,       // Gap between slides
+        loop: true,             // THIS MAKES IT LOOP FOREVER
+        autoplay: {
+            delay: 3000,        // Moves every 3 seconds
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.tp-project-dot',
+            clickable: true,
+        },
+        breakpoints: {
+            // Responsive settings
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1200: { slidesPerView: 3 },
+        }
+    });
+});
+
 </script>
 
 </body>

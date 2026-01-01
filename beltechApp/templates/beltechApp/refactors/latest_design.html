@@ -1,0 +1,49 @@
+{% load static %}
+
+<!-- product area start -->
+<section class="tp-product-area p-relative z-index-11">
+    <div class="container-fluid">
+        <div class="row tp-product-row">
+            
+            {% for latest in latests %}
+            <div class="col-xl-6 col-lg-6 mb-30"> <div class="tp-product-bg-overlay {% if forloop.counter|divisibleby:2 %}two{% endif %} fix wow fadeInUp">
+                    <div class="row align-items-center">
+                        
+                        <div class="col-xl-5 col-lg-7 col-md-5">
+                            <div class="tp-product-left-wrapper">
+                                <div class="tp-product-content p-relative z-index-11">
+                                    <h6 class="tp-product-sub-title">LATEST DESIGN</h6>
+                                    <h3 class="tp-product-title">{{ latest.title }}</h3>
+                                    <div class="tp-product-btn">
+                                        <a class="tp-btn-border" href="#"><span>View Project</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-7 col-lg-5 col-md-7">
+                            <div class="tp-product-right-wrapper">
+                                <div class="tp-product-right-img {% if forloop.counter|divisibleby:2 %}two{% else %}one{% endif %} p-relative z-index-1">
+                                    
+                                    <img src="{{ latest.image.url }}" alt="{{ latest.title }}" style="width: 100%; object-fit: cover;">
+                                    
+                                    <div class="{% if forloop.counter|divisibleby:2 %}tp-product-right-img-shape-two{% else %}tp-product-right-img-shape{% endif %}">
+                                        {% if forloop.counter|divisibleby:2 %}
+                                            <img src="{% static 'beltechApp/assets/img/product/product-box-shape2.png' %}" alt="">
+                                        {% else %}
+                                            <img src="{% static 'beltechApp/assets/img/product/product-box-shape1.png' %}" alt="">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>                
+<!-- product area end -->

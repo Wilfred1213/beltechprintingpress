@@ -1,0 +1,42 @@
+<section class="tp-breadcrumb-area tp-slider-spacing-inner p-relative z-index-1">
+    <div class="tp-breadcrumb-bg-shape">
+        {% for nav in navs %}
+        <img class="tp-breadcrumb-bg-shape-{{ forloop.counter }}" src="{{ nav.image.url }}" alt="shape">
+        {% endfor %}
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-5">
+                <div class="tp-breadcrumb-content">
+                    <h2 class="tp-breadcrumb-title">
+                        {% if request.resolver_match.url_name == 'blog_detail' %}
+                            {# This shows the actual title of the post #}
+                            {{ blog.title }}
+                        {% elif '/service' in request.path %}
+                            Our Service
+                        {% elif '/blog' in request.path %}
+                            Our Blog
+                        {% else %}
+                            Beltech Printing
+                        {% endif %}
+                    </h2>
+
+                    <p class="tp-breadcrumb-body">
+                        <span><a class="home" href="{% url 'home' %}">Home <span class="spacing">_</span> </a></span>
+                        
+                        {% if request.resolver_match.url_name == 'blog_detail' %}
+                            {# This creates a clickable link back to the main blog list #}
+                            <a href="{% url 'blog' %}">Our Blog</a> 
+                            <span class="spacing">_</span> 
+                            <span class="current-page">{{ blog.title|truncatechars:30 }}</span>
+                        {% elif '/service' in request.path %}
+                            Our Service
+                        {% else %}
+                            Our Blog
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

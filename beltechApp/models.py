@@ -1,5 +1,9 @@
-from django.db import models
+
 from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.conf import settings
+from django.utils.text import slugify
+from django_ckeditor_5.fields import CKEditor5Field
 
 class CustomUser(AbstractUser):
     # Ensure the class name is exactly 'CustomUser'
@@ -7,13 +11,6 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return self.username
-
-# Create your models here.
-from django.db import models
-from django.conf import settings
-from django.utils.text import slugify
-from django_ckeditor_5.fields import CKEditor5Field
-
 
 class Carousel(models.Model):
     discount = models.CharField(max_length=50)
@@ -84,6 +81,7 @@ class PrintingService(models.Model):
     image = models.ImageField(upload_to='services/')
     date = models.DateTimeField(auto_now_add=True, null=True)
     is_available = models.BooleanField(default=True)
+    is_latest = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} - {self.category.name}"
@@ -132,3 +130,51 @@ class Already_done_project(models.Model):
 
     def __str__(self):
         return f"already done #{self.id} ({self.title})"
+    
+class Logo(models.Model):
+    name = models.CharField(max_length=100)
+    main_image = models.ImageField(upload_to='logo/', help_text="Logo image")
+
+class Blog_category(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Blog category"
+class BlogPost(models.Model):
+    # Basic Info
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    category = models.ForeignKey(Blog_category, on_delete=models.CASCADE, related_name='blopPost', null=True)
+    
+    # Images
+    main_image = models.ImageField(upload_to='blog/main/', help_text="Featured image at the top")
+    secondary_image = models.ImageField(upload_to='blog/secondary/', blank=True, null=True, help_text="Image for the middle of the article")
+    
+    # Content Areas
+    content = CKEditor5Field('Body Content', config_name='default')
+    
+    # The Quote Area
+    quote_text = models.TextField(blank=True, help_text="Special highlighted quote in the article")
+    quote_author = models.CharField(max_length=100, blank=True, help_text="Author of the quote")
+    
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
+    views = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)

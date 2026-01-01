@@ -1,0 +1,45 @@
+<section class="tp-blog-3-area pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="tp-section-title-wrapper mb-45 text-center">
+                <h6 class="tp-section-sub-title">OUR LATEST BLOGS</h6>
+                <h3 class="tp-section-title mb-35 tp-split-text right">Read Our Latest Blog Post</h3>
+            </div>
+        </div>
+        <div class="row">
+            {% for blog in recent_blogs %}
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                
+                <div class="tp-blog-3-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                    <div class="tp-blog-3-thumb p-relative z-index-1 mb-15 not-hide-cursor" data-cursor="View<br>Detail">
+                        <a class="cursor-hide" href="blog-details.html"><img src="{{ blog.main_image.url}}" alt=""></a>
+                        <div class="tp-blog-3-date">
+                            <span>{{ blog.created_at|date:"d" }}</span>
+                            <span class="two">{{ blog.created_at|date:"b" }}</span>
+                        </div>
+                    </div>
+                    <div class="tp-blog-3-tag d-flex">
+                        <a href="blog-details.html">Printing</a>
+                        <a href="blog-details.html">Agency</a>
+                    </div>
+                    <div class="tp-blog-3-content">
+                        <h4 class="tp-blog-3-title"><a href="blog-details.html">{{ blog.title}}</a></h4>
+                    </div>
+                    <div class="tp-blog-3-member-detalis d-flex align-items-center">
+                        <div class="tp-blog-3-member-thumb mr-15">
+                            <img src="{{ logo.main_image.url|default:'assets/img/blog/default-author.png' }}" 
+                                alt="{{ blog.author }}"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #f0f0f0;">
+                        </div>
+                        <div class="tp-blog-3-name">
+                            <h5 style="margin-bottom: 0; font-size: 16px;">{{ blog.author.get_full_name|default:blog.author.username }}</h5>
+                            <span style="font-size: 13px; color: #777;">{{ blog.updated_at|date:"M d, Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
