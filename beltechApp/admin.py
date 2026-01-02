@@ -139,3 +139,8 @@ class BlogPostAdmin(admin.ModelAdmin):
             'fields': ('is_published', 'views')
         }),
     )
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_at')
+    readonly_fields = ('name', 'email', 'website', 'message', 'created_at')

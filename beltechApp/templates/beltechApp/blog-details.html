@@ -160,12 +160,10 @@
                                         <div class="tp-service-details-box mb-30 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                                             <h4 class="tp-service-details-box-title">our services</h4>
                                             <ul>
-                                                <li><a href="service-details.html">Data Visualization <span><i class="flaticon-next"></i></span> </a></li>
-                                                <li><a class="active" href="blog-details.html">Product Development <span><i class="flaticon-next"></i></span></a></li>
-                                                <li><a href="blog-details.html">Security System <span><i class="flaticon-next"></i></span></a></li>
-                                                <li><a href="blog-details.html">UI/UX Designing <span><i class="flaticon-next"></i></span> </a></li>
-                                                <li><a href="blog-details.html">Digital Marketing <span><i class="flaticon-next"></i></span></a></li>
-                                                <li><a href="blog-details.html">Data Analytics <span><i class="flaticon-next"></i></span></a></li>
+                                                {% for product in product_count %}
+                                                <li><a href="{% url 'service_tags' product.id %}">{{ product.name }} ({{ product.total_products}}) <span><i class="flaticon-next"></i></span> </a></li>
+                                                {% endfor %}
+                                                
                                             </ul>
                                         </div>
                                     </div>

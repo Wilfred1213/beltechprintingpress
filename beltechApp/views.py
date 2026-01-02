@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from beltechApp.models import *
+from django.db.models import Count
 
 # Create your views here.
 def home(request):
@@ -65,12 +66,18 @@ def blog_detail(request, blog_id):
     recent_blog = BlogPost.objects.all().order_by('-created_at')[:3]
 
     category = Blog_category.objects.all()
+    our_service_category = Category.objects.all()
+    
+
+    categories_with_counts = Category.objects.annotate(total_products=Count('services'))
 
     context ={
         'blog':details,
         'navs':breadcrumb,
         'recent_blogs':recent_blog,
-        'tags':category
+        'tags':category,
+        'categorys':our_service_category,
+        'product_count':categories_with_counts
 
         
     }
@@ -92,4 +99,35 @@ def tags(request, category_id):
     }
     return render(request, 'beltechApp/blog.html', context)
 
+def service_tags(request, service_id):
+    category =Category.objects.get(id =service_id)
+    blog_tags = PrintingService.objects.filter(category =category)
 
+    breadcrumb = printingHomePageImage.objects.all()
+    # products = PrintingService.objects.all()
+
+    latest_product = Already_done_project.objects.all().order_by('-date')[:2]
+    category = Category.objects.all()
+    recent_blogs =BlogPost.objects.all().order_by('-created_at')[:3]
+    logo = Logo.objects.first()
+
+    context ={
+        'navs':breadcrumb,
+        'categories':category,
+        'products':blog_tags,
+        'latests':latest_product,
+        'recent_blogs':recent_blogs,
+        'logo': logo
+        
+        
+    }
+    return render(request, 'beltechApp/service.html', context)
+
+
+
+
+    
+    
+
+    
+   

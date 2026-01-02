@@ -12,18 +12,18 @@
                 
                 <div class="tp-blog-3-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                     <div class="tp-blog-3-thumb p-relative z-index-1 mb-15 not-hide-cursor" data-cursor="View<br>Detail">
-                        <a class="cursor-hide" href="blog-details.html"><img src="{{ blog.main_image.url}}" alt=""></a>
+                        <a class="cursor-hide" href="{% url 'blog_detail' blog.id %}"><img src="{{ blog.main_image.url}}" alt=""></a>
                         <div class="tp-blog-3-date">
                             <span>{{ blog.created_at|date:"d" }}</span>
                             <span class="two">{{ blog.created_at|date:"b" }}</span>
                         </div>
                     </div>
                     <div class="tp-blog-3-tag d-flex">
-                        <a href="blog-details.html">Printing</a>
-                        <a href="blog-details.html">Agency</a>
+                        <a href="{% url 'blog_detail' blog.id %}">Printing</a>
+                        <a href="{% url 'blog_detail' blog.id %}">Agency</a>
                     </div>
                     <div class="tp-blog-3-content">
-                        <h4 class="tp-blog-3-title"><a href="blog-details.html">{{ blog.title}}</a></h4>
+                        <h4 class="tp-blog-3-title"><a href="{% url 'blog_detail' blog.id %}">{{ blog.title}}</a></h4>
                     </div>
                     <div class="tp-blog-3-member-detalis d-flex align-items-center">
                         <div class="tp-blog-3-member-thumb mr-15">
