@@ -38,6 +38,17 @@
                                         </div>
                                     </article>
 
+                                    <div class="tp-postbox-blog-code mb-80 text-center wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                        <div class="tp-postbox-blog-code-icon mb-20">
+                                            <img src="{% static 'beltechApp/assets/img/blog/blog-code.svg' %}" alt="">
+                                        </div>
+                                        <div class="tp-postbox-blog-code-content">
+                                            <h4 class="tp-postbox-blog-code-title">Diam luctus nostra dapibus varius et semper semper rutrum ad risus felis
+                                                eros. Cursus libero viverra tempus netus diam vestibulum</h4>
+                                            <p class="tp-postbox-blog-code-name">David Backhum</p>
+                                        </div>
+                                    </div>
+
                                     <div class="row align-items-center tp-postbox-details-row mb-50">
                                         <div class="col-xl-10 col-lg-10 col-md-10">
                                             <div class="tp-postbox-details-tag details d-flex wow fadeInUp">
@@ -55,58 +66,94 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tp-postbox-comment mb-50">
-                                        <h3 class="tp-postbox-comment-title wow fadeInUp">01 Comments</h3>
-                                        <div class="tp-postbox-comment-box border-mr p-relative">
-                                            <div class="tp-postbox-comment-box-inner">
-                                                <div class="tp-postbox-comment-avater wow fadeInUp">
-                                                    <img src="assets/img/blog/blog-details-4.png" alt="">
-                                                </div>
-                                                <div class="tp-postbox-comment-content wow fadeInUp">
-                                                    <div class="tp-postbox-comment-top">
-                                                        <div class="tp-postbox-comment-date">
-                                                            <span>September 6, 2022 at 1:28 pm </span>
+                                    <div class="tp-postbox-comment mb-50" id="comments">
+                                        <h3 class="tp-postbox-comment-title wow fadeInUp">{{ blog.blopcomment.count }} Comments</h3>
+
+                                        <div id="comment-list">
+                                            {% for comment in blog.blopcomment.all %}
+                                                {% if not comment.parent %}
+                                                    <div class="tp-postbox-comment-box border-mr p-relative mb-30 comment-group">
+                                                        <div class="tp-postbox-comment-box-inner d-flex">
+                                                            <div class="tp-postbox-comment-avater wow fadeInUp">
+                                                                <img src="{{ comment.logo.main_image.url }}" alt="{{ comment.logo.name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%; flex-shrink: 0;">
+                                                            </div>
+                                                            <div class="tp-postbox-comment-content wow fadeInUp">
+                                                                <div class="tp-postbox-comment-top d-flex justify-content-between">
+                                                                    <div class="tp-postbox-comment-date">
+                                                                        <span>{{ comment.created_at|date:"F j, Y \a\t g:i a" }}</span>
+                                                                    </div>
+                                                                    <div class="tp-postbox-comment-reply">
+                                                                        <a href="#tp-postbox-contact-form" onclick="prepareReply('{{ comment.id }}', '{{ comment.name }}')">
+                                                                            <i class="fa-light fa-reply"></i> REPLY
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tp-postbox-comment-author">
+                                                                    <h4 class="tp-postbox-comment-name">{{ comment.name }}</h4>
+                                                                </div>
+                                                                <p>{{ comment.message }}</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="tp-postbox-comment-reply">
-                                                            <a href="#"><i class="fa-light fa-reply"></i>REPLY</a>
+
+                                                        {# Nested Replies loop #}
+                                                        {% for reply in comment.replies.all %}
+                                                        <div class="tp-postbox-comment-box-inner d-flex mt-30 ml-50" style="border-left: 2px solid #ededed; padding-left: 20px;">
+                                                            <div class="tp-postbox-comment-avater wow fadeInUp">
+                                                                <img src="{{ comment.logo.main_image.url }}" alt="{{ comment.logo.name }}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 50%;">
+                                                            </div>
+                                                            <div class="tp-postbox-comment-content wow fadeInUp">
+                                                                <div class="tp-postbox-comment-author">
+                                                                    <h4 class="tp-postbox-comment-name">{{ reply.name }} <small>(Reply)</small></h4>
+                                                                </div>
+                                                                <p>{{ reply.message }}</p>
+                                                            </div>
                                                         </div>
+                                                        {% endfor %}
                                                     </div>
-                                                    <div class="tp-postbox-comment-author d-flex align-items-center">
-                                                        <h4 class="tp-postbox-comment-name">Nitisha Batman</h4>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipi vestibulum lectus egestas cubilia nam sagittis, nulla posuere habitant</p>
+                                                {% endif %}
+                                            {% empty %}
+                                                <div class="no-comments-msg">
+                                                    <p>No comments yet. Be the first to share your thoughts!</p>
                                                 </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
-                                    </div>
+
+                                        <div class="tp-postbox-comment-btn-box mt-20 text-center" id="view-all-wrapper" style="display: none;">
+                                            <button type="button" class="tp-btn" onclick="showAllComments()">
+                                                <span>View All Comments</span>
+                                            </button>
+                                        </div>
+                                    </div> 
+                                
                                     <div class="tp-postbox-contact-reply wow fadeInUp">
-                                        <h3 class="tp-postbox-contact-title">Let’s Get in Touch</h3>
-                                        <p class="tp-postbox-contact-pagagraph">Your email address will not be published. Required fields are marked *</p>
-                                        <form id="tp-postbox-contact-form" action="assets/mail.php" method="POST">
+                                        <h3 class="tp-postbox-contact-title" id="reply-title">What's on your mind?</h3>
+                                        <p id="reply-info" style="display:none; color: #007bff; margin-bottom: 10px;">
+                                            Replying to <strong id="reply-name"></strong> 
+                                            <button type="button" onclick="cancelReply()" style="color:red; border:none; background:none; cursor:pointer; font-size: 12px;#commentTag">(Cancel)</button>
+                                        </p>
+
+                                        <form id="tp-postbox-contact-form" method="POST" action="{% url 'blog_detail' blog.id %}">
+                                            {% csrf_token %}
+                                            
+                                            {# IMPORTANT: This hidden field sends the parent ID to Django #}
+                                            <input type="hidden" name="parent_id" id="parent_id_input" value="">
+
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="tp-postbox-contact-input">
-                                                        <input name="name" type="text" placeholder="Your Name*">
-                                                    </div>
+                                                    <div class="tp-postbox-contact-input">{{ form.name }}</div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="tp-postbox-contact-input">
-                                                        <input name="email" type="email" placeholder="Your E-mail*">
-                                                    </div>
+                                                    <div class="tp-postbox-contact-input">{{ form.email }}</div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="tp-postbox-contact-input">
-                                                        <input name="name" type="text" placeholder="Website*">
-                                                    </div>
+                                                    <div class="tp-postbox-contact-input">{{ form.website }}</div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="tp-postbox-contact-input">
-                                                        <textarea placeholder="Write Your Comment*"></textarea>
-                                                    </div>
+                                                    <div class="tp-postbox-contact-input">{{ form.message }}</div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="tp-postbox-contact-input-btn">
-                                                        <button class="tp-btn" type="submit"><span>Send your Meassage</span></button>
+                                                        <button id ="commentTarget" class="tp-btn" type="submit"><span>Send your Message</span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +190,7 @@
                                                     </div>
                                                     <div class="rc__post-content">
                                                         <h3 class="rc__post-title">
-                                                            <a href="">{{blog.title}}</a>
+                                                            <a href="{% url 'blog_detail' blog.id %}">{{blog.title}}</a>
                                                         </h3>
                                                         <div class="rc__meta">
                                                             <span><i class="flaticon-clock"></i>
@@ -189,10 +236,8 @@
                     </div>
                 </section>
                 <!-- postbox area end -->
-
-
-
-
-
             </main>
+
+
+
 {% endblock %}

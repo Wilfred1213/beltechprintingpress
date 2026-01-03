@@ -840,6 +840,97 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+{% comment %} replying comment area {% endcomment %}
+function prepareReply(commentId, commenterName) {
+        // Set the hidden input value
+        document.getElementById('parent_id_input').value = commentId;
+        
+        // Update the UI to show the user they are replying
+        document.getElementById('reply-name').innerText = commenterName;
+        document.getElementById('reply-info').style.display = 'block';
+        document.getElementById('reply-title').innerText = "Post a Reply";
+        
+        // Smoothly scroll to the form
+        document.getElementById('tp-postbox-contact-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelReply() {
+        // Reset the form to a normal comment
+        document.getElementById('parent_id_input').value = "";
+        document.getElementById('reply-info').style.display = 'none';
+        document.getElementById('reply-title').innerText = "What's on your mind?";
+    }
+
+  // 1. Reply logic
+    function prepareReply(id, name) {
+        document.getElementById('parent_id_input').value = id;
+        document.getElementById('reply-info').style.display = 'block';
+        document.getElementById('reply-name').innerText = name;
+        document.getElementById('reply-title').innerText = "Reply to " + name;
+    }
+
+    function cancelReply() {
+        document.getElementById('parent_id_input').value = "";
+        document.getElementById('reply-info').style.display = 'none';
+        document.getElementById('reply-title').innerText = "What's on your mind?";
+    }
+
+    // 2. The Fix for the "Invisible" content
+    window.addEventListener('load', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Check if we just posted a comment
+        if (urlParams.has('posted') || window.location.hash === '#comments') {
+            
+            // Give the SmoothScroll engine a moment to initialize
+            setTimeout(() => {
+                // Force a refresh of the scroll engine (critical for GSAP/SmoothScroll)
+                if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                }
+
+                const el = document.getElementById('comments');
+                if (el) {
+                    // Use standard scroll if smooth-scroll isn't playing nice
+                    const offset = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: offset, behavior: 'smooth' });
+                }
+            }, 300); 
+        }
+    });
+
+    {% comment %} hidden comment {% endcomment %}
+    document.addEventListener("DOMContentLoaded", function() {
+    // Select only top-level comments
+    const comments = document.querySelectorAll('.comment-group');
+    const btnWrapper = document.getElementById('view-all-wrapper');
+    
+    // 1. If we have more than 4, hide the rest and show the button
+    if (comments.length > 4) {
+        for (let i = 4; i < comments.length; i++) {
+            comments[i].style.display = 'none';
+        }
+        btnWrapper.style.display = 'block'; // Show the button
+    }
+});
+
+function showAllComments() {
+    const comments = document.querySelectorAll('.comment-group');
+    const btnWrapper = document.getElementById('view-all-wrapper');
+    
+    comments.forEach(comment => {
+        comment.style.display = 'block';
+    });
+    
+    btnWrapper.style.display = 'none'; // Hide button after click
+
+    // Refresh ScrollTrigger so the page doesn't go "blank"
+    if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+    }
+}  
+
 </script>
 
 </body>

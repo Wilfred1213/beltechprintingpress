@@ -179,12 +179,17 @@ class BlogPost(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-class ContactMessage(models.Model):
+class BlogComment(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     website = models.URLField(blank=True, null=True)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='blopcomment', null=True)
+    logo = models.ForeignKey(Logo, on_delete=models.CASCADE, related_name='logo', null=True)
+
+    # reply
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
 
     def __str__(self):
         return f"Message from {self.name} - {self.email}"

@@ -140,7 +140,7 @@ class BlogPostAdmin(admin.ModelAdmin):
         }),
     )
 
-@admin.register(ContactMessage)
+@admin.register(BlogComment)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'created_at')
-    readonly_fields = ('name', 'email', 'website', 'message', 'created_at')
+    list_display = ('name', 'email', 'created_at', 'message', 'blog', 'parent')
+    readonly_fields = ('name', 'email', 'website', 'message', 'created_at', 'blog', 'logo', 'parent')

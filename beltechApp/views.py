@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from beltechApp.models import *
 from django.db.models import Count
+from beltechApp.forms import BlogCommentForm
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -67,9 +70,33 @@ def blog_detail(request, blog_id):
 
     category = Blog_category.objects.all()
     our_service_category = Category.objects.all()
+
+    blog_comment = details.blopcomment.all()
     
 
     categories_with_counts = Category.objects.annotate(total_products=Count('services'))
+    logo = Logo.objects.first()
+    if request.method == 'POST':
+        comment_form = BlogCommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit =False)
+            new_comment.blog = details
+            new_comment.logo = logo
+
+            # Check if this is a reply
+            parent_id = request.POST.get('parent_id')
+            if parent_id:
+                new_comment.parent = BlogComment.objects.get(id=parent_id)
+
+            new_comment.save()
+            messages.info(request, 'Comment posted successfully!')
+            # return('blog_detail', blog_id)
+            return redirect(reverse('blog_detail', kwargs={'blog_id': blog_id}))
+        else:
+            messages.error(request, 'Check the data you input and try again!')
+            return redirect(reverse('blog_detail', kwargs={'blog_id': blog_id}))
+    else:
+        comment_form = BlogCommentForm()
 
     context ={
         'blog':details,
@@ -77,7 +104,9 @@ def blog_detail(request, blog_id):
         'recent_blogs':recent_blog,
         'tags':category,
         'categorys':our_service_category,
-        'product_count':categories_with_counts
+        'product_count':categories_with_counts,
+        'form': comment_form,
+        'comments':blog_comment
 
         
     }

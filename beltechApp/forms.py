@@ -1,9 +1,9 @@
 from django import forms
-from .models import ContactMessage
+from .models import BlogComment
 
-class ContactForm(forms.ModelForm):
+class BlogCommentForm(forms.ModelForm):
     class Meta:
-        model = ContactMessage
+        model = BlogComment
         fields = ['name', 'email', 'website', 'message']
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Your Name*', 'class': 'form-control'}),
