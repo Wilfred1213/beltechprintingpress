@@ -1,0 +1,35 @@
+<div class="product_wrapper two mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+    <div class="product__item p-relative">
+        <div class="product__top-brand d-flex justify-content-between mb-15">
+            <div class="product__top-name">
+                <i class="fas fa-folder"></i>
+                <span>{{ product.category.name|default:"Product" }}</span>
+            </div>
+            <div class="product__top-price">
+                <a href="#">N{{ product.base_price }}</a>
+            </div>
+        </div>
+        <div class="product__thumb w-img p-relative fix mb-10">
+            <a href="shop-details.html">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+            <div class="product__action d-flex flex-column flex-wrap">
+                </div>
+            <div class="product__add transition-3">
+                <button type="button" class="product-add-cart-btn w-100">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product__content text-center">
+            <h3 class="product__title">
+                <a href="shop-details.html">{{ product.name }}</a>
+            </h3>
+            <div class="product__rating d-flex justify-content-center">
+                <span><i class="fa-solid fa-star"></i></span>
+                <span><i class="fa-solid fa-star"></i></span>
+                <span><i class="fa-solid fa-star"></i></span>
+                <span><i class="fa-solid fa-star"></i></span>
+                <span><i class="fa-solid fa-star"></i></span>
+            </div>
+        </div>
+    </div>
+</div>

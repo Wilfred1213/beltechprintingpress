@@ -16,6 +16,8 @@
                             Our Service
                         {% elif '/blog' in request.path %}
                             Our Blog
+                        {% elif '/shop' in request.path %}
+                            Our Shop
                         {% else %}
                             Beltech Printing
                         {% endif %}
@@ -31,6 +33,8 @@
                             <span class="current-page">{{ blog.title|truncatechars:30 }}</span>
                         {% elif '/service' in request.path %}
                             Our Service
+                        {% elif '/shop' in request.path %}
+                            Our shop
                         {% else %}
                             Our Blog
                         {% endif %}

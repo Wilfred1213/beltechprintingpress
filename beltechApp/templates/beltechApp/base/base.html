@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'beltechApp/assets/img/logo/favicon.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ logo.main_image.url }}">
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/bootstrap.css' %}">
@@ -83,7 +83,7 @@
 
 
     <!-- product quick view start -->
-    <div class="product-popup__modal modal fade" id="productModal" tabindex="-1" aria-labelledby="productModal" aria-hidden="true">
+    {% comment %} <div class="product-popup__modal modal fade" id="productModal" tabindex="-1" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="product-popup__modal-wrapper">
@@ -262,12 +262,12 @@
             </div>
         </div>
     </div>
-    <!-- product quick view end -->
+    <!-- product quick view end --> {% endcomment %}
 
 
 
     <!-- cart mini area start -->
-    <div class="cartmini__area">
+    {% comment %} <div class="cartmini__area">
         <div class="cartmini__wrapper d-flex justify-content-between flex-column">
             <div class="cartmini__top-wrapper ">
                 <div class="cartmini__top p-relative">
@@ -344,7 +344,7 @@
             </div>
         </div>
     </div>
-    <div class="cartmini-overlay"></div>
+    <div class="cartmini-overlay"></div> {% endcomment %}
     <!-- cart mini area end -->
 
 
@@ -355,9 +355,43 @@
             <div class="tpoffcanvas__close-btn">
                 <button class="close-btn"><i class="fal fa-times"></i></button>
             </div>
-            <div class="tpoffcanvas__logo">
+            {% comment %} <div class="tpoffcanvas__logo">
                 <a href="index.html">
-                    <img src="{% static 'beltechApp/assets/img/logo/logo.png' %}" alt="">
+                    <img src="" alt="{{ logo.name }}">
+                </a>
+            </div> {% endcomment %}
+            {% comment %} <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
+                <a href="{% url 'home' %}" style="display: block;"> 
+                    {% if logo %}
+                        <img src="{{ logo.main_image.url }}" 
+                            alt="{{ logo.name }}" 
+                            style="max-width: 180px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
+                            width="150" 
+                            height="50" 
+                            onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
+                    {% else %}
+                        <span style="font-weight: bold; font-size: 24px;">BELTECH</span>
+                    {% endif %}
+                </a>
+            </div> {% endcomment %}
+            <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
+                <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;"> 
+                    {% if logo %}
+                        <img src="{{ logo.main_image.url }}" 
+                            alt="{{ logo.name }}" 
+                            style="max-width: 50px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
+                            width="50" 
+                            height="50" 
+                            onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
+                        
+                        <span style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 26px; color: #111; letter-spacing: -0.5px; text-transform: uppercase;">
+                            Bel<span style="color: #ff5a01;">tech</span>
+                        </span>
+                    {% else %}
+                        <span style="font-weight: 800; font-size: 26px; color: #111; text-transform: uppercase;">
+                            BEL<span style="color: #ff5a01;">TECH</span>
+                        </span>
+                    {% endif %}
                 </a>
             </div>
             <div class="tpoffcanvas__title">
@@ -372,7 +406,7 @@
                 <ul>
                     <li>
                         <i class="fa-solid fa-location-dot"></i>
-                        <a href="https://www.google.com/maps/@23.8223586,90.3661283,15z" target="_blank">Manchester 21, Zurich, CH</a>
+                        <a href="https://www.google.com/maps/@23.8223586,90.3661283,15z" target="_blank">Kafanchan, Borno State, Nigeria</a>
                     </li>
                     <li>
                         <i class="fas fa-envelope"></i>
@@ -380,7 +414,7 @@
                     </li>
                     <li>
                         <i class="fa-solid fa-phone-flip"></i>
-                        <a href="tel:+48555223224">(+00) 678 345 98568</a>
+                        <a href="tel:+48555223224">(+234) 8134622388</a>
                     </li>
                 </ul>
             </div>
@@ -419,12 +453,12 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4">
                         <div class="tp-header-top-address">
-                            <span><img src="{% static 'beltechApp/assets/img/header/location.svg' %}" alt="location"> <a href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z">NT Road. North West</a></span>
+                            <span><img src="{% static 'beltechApp/assets/img/header/location.svg' %}" alt="location"> <a href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z">Borno Maiduguri</a></span>
                         </div>
                     </div>
                     <div class="col-xl-4">
                         <div class="tp-header-top-text text-center">
-                            <span>Free metro delivery* Sign Up for $30 off your order! </span>
+                            <span>Beltch Printing Press Enterprise! </span>
                         </div>
                     </div>
                     <div class="col-xl-4">
@@ -438,44 +472,44 @@
                 </div>
             </div>
         </div>
+        {% comment %} search section {% endcomment %}
         <div class="tp-header-center d-none d-xl-block">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-xl-2">
                         <div class="tp-header-center-search">
-                            <form action="#">
+                            <form action="{% url 'search_results_view' %}">
                                 <div class="tp-header-center-search-input">
-                                    <input type="text" placeholder="Search...">
+                                    {{ search_form }}
                                     <span><i class="flaticon-search"></i></span>
                                 </div>
                             </form>
                         </div>
                     </div>
+                   
                     <div class="col-xl-8">
-                        <div class="tp-header-center-logo text-center">
-                            <a href="index.html"><img src="{% static 'beltechApp/assets/img/logo/logo.png' %}" alt=""></a>
+                        <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
+                            <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                                {% if logo %}
+                                    <img src="{{ logo.main_image.url }}" 
+                                        alt="{{ logo.name }}" 
+                                        style="max-width: 55px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
+                                        width="55" 
+                                        height="55"
+                                        onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
+                                    
+                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 28px; color: #111; letter-spacing: -1px; text-transform: uppercase; line-height: 1; white-space: nowrap;">
+                                        Bel<span style="color: #ff5a01;">tech</span> <span style="font-weight: 400; color: #666; font-size: 24px;">Enterprise</span>
+                                    </span>
+                                {% else %}
+                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 28px; color: #111; text-transform: uppercase; white-space: nowrap;">
+                                        BEL<span style="color: #ff5a01;">TECH</span> ENTERPRISE
+                                    </span>
+                                {% endif %}
+                            </a>
                         </div>
                     </div>
-                    <div class="col-xl-2">
-                        <div class="tp-header-center-right d-flex justify-content-end">
 
-                            <!-- Header user -->
-                            <div class="tp-header-center-user">
-                                <a href="login.html"><button><i class="flaticon-user"></i></button></a>
-                            </div>
-
-                            <!-- Header shop -->
-                            <div class="tp-header-center-shop">
-                                <button class="click-cart tp-header-cart-home cartmini-open-btn"><i class="flaticon-shopping-cart"></i></button>
-                            </div>
-
-                            <!-- Header love -->
-                            <div class="tp-header-center-commerce">
-                                <button><i class="flaticon-e-commerce"></i></button>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -491,79 +525,9 @@
                         <div class="tp-header-main-menu">
                             <nav class="tp-main-menu-content">
                                 <ul>
-                                    <li class="has-dropdown"><a href="{% url 'home' %}">Home</a>
-                                        <div class="tp-submenu submenu has-homemenu">
-                                            <div class="row gx-6 row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-5">
-                                                <div class="col homemenu">
-                                                    <div class="homemenu-thumb mb-15">
-                                                        <a href="index.html">
-                                                            <img src="{% static 'beltechApp/assets/img/menu/home1.jpg' %}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="homemenu-content text-center">
-                                                        <h4 class="homemenu-title">
-                                                            <a href="index.html">Home 01</a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col homemenu">
-                                                    <div class="homemenu-thumb mb-15">
-                                                        <a href="index-2.html">
-                                                            <img src="{% static 'beltechApp/assets/img/menu/home2.jpg' %}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="homemenu-content text-center">
-                                                        <h4 class="homemenu-title">
-                                                            <a href="index-2.html">Home 02</a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col homemenu">
-                                                    <div class="homemenu-thumb mb-15">
-                                                        <a href="index-3.html">
-                                                            <img src="{% static 'beltechApp/assets/img/menu/home3.jpg' %}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="homemenu-content text-center">
-                                                        <h4 class="homemenu-title">
-                                                            <a href="index-3.html">Home 03</a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col homemenu">
-                                                    <div class="homemenu-thumb mb-15">
-                                                        <a href="index-4.html">
-                                                            <img src="{% static 'beltechApp/assets/img/menu/home4.jpg' %}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="homemenu-content text-center">
-                                                        <h4 class="homemenu-title">
-                                                            <a href="index-4.html">Home 04</a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col homemenu">
-                                                    <div class="homemenu-thumb mb-15">
-                                                        <a href="index-5.html">
-                                                            <img src="{% static 'beltechApp/assets/img/menu/home5.jpg' %}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="homemenu-content text-center">
-                                                        <h4 class="homemenu-title">
-                                                            <a href="index-5.html">Home 05</a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="has-dropdown"><a href="{% url 'service' %}">Services</a>
-                                        <ul class="submenu tp-submenu">
-                                            <li><a href="{% url 'service' %}">Our Service</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown"><a href="shop.html">Shop</a>
+                                    <li class="has-dropdown"><a href="{% url 'home' %}">Home</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'service' %}">Our Services</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'shop' %}">Shop</a>
                                         <ul class="submenu tp-submenu">
                                             <li><a href="shop.html">Our Shop</a></li>
                                             <li><a href="shop-details.html">Shop Details</a></li>
@@ -571,7 +535,7 @@
                                             <li><a href="checkout.html">Checkout</a></li>
                                         </ul>
                                     </li>
-                                    <li class="has-dropdown"><a href="blog.html">Blog</a>
+                                    <li class="has-dropdown"><a href="{% url 'blog' %}">Blog</a>
                                         <ul class="submenu tp-submenu">
                                             <li><a href="blog.html">Blog</a></li>
                                             <li><a href="blog-sideber.html">Blog Sidebar</a></li>
@@ -615,8 +579,40 @@
             </div>
         </div>
     </header>
+
+
+
+    <style>
+        /* Force the background shape container to be visible */
+        .tp-breadcrumb-bg-shape {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Ensure images within that container don't get hidden */
+        .tp-breadcrumb-bg-shape img {
+            display: block !important;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Prevent text from becoming unreadable on mobile if images overlap */
+        @media (max-width: 768px) {
+            .tp-breadcrumb-area {
+                padding-top: 80px;
+                padding-bottom: 80px;
+                overflow: hidden; /* prevents side-scrolling on mobile */
+            }
+            .tp-breadcrumb-bg-shape {
+                z-index: -1; /* puts images behind the text */
+            }
+        }
+    </style>
+
     <!-- header area end -->
 <body>
+    
     {% block content %}
     {% endblock %} 
     <!-- call-to-action area start -->

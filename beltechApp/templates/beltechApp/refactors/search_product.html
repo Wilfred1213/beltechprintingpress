@@ -1,0 +1,25 @@
+{% extends 'beltechApp/base/base.html' %}
+
+{% block content %}
+<section class="search-results-area pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-50">Search Results for: "{{ query }}"</h3>
+            </div>
+        </div>
+
+        <div class="row align-items-end mb-50">
+            {% for product in products %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    {% include 'beltechApp/refactors/item_list.html' %}
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p>No products matched your search. Try a different keyword.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

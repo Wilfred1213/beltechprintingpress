@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from beltechApp.models import *
 from django.db.models import Count
-from beltechApp.forms import BlogCommentForm
+from beltechApp.forms import BlogCommentForm, BlogSearchForm
 from django.contrib import messages
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -66,12 +68,23 @@ def blog(request):
 def blog_detail(request, blog_id):
     details = BlogPost.objects.get(id=blog_id)
     breadcrumb = printingHomePageImage.objects.all()
-    recent_blog = BlogPost.objects.all().order_by('-created_at')[:3]
+
+    blogpost =BlogPost.objects.all()
+    recent_blog = blogpost.order_by('-created_at')[:3]
 
     category = Blog_category.objects.all()
     our_service_category = Category.objects.all()
 
     blog_comment = details.blopcomment.all()
+
+    if request.method =='GET':
+        search_form = BlogSearchForm(request.GET)
+        if search_form.is_valid():
+            search_string = search_form.cleaned_data.get('q')
+            search_data = BlogPost.objects.filter(Q(title__icontains =search_string)| Q(slug__icontains =search_string)) if search_string else None
+        else:
+            search_form = BlogSearchForm()
+
     
 
     categories_with_counts = Category.objects.annotate(total_products=Count('services'))
@@ -106,7 +119,9 @@ def blog_detail(request, blog_id):
         'categorys':our_service_category,
         'product_count':categories_with_counts,
         'form': comment_form,
-        'comments':blog_comment
+        'comments':blog_comment,
+        'search_form':search_form,
+        'search_data':search_data
 
         
     }
@@ -153,6 +168,47 @@ def service_tags(request, service_id):
     return render(request, 'beltechApp/service.html', context)
 
 
+def search_results_view(request):
+    product = PrintingService.objects.all()
+    query = request.GET.get('q')
+   
+    if query:
+        # Search Products/Services
+        product_results = PrintingService.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        ).distinct()
+
+    
+    context ={
+        'query': query,
+        'products':product,
+        'products': product_results,
+
+    }
+    return render(request, 'beltechApp/refactors/search_product.html', context)
+
+
+
+def shop(request):
+    all_products = PrintingService.objects.all().order_by('-date')
+    recent_product = all_products[:3]
+    breadcrumb = printingHomePageImage.objects.all()
+    category = Category.objects.all()
+
+    # --- Pagination Logic ---
+    # Show 6 products per page (change this number as you like)
+    paginator = Paginator(all_products, 6) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'products': page_obj,
+        'navs': breadcrumb,
+        'categorys': category,
+        'recent_products': recent_product
+    }
+
+    return render(request, 'beltechApp/shop.html', context)
 
 
     

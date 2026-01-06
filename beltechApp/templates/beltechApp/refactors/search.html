@@ -1,0 +1,28 @@
+<section class="tp-blog-4-area pt-120 pb-90">
+    <div class="container">
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-lg-4 col-md-6">
+                <div class="tp-blog-wrapper tp-blog-4-wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                    <div class="tp-blog-thumb tp-blog-4-thumb not-hide-cursor" data-cursor="View<br>Detail">
+                        <a class="cursor-hide" href="{% url 'blog_detail' blog.id %}"><img src="{{ blog.main_image.url}}" alt=""></a>
+                    </div>
+                    <div class="tp-blog-4-content">
+                        <div class="tp-blog-4-meta">
+                            <span>Printing</span>
+                            <span>{{ blog.created_at|date:"M d, Y" }}</span>
+                        </div>
+                        <h4 class="tp-blog-4-title"><a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></h4>
+                        <div class="tp-blog-4-btn">
+                            <a href="{% url 'blog_detail' blog.id %}">Read More <span><i class="fa-regular fa-plus"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
+            
+        </div>
+    </div>
+</section>
+<!-- blog area end -->

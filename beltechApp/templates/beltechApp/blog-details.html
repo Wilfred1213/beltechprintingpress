@@ -19,14 +19,46 @@
                 <!-- breadcrumb area end -->
                 
 
-
-
-                <!-- postbox area start -->
+                <!-- postbox area start --> 
+                               
                 <section class="tp-postbox-area pt-120 pb-120">
                     <div class="container">
                         <div class="row">
                             <div class="col-xxl-8 col-xl-8 col-lg-8">
                                 <div class="tp-postbox-wrapper">
+                                    {% if search_data != None %}
+                                    <h3 class="mb-40">Search Results for: "{{ request.GET.q }}"</h3>
+                                    
+                                    {% for blog in search_data %}
+                                    <article class="tp-postbox-item wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                        <div class="tp-postbox-thumb p-relative">
+                                            <a href="{% url 'blog_detail' blog.id %}">
+                                                <img src="{{ blog.main_image.url }}" alt="{{ blog.title }}">
+                                            </a>
+                                        </div>
+                                        <div class="tp-postbox-content">
+                                            <h3 class="tp-postbox-title details">
+                                                <a href="{% url 'blog_detail' blog.id %}">{{ blog.title | safe }}</a>
+                                            </h3>
+                                            
+                                            <p class="tp-postbox-paragraph">
+                                                {{ blog.content | truncatewords:30 | safe }}
+                                            </p>
+
+                                            <div class="tp-postbox-read-more">
+                                                <a href="{% url 'blog_detail' blog.id %}" class="tp-btn">
+                                                    <span>Read More</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    {% empty %}
+                                        <p>No results found for your search.</p>
+                                    {% endfor %}
+                                    
+                                    <hr class="mt-50 mb-50">
+
+                                    {% else %}
                                     <article class="tp-postbox-item wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                                         <div class="tp-postbox-thumb p-relative">
                                             <img src="{{blog.main_image.url}}" alt="">
@@ -38,34 +70,21 @@
                                         </div>
                                     </article>
 
+                                    {% if blog.quote_text %}
                                     <div class="tp-postbox-blog-code mb-80 text-center wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                                         <div class="tp-postbox-blog-code-icon mb-20">
                                             <img src="{% static 'beltechApp/assets/img/blog/blog-code.svg' %}" alt="">
                                         </div>
                                         <div class="tp-postbox-blog-code-content">
-                                            <h4 class="tp-postbox-blog-code-title">Diam luctus nostra dapibus varius et semper semper rutrum ad risus felis
-                                                eros. Cursus libero viverra tempus netus diam vestibulum</h4>
-                                            <p class="tp-postbox-blog-code-name">David Backhum</p>
+                                            <h4 class="tp-postbox-blog-code-title">{{ blog.quote_text }}</h4>
+                                            <p class="tp-postbox-blog-code-name">{{ blog.quote_author}}</p>
                                         </div>
                                     </div>
+                                    {% endif %}
 
-                                    <div class="row align-items-center tp-postbox-details-row mb-50">
-                                        <div class="col-xl-10 col-lg-10 col-md-10">
-                                            <div class="tp-postbox-details-tag details d-flex wow fadeInUp">
-                                                <span>Posted in:</span>
-                                                <div class="tp-postbox-tagcloud-social">
-                                                    <a href="#">Development</a>
-                                                    <a href="#">Digital</a>
-                                                    <a href="#">Tech</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-2 col-lg-2 col-md-2">
-                                            <div class="tp-postbox-details-share d-flex justify-content-end wow fadeInUp">
-                                                <a href="#"><span><i class="flaticon-share"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+
+
                                     <div class="tp-postbox-comment mb-50" id="comments">
                                         <h3 class="tp-postbox-comment-title wow fadeInUp">{{ blog.blopcomment.count }} Comments</h3>
 
@@ -159,6 +178,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                   {% endif %} 
                                 </div>
                             </div>
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-7">
@@ -169,7 +189,7 @@
                                             <div class="sidebar__search">
                                                 <form action="#">
                                                     <div class="sidebar__search-input-2">
-                                                        <input type="text" placeholder="Keywords here....">
+                                                        {{ search_form }}
                                                         <button type="submit"><i class="far fa-search"></i></button>
                                                     </div>
                                                 </form>
