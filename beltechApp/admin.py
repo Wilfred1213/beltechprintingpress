@@ -41,7 +41,7 @@ class CategoryAdmin(admin.ModelAdmin):
     # Automatically fill the slug field as you type the name
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name',)
-@admin.register(PrintingService)
+@admin.register(Products)
 class PrintingServiceAdmin(admin.ModelAdmin):
     # Show key details and a small image preview in the list
     list_display = ('display_image', 'name', 'category', 'base_price', 'is_available', 'is_latest')
@@ -144,3 +144,26 @@ class BlogPostAdmin(admin.ModelAdmin):
 class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'created_at', 'message', 'blog', 'parent')
     readonly_fields = ('name', 'email', 'website', 'message', 'created_at', 'blog', 'logo', 'parent')
+
+
+
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('display_image', 'name', 'description')
+    search_fields = ('name',)
+    
+    # Method to display a small thumbnail in the admin list
+    def display_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="width: 45px; height:45px; border-radius: 5px;" />', obj.image.url)
+        return "No Image"
+    
+    display_image.short_description = 'Preview'
+
+    # Organize the detail page into sections
+    fieldsets = (
+        ('General Information', {
+            'fields': ('name', 'description', 'image')
+        }),
+        
+    )

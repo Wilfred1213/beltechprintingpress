@@ -72,7 +72,7 @@ class Category(models.Model):
         return self.name
 
 # 2. PRINTING SERVICES (The specific products like "Business Cards")
-class PrintingService(models.Model):
+class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=200)
     # Using CKEditor for rich descriptions (bullet points for specs, etc.)
@@ -85,6 +85,18 @@ class PrintingService(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.category.name}"
+    
+class Service(models.Model):
+    name = models.CharField(max_length=200)
+    # Using CKEditor for rich descriptions (bullet points for specs, etc.)
+    description = CKEditor5Field('Description', config_name='default')
+    
+    image = models.ImageField(upload_to='services/')
+    date = models.DateTimeField(auto_now_add=True, null=True)
+    
+
+    def __str__(self):
+        return f"{self.name}"
 
 class printingHomePageImage(models.Model):
     image = models.ImageField(upload_to='services/')
@@ -101,7 +113,7 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    service = models.ForeignKey(PrintingService, on_delete=models.PROTECT)
+    service = models.ForeignKey(Products, on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField(default=1)
     
     # Critical for Beltech: The print-ready file

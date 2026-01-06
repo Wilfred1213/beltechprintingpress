@@ -16,106 +16,143 @@
         
         <!-- breadcrumb area end -->
 
-        <!-- product-top area start -->
-        <section class="tp-product-2-area pt-120 pb-120">
-            <div class="container">
-                <div class="row">
-                    <div class="tp-section-title-wrapper mb-30">
-                        <h6 class="tp-section-sub-title">WE ALWYAS BELIEVE IN QUALITY</h6>
-                        <h3 class="tp-section-title mb-35 tp-split-text right">Explore All Catagories</h3>
+    <!-- feature area start -->
+    {% include 'beltechApp/refactors/features.html'%}
+               
+    <!-- feature area end -->
+
+
+
+    <!-- service area start -->
+    <div class="row">
+        {% for service in services %}
+        <div class="col-xl-6 col-lg-6">
+            <div class="tp-service-2-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s">
+                <div class="tp-service-2-icon-box">
+                    <div class="tp-service-2-icon">
+                        <span>
+                            <img src="{{ service.image.url }}" alt="{{ service.name }}">
+                        </span>
+                    </div>
+                    <div class="tp-service-2-number">
+                        <span>0{{ forloop.counter }}</span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xxl-12">
-                        <div class="tp-product-2-slider p-relative">
-                            <div class="tp-product-2-active swiper-container wow fadeInUp">
-                                <div class="swiper-wrapper">
-                                    <!-- Slide  -->
-                                    {% for category in categories %}
-                                    <div class="tp-product-2-wrapper tp-costom-wrapper-hover fix swiper-slide">
-                                        <div class="tp-product-2-thumb fix mb-15">
-                                            <div class="tp-costom-inner-hover">
-                                                <a href="shop-details.html"><img src="{{ category.image.url }}" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-2-content text-center">
-                                            <h4 class="tp-product-2-title"><a href="shop-details.html">{{ category.name }}</a></h4>
+                <div class="tp-service-2-content">
+                    <h4 class="tp-service-2-title"><a href="service-details.html">{{ service.name }}</a></h4>
+                    <p class="tp-service-2-paragraph">{{ service.description | safe }}</p>
+                    <div class="tp-service-2-button">
+                        <a class="tp-service-2-btn" href="service-details.html">Contact us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- service area end -->
+
+
+
+    <!-- product-top area start -->
+    <section class="tp-product-2-area pt-120 pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="tp-section-title-wrapper mb-30">
+                    {% comment %} <h6 class="tp-section-sub-title">WE ALWYAS BELIEVE IN QUALITY</h6> {% endcomment %}
+                    <h3 class="tp-section-title mb-35 tp-split-text right">Explore All Catagories</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="tp-product-2-slider p-relative">
+                        <div class="tp-product-2-active swiper-container wow fadeInUp">
+                            <div class="swiper-wrapper">
+                                <!-- Slide  -->
+                                {% for category in categories %}
+                                <div class="tp-product-2-wrapper tp-costom-wrapper-hover fix swiper-slide">
+                                    <div class="tp-product-2-thumb fix mb-15">
+                                        <div class="tp-costom-inner-hover">
+                                            <a href="shop-details.html"><img src="{{ category.image.url }}" alt=""></a>
                                         </div>
                                     </div>
-                                    {% endfor %}
-                                    
+                                    <div class="tp-product-2-content text-center">
+                                        <h4 class="tp-product-2-title"><a href="shop-details.html">{{ category.name }}</a></h4>
+                                    </div>
                                 </div>
+                                {% endfor %}
+                                
                             </div>
-                            <div class="tp-product-2-arrow-box">
-                                <button class="slider-prev" tabindex="0" aria-label="Previous slide">
-                                    <i class="fa-sharp fa-regular fa-arrow-left"></i>
-                                </button>
-                                <button class="slider-next" tabindex="0" aria-label="Next slide">
-                                    <i class="fa-sharp fa-regular fa-arrow-right"></i>
-                                </button>
-                            </div>
+                        </div>
+                        <div class="tp-product-2-arrow-box">
+                            <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+                                <i class="fa-sharp fa-regular fa-arrow-left"></i>
+                            </button>
+                            <button class="slider-next" tabindex="0" aria-label="Next slide">
+                                <i class="fa-sharp fa-regular fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- product-top area end -->
+        </div>
+    </section>
+    <!-- product-top area end -->
 
 
 
-        <!-- product-center area start -->
-        {% include 'beltechApp/refactors/latest_design.html'%}
-        <!-- product-center area end -->
+    <!-- product-center area start -->
+    {% include 'beltechApp/refactors/latest_design.html'%}
+    <!-- product-center area end -->
 
 
 
-        <!-- shop area start -->
-        <section class="tp-product-area pb-40">
+    <!-- shop area start -->
+    <section class="tp-product-area pb-40">
+        <div class="container">
+            <div class="row align-items-center mb-45">
+                <div class="col-xl-8 col-lg-8">
+                    <div class="tp-product-3-coundown-wrapper d-flex">
+                        <div class="tp-product-3-coundown-title mr-30">
+                            <h3 class="tp-split-text right">Date of the Day</h3>
+                        </div>
+                        <div class="tp-product-3-countdown" data-countdown data-date="Dec 30 2026 20:20:12">
+                            <div class="tp-product-3-countdown-inner">
+                                <ul>
+                                    <li><span data-days>0</span>:</li>
+                                    <li><span data-hours>0</span>:</li>
+                                    <li><span data-minutes>0</span>:</li>
+                                    <li><span data-seconds>0</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="tp-product-3-coundown-btn d-flex justify-content-end">
+                        <a class="tp-btn-border" href="cart.html"><span>View All Products</span></a>
+                    </div>
+                </div>
+            </div>
+
+            
             <div class="container">
-                <div class="row align-items-center mb-45">
-                    <div class="col-xl-8 col-lg-8">
-                        <div class="tp-product-3-coundown-wrapper d-flex">
-                            <div class="tp-product-3-coundown-title mr-30">
-                                <h3 class="tp-split-text right">Date of the Day</h3>
-                            </div>
-                            <div class="tp-product-3-countdown" data-countdown data-date="Dec 30 2026 20:20:12">
-                                <div class="tp-product-3-countdown-inner">
-                                    <ul>
-                                        <li><span data-days>0</span>:</li>
-                                        <li><span data-hours>0</span>:</li>
-                                        <li><span data-minutes>0</span>:</li>
-                                        <li><span data-seconds>0</span></li>
-                                    </ul>
-                                </div>
-                            </div>
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            {% include 'beltechApp/refactors/item_list.html' %}
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="tp-product-3-coundown-btn d-flex justify-content-end">
-                            <a class="tp-btn-border" href="cart.html"><span>View All Products</span></a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
-
-                
-                <div class="container">
-                    <div class="row">
-                        {% for product in products %}
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                {% include 'beltechApp/refactors/item_list.html' %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-               
-                
             </div>
-        </section>
-        <!-- shop area end -->
+        
+            
+        </div>
+    </section>
+    <!-- shop area end -->
 
-        <!-- blog area start -->
-        {% include 'beltechApp/refactors/latest_blog.html'%}
-        <!-- blog area end -->
+    <!-- blog area start -->
+    {% include 'beltechApp/refactors/latest_blog.html'%}
+    <!-- blog area end -->
 </div>
 
 

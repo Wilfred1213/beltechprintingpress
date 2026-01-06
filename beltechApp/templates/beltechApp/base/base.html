@@ -608,6 +608,40 @@
                 z-index: -1; /* puts images behind the text */
             }
         }
+
+
+        {% comment %} service image control {% endcomment %}
+        /* Control the icon container size */
+    .tp-service-2-icon {
+        width: 110px !important;  /* Increased size */
+        height: 110px !important; /* Increased size */
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.4s ease; /* Smooth transition for the container */
+        border: 1px solid #eee; /* Optional: adds a soft border */
+    }
+
+    /* The actual image logic */
+    .tp-service-2-icon img {
+        max-width: 80%; /* Fits nicely with some padding */
+        height: auto;
+        transition: transform 0.4s ease; /* Smooth zoom for the image */
+    }
+
+    /* Grow effect on Hover */
+    .tp-service-2-wrapper:hover .tp-service-2-icon img {
+        transform: scale(1.15); /* Grows by 15% when you hover the card */
+    }
+
+    /* Optional: Slight lift effect for the whole icon box */
+    .tp-service-2-wrapper:hover .tp-service-2-icon {
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        border-color: #ff5a01; /* Uses your brand orange on hover */
+    }
     </style>
 
     <!-- header area end -->

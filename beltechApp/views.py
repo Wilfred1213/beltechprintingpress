@@ -15,8 +15,8 @@ def home(request):
     homepage_about = Homepage_about_area.objects.first()
 
     latest_product = Already_done_project.objects.all().order_by('-date')[:2]
-    recent_project_done = PrintingService.objects.filter(is_latest =True)
-    products = PrintingService.objects.all()
+    recent_project_done = Products.objects.filter(is_latest =True)
+    products = Products.objects.all()
 
     recent_blogs =BlogPost.objects.all().order_by('-created_at')[:3]
     logo = Logo.objects.first()
@@ -38,17 +38,23 @@ def service(request):
     latest_product = Already_done_project.objects.all().order_by('-date')[:2]
     category = Category.objects.all()
     breadcrumb = printingHomePageImage.objects.all()
-    products = PrintingService.objects.all()
+    products = Products.objects.all()
+
+    features = Homepage_service_area.objects.all()[:3]
 
     recent_blogs =BlogPost.objects.all().order_by('-created_at')[:3]
     logo = Logo.objects.first()
+
+    service =Service.objects.all()
     context = {
         'categories':category,
         'navs':breadcrumb,
         'products':products,
         'latests':latest_product,
         'recent_blogs':recent_blogs,
-        'logo': logo
+        'logo': logo,
+        'features':features,
+        'services':service
         
     }
     return render(request, 'beltechApp/service.html', context)
@@ -56,7 +62,7 @@ def service(request):
 def blog(request):
     breadcrumb = printingHomePageImage.objects.all()
     blog = BlogPost.objects.all()
-    products = PrintingService.objects.all()
+    products = Products.objects.all()
 
     context ={
         'blogs':blog,
@@ -132,7 +138,7 @@ def tags(request, category_id):
     blog_tags = BlogPost.objects.filter(category =category)
 
     breadcrumb = printingHomePageImage.objects.all()
-    products = PrintingService.objects.all()
+    products = Products.objects.all()
 
     context ={
         'blogs':blog_tags,
@@ -145,10 +151,10 @@ def tags(request, category_id):
 
 def service_tags(request, service_id):
     category =Category.objects.get(id =service_id)
-    blog_tags = PrintingService.objects.filter(category =category)
+    blog_tags = Products.objects.filter(category =category)
 
     breadcrumb = printingHomePageImage.objects.all()
-    # products = PrintingService.objects.all()
+    # products = Products.objects.all()
 
     latest_product = Already_done_project.objects.all().order_by('-date')[:2]
     category = Category.objects.all()
@@ -169,12 +175,12 @@ def service_tags(request, service_id):
 
 
 def search_results_view(request):
-    product = PrintingService.objects.all()
+    product = Products.objects.all()
     query = request.GET.get('q')
    
     if query:
         # Search Products/Services
-        product_results = PrintingService.objects.filter(
+        product_results = Products.objects.filter(
             Q(name__icontains=query) | Q(description__icontains=query)
         ).distinct()
 
@@ -190,7 +196,7 @@ def search_results_view(request):
 
 
 def shop(request):
-    all_products = PrintingService.objects.all().order_by('-date')
+    all_products = Products.objects.all().order_by('-date')
     recent_product = all_products[:3]
     breadcrumb = printingHomePageImage.objects.all()
     category = Category.objects.all()
@@ -210,9 +216,17 @@ def shop(request):
 
     return render(request, 'beltechApp/shop.html', context)
 
+def about(request):
+    about = Homepage_about_area.objects.first()
+    # blog = BlogPost.objects.all()
+    breadcrumb = printingHomePageImage.objects.all()
 
-    
-    
+    context = {
+        'about': about,
+        'blogs':blog,
+        'navs': breadcrumb
+    }
+    return render(request, 'beltechApp/about.html', context)
 
     
    
