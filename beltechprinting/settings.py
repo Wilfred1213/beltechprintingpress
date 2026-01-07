@@ -29,40 +29,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
-# INSTALLED_APPS = [
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     'apps.accounts', # Must include the "apps." prefix
-#     'beltechApp',
-    
-#     # 'django_ckeditor_5',
-#     # 'crispy_forms',
-#     # 'crispy_bootstrap5',
-# ]
-
-# THIRD_PARTY_APPS = [
-#     'crispy_forms',
-#     'crispy_bootstrap5',
-# ]
-
-# LOCAL_APPS = [
-#     'apps.core',
-#     'apps.services', # For printing products
-#     'apps.orders',   # For customer orders
-#     'apps.accounts', # Custom user model
-# ]
-
-# INSTALLED_APPS = INSTALLED_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-# # Crispy Forms Config
-# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-# CRISPY_TEMPLATE_PACK = "bootstrap5"
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -98,8 +64,12 @@ CKEDITOR_5_CONFIGS = {
 
 AUTH_USER_MODEL = 'beltechApp.CustomUser'
 
+# X_FRAME_OPTIONS = "SAMEORIGIN"
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 'beltechApp.middleware.AllowYouTubeEmbeddingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

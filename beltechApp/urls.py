@@ -12,5 +12,7 @@ urlpatterns = [
     path('search_results_view/', views.search_results_view, name='search_results_view' ),
     path('shop/', views.shop, name='shop' ),
     path('about/', views.about, name='about' ),
+    path('testimonial/', views.testimonial, name='testimonial' ),
+    path('submit_testimonial/', views.submit_testimonial, name='submit_testimonial' ),
     
 ]

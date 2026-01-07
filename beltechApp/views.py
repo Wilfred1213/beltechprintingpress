@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from beltechApp.models import *
 from django.db.models import Count
-from beltechApp.forms import BlogCommentForm, BlogSearchForm
+from beltechApp.forms import BlogCommentForm, BlogSearchForm, TestimonialForm
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -220,13 +220,42 @@ def about(request):
     about = Homepage_about_area.objects.first()
     # blog = BlogPost.objects.all()
     breadcrumb = printingHomePageImage.objects.all()
+    faq = Faq.objects.all()[:3]
+
+    process_video = ProcessVideo.objects.first()
 
     context = {
         'about': about,
         'blogs':blog,
-        'navs': breadcrumb
+        'navs': breadcrumb,
+        'faqs':faq,
+        'process_video': process_video,
     }
     return render(request, 'beltechApp/about.html', context)
 
+def testimonial(request):
+    testimony = Testimonial.objects.all()
+    breadcrumb = printingHomePageImage.objects.all()
+
+    context = {
+        'testimonys': testimony,
+        'navs': breadcrumb,
+    }
+
+    return render(request, 'beltechApp/testimonials.html', context)
+
+
+
+def submit_testimonial(request):
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Thank you! Your testimonial has been submitted.')
+            return redirect('testimonial') # Redirect to your testimonial list
+    else:
+        form = TestimonialForm()
+    
+    return render(request, 'beltechApp/testimonial_form.html', {'form': form})
     
    

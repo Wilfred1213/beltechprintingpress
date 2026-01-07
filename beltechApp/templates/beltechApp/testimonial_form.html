@@ -1,0 +1,73 @@
+{% extends 'beltechApp/base/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="testimonial-form-area pt-120 pb-120" style="background: #f8f9fa; position: relative; overflow: hidden;">
+    <div class="shape-1" style="position: absolute; top: 10%; left: -5%; width: 300px; height: 300px; background: rgba(255, 90, 1, 0.05); border-radius: 50%;"></div>
+    <div class="shape-2" style="position: absolute; bottom: 10%; right: -5%; width: 400px; height: 400px; background: rgba(255, 90, 1, 0.03); border-radius: 50%;"></div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-9">
+                <div class="testimonial-form-card">
+                    <div class="form-header text-center mb-40">
+                        <span class="tp-section-sub-title">SHARE YOUR STORY</span>
+                        <h2 class="form-title">How was your experience with <span style="color: #ff5a01;">Beltech?</span></h2>
+                        <p>Your feedback helps us grow and helps others make the right choice.</p>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data" class="tp-form-main">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-25">
+                                <label class="custom-label">Full Name</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-light fa-user"></i>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-30 text-center">
+                                <label class="custom-label d-block mb-15">Overall Rating</label>
+                                <div class="star-rating-container">
+                                    <div class="star-rating">
+                                        {% for radio in form.rating %}
+                                            {{ radio.tag }}
+                                            <label for="{{ radio.id_for_label }}" title="{{ radio.choice_label }}">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-25">
+                                <label class="custom-label">Your Review</label>
+                                {{ form.message }}
+                            </div>
+
+                            <div class="col-md-12 mb-40">
+                                <label class="custom-label">Profile Photo (Optional)</label>
+                                <div class="file-upload-wrapper">
+                                    <label for="{{ form.main_image.id_for_label }}" class="file-drop-area">
+                                        <i class="fa-light fa-cloud-arrow-up"></i>
+                                        <span>Click to upload or drag and drop</span>
+                                        {{ form.main_image }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="tp-btn w-100">
+                                    Submit Review <i class="fa-light fa-paper-plane ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

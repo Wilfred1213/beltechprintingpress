@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class CustomUser(AbstractUser):
     # Ensure the class name is exactly 'CustomUser'
@@ -208,3 +209,102 @@ class BlogComment(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+class Faq(models.Model):
+    question =models.CharField(max_length=200)
+    answer = CKEditor5Field('Body Content', config_name='default')
+
+    def __str__(self):
+        return f"Question {self.question}"
+    
+from django.db import models
+
+from django.db import models
+from urllib.parse import urlparse, parse_qs
+
+
+from django.db import models
+from urllib.parse import urlparse, parse_qs
+
+
+class ProcessVideo(models.Model):
+    title = models.CharField(
+        max_length=200,
+        default="How We Bring Your Ideas To Life"
+    )
+    sub_title = models.CharField(
+        max_length=100,
+        default="WATCH OUR PROCESS"
+    )
+    youtube_url = models.URLField(
+        help_text="Paste a YouTube video URL (not playlist or channel)"
+    )
+
+    class Meta:
+        verbose_name = "Process Video"
+        verbose_name_plural = "Process Videos"
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def embed_url(self):
+        """
+        Always return a VALID YouTube embed URL.
+        Never return watch URLs.
+        """
+        parsed = urlparse(self.youtube_url)
+        video_id = None
+
+        # https://youtu.be/VIDEO_ID
+        if parsed.netloc == "youtu.be":
+            video_id = parsed.path.strip("/")
+
+        # https://www.youtube.com/watch?v=VIDEO_ID
+        elif "youtube.com" in parsed.netloc:
+            qs = parse_qs(parsed.query)
+            video_id = qs.get("v", [None])[0]
+
+            # https://www.youtube.com/embed/VIDEO_ID
+            if not video_id and "embed" in parsed.path:
+                video_id = parsed.path.split("/")[-1]
+
+        if not video_id:
+            return ""
+
+        return f"https://www.youtube.com/embed/{video_id}"
+
+class Team(models.Model):
+     name = models.CharField(max_length=200)
+     image = models.ImageField(upload_to='services/')
+     role = models.CharField(max_length=200)
+
+     def __str__(self):
+         return self.name
+     
+from django.db import models
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=100, help_text="Client or customer name")
+    message = models.TextField(help_text="Client testimonial message")
+    logo_image = models.ForeignKey(Logo, on_delete=models.CASCADE, null=True)
+    # rating = models.PositiveSmallIntegerField(default=5, help_text="Rating from 1 to 5")
+    rating = models.IntegerField(
+        default=5, 
+        validators=[MinValueValidator(1), MaxValueValidator(5)], null=True,
+        help_text="Rate from 1 to 5"
+    )
+    main_image = models.ImageField(upload_to='blog/main/', null=True, help_text="Featured image at the top")
+    is_active = models.BooleanField(default=True, help_text="Show or hide this testimonial on the site")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Testimonial"
+        verbose_name_plural = "Testimonials"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.name} ({self.rating}★)"
+
+    

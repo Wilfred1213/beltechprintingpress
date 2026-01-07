@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogComment
+from .models import BlogComment, Testimonial
 
 class BlogCommentForm(forms.ModelForm):
     class Meta:
@@ -21,3 +21,30 @@ class BlogSearchForm(forms.Form):
             'class': 'sidebar__search-input-2' # This matches your CSS
         })
     )
+
+
+class TestimonialForm(forms.ModelForm):
+    # Overwrite the rating field to use RadioSelect, which works well with the custom star CSS
+    rating = forms.IntegerField(
+        label='Rate Your Experience (1 to 5 Stars)',
+        widget=forms.RadioSelect(choices=[
+            (1, '⭐'), 
+            (2, '⭐⭐'), 
+            (3, '⭐⭐⭐'), 
+            (4, '⭐⭐⭐⭐'), 
+            (5, '⭐⭐⭐⭐⭐')
+        ]),
+        initial=5,
+    )
+
+    class Meta:
+        model = Testimonial
+        fields = ['name', 'rating', 'message', 'main_image']
+        
+        # Add Bootstrap's default 'form-control' class to other fields
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Your Full Name'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 6, 'placeholder': 'Share your detailed experience here...'}),
+            'main_image': forms.FileInput(attrs={'class': 'form-control'}), # File inputs need form-control
+        }
+

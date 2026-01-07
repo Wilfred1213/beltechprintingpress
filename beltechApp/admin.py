@@ -14,6 +14,8 @@ admin.site.register(Homepage_service_area)
 admin.site.register(Homepage_about_area)
 admin.site.register(printingHomePageImage)
 admin.site.register(Logo)
+admin.site.register(Team)
+
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
@@ -167,3 +169,33 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
         
     )
+
+@admin.register(ProcessVideo)
+class ProcessVideoAdmin(admin.ModelAdmin):
+    # This limits the admin to only one video entry to prevent layout breaking
+    list_display = ('title', 'youtube_url')
+    
+    def has_add_permission(self, request):
+        # If a video already exists, don't allow adding another one
+        if ProcessVideo.objects.exists():
+            return False
+        return True
+
+@admin.register(Faq)
+class FAQAdmin(admin.ModelAdmin):
+    # Displays the question and a snippet of the answer in the list view
+    list_display = ('question', 'get_answer_preview')
+    search_fields = ('question', 'answer')
+    list_filter = ('question',) # You can add categories here if you have them
+
+    def get_answer_preview(self, obj):
+        from django.utils.html import strip_tags
+        return strip_tags(obj.answer)[:50] + "..."
+    get_answer_preview.short_description = "Answer Preview"
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ('name', 'rating', 'is_active', 'created_at' )
+    list_filter = ('is_active', 'rating')
+    search_fields = ('name', 'message')
