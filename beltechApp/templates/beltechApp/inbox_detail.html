@@ -1,0 +1,72 @@
+
+{% extends 'beltechApp/base/base.html' %}
+{% load static %}
+
+{% block title %} Inbox detail {% endblock %}
+
+{% block content %}
+
+<section class="message-detail-area pt-120 pb-120" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="mb-30">
+                    <a href="{% url 'inbox' %}" style="color: #ff5a01; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Inbox
+                    </a>
+                </div>
+
+                <div class="detail-card" style="background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 40px;">
+                    <div class="d-flex justify-content-between align-items-center mb-30">
+                        <div>
+                            <h3 style="margin-bottom: 5px;">{{ msg.full_name }}</h3>
+                            <span style="color: #777;"><i class="fa-light fa-calendar"></i> {{ msg.date|date:"F d, Y - P" }}</span>
+                        </div>
+                        <div class="actions">
+                            <a href="{% url 'delete_message' msg.pk %}" 
+                               onclick="return confirm('Are you sure you want to delete this message?')"
+                               style="color: #dc3545; font-size: 20px; margin-left: 15px;" title="Delete Message">
+                                <i class="fa-light fa-trash-can"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid #eee; margin-bottom: 30px;">
+
+                    <div class="row mb-40">
+                        <div class="col-md-6">
+                            <small style="text-transform: uppercase; color: #999; display: block; margin-bottom: 5px;">Email Address</small>
+                            <a href="mailto:{{ msg.email }}" style="color: #333; font-weight: 600; text-decoration: none;">
+                                {{ msg.email }}
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <small style="text-transform: uppercase; color: #999; display: block; margin-bottom: 5px;">Phone Number</small>
+                            <a href="tel:{{ msg.phone_number }}" style="color: #ff5a01; font-weight: 700; font-size: 18px; text-decoration: none;">
+                                <i class="fa-solid fa-phone"></i> {{ msg.phone_number }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="message-body" style="background: #fdf2e9; padding: 30px; border-radius: 15px; border-left: 5px solid #ff5a01;">
+                        <h6 style="margin-bottom: 15px; color: #ff5a01;">Message Content:</h6>
+                        <p style="line-height: 1.8; color: #444; font-size: 16px;">
+                            {{ msg.message|linebreaksbr }}
+                        </p>
+                    </div>
+
+                    <div class="mt-40 d-flex gap-3">
+                        <a href="tel:{{ msg.phone_number }}" class="tp-btn" style="background: #ff5a01; color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; display: inline-block;">
+                            Call Customer Now
+                        </a>
+                        <a href="mailto:{{ msg.email }}" class="tp-btn" style="background: #333; color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; display: inline-block;">
+                            Reply via Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

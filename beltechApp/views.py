@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from beltechApp.models import *
 from django.db.models import Count
@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -322,13 +323,15 @@ def faq(request):
     return render(request, 'beltechApp/faq.html', context)
 
 
-
 def contact(request):
     breadcrumb = printingHomePageImage.objects.all()
+    address = CompanyInformation.objects.first()
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            save_message= form.save(commit =False)
+            save_message.is_read =False
+            save_message.save()
             # This 'success' tag is what 'message.tags' looks for in HTML
             messages.success(request, 'Your message for Beltech Printing has been sent! We will call you shortly.')
             return redirect(reverse('contact') + '#contacts-form')
@@ -336,5 +339,60 @@ def contact(request):
             messages.error(request, 'Please check your phone number or email format.')
     else:
         form = ContactForm()
+    context = {
+        'contact_form': form, 
+        'navs':breadcrumb,
+        'address':address
+    }
+    return render(request, 'beltechApp/contact.html', context)
+
+
+
+
+@login_required # Only the owner should see messages
+def inbox(request):
+    messages = Contact.objects.all().order_by('-date') # Newest first
+
+    context = {
+        'contact_messages': messages
+        }
+    return render(request, 'beltechApp/inbox.html', context)
+
+def inbox_detail(request, pk):
+    # Fetch the message or return 404 if not found
+    msg = get_object_or_404(Contact, pk=pk)
+
+    if msg.is_read == True:
+        msg.is_read ==False
+        msg.save()
     
-    return render(request, 'beltechApp/contact.html', {'contact_form': form, 'navs':breadcrumb})
+    # Mark as read automatically when opened
+    if not msg.is_read:
+        msg.is_read = True
+        msg.save()
+        
+    return render(request, 'beltechApp/inbox_detail.html', {'msg': msg})
+
+def delete_message(request, pk):
+    msg = get_object_or_404(Contact, pk=pk)
+    msg.delete()
+    messages.success(request, "Message deleted successfully.")
+    return redirect('inbox')
+
+def message_count(request):
+    # Assuming you have a 'is_read' boolean field in your Contact model
+    # If not, you can just count all: Contact.objects.count()
+    count = Contact.objects.filter(is_read=False).count()
+    return {'unread_messages': count}
+
+def category_details(request, cat_id):
+    category = Category.objects.get(id = cat_id)
+
+    products = Products.objects.filter(category =category)
+
+    context ={
+        'category':category,
+        'products':products
+    }
+
+    return render(request, 'beltechApp/category_detail.html', context)

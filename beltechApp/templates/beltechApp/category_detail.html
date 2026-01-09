@@ -1,0 +1,76 @@
+
+{% extends 'beltechApp/base/base.html' %}
+{% load static %}
+
+{% block title %} Category detail {% endblock %}
+
+{% block content %}
+
+<section class="category-header-area pt-100 pb-100 p-relative fix" 
+         style="background: #111; min-height: 400px; display: flex; align-items: center;">
+    <div class="category-bg-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+         background-image: url('{{ category.image.url }}'); background-size: cover; background-position: center; opacity: 0.4;">
+    </div>
+    
+    <div class="container p-relative z-index-1">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="category-content text-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: #ff5a01;">Home</a></li>
+                            <li class="breadcrumb-item active" style="color: #fff;">{{ category.name }}</li>
+                        </ol>
+                    </nav>
+                    <h1 style="color: #fff; font-size: 60px; font-weight: 800; text-transform: uppercase;">
+                        {{ category.name }}
+                    </h1>
+                    <p style="color: #eee; font-size: 18px; max-width: 600px; margin: 20px auto;">
+                        Premium quality {{ category.name|lower }} printing services at Beltech, Musty Global Plaza.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product-grid-area pt-80 pb-120" style="background: #fdf2e933;">
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-40">
+                <div class="product-card" style="background: #fff; border-radius: 20px; overflow: hidden; transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                    <div class="product-img-wrapper" style="position: relative; overflow: hidden; height: 280px;">
+                        <a href="">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" 
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: 0.6s;">
+                        </a>
+                        <div class="product-tag" style="position: absolute; top: 15px; left: 15px; background: #ff5a01; color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 600;">
+                            Beltech Quality
+                        </div>
+                    </div>
+
+                    <div class="product-info" style="padding: 20px; text-align: center;">
+                        <h4 style="font-size: 18px; margin-bottom: 10px;">
+                            <a href="#" style="color: #333; transition: 0.3s;">{{ product.name }}</a>
+                        </h4>
+                        <p style="color: #ff5a01; font-weight: 700; font-size: 20px; margin-bottom: 15px;">
+                            ₦{{ product.base_price }}
+                        </p>
+                        <a href="{{ product.whatsapp_link }}" class="tp-btn-small">
+                            Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <h3 style="color: #999;">No products found in this category yet.</h3>
+                <a href="/" class="tp-btn" style="color: #ff5a01;">Continue Shopping</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

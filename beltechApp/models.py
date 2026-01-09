@@ -6,6 +6,11 @@ from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from urllib.parse import urlparse, parse_qs
+import urllib.parse
+
+
+
 class CustomUser(AbstractUser):
     # Ensure the class name is exactly 'CustomUser'
     phone_number = models.CharField(max_length=15, blank=True, null=True)
@@ -18,7 +23,7 @@ class Carousel(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     image = models.ImageField(upload_to='media/')
-    image2 = models.ImageField(upload_to='media/', null = True, blank=False)
+    # image2 = models.ImageField(upload_to='media/', null = True, blank=False)
 
 
     def __str__(self):
@@ -28,10 +33,15 @@ class Homepage_feature_area(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     # image = models.ImageField(upload_to='media/')
+    def __str__(self):
+        return self.title
 class Homepage_service_area(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     image = models.ImageField(upload_to='media/')
+
+    def __str__(self):
+        return self.title
 
 class Homepage_about_area(models.Model):
     title = models.CharField(max_length=50)
@@ -71,6 +81,28 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class SiteSetting(models.Model):
+    site_name = models.CharField(max_length=100, default="Beltech Printing")
+    whatsapp_number = models.CharField(
+        max_length=15, 
+        help_text="Enter number with country code, no plus sign (e.g., 2348030000000)"
+    )
+    business_address = models.TextField(default="Musty Global Plaza, Maiduguri")
+    contact_email = models.EmailField(default="info@beltech.com.ng")
+
+    class Meta:
+        verbose_name = "Site Setting"
+        verbose_name_plural = "Site Settings"
+
+    def __str__(self):
+        return self.site_name
+
+    def save(self, *args, **kwargs):
+        # This ensures only one SiteSetting object exists
+        if not self.pk and SiteSetting.objects.exists():
+            return 
+        return super(SiteSetting, self).save(*args, **kwargs)
 
 # 2. PRINTING SERVICES (The specific products like "Business Cards")
 class Products(models.Model):
@@ -83,6 +115,17 @@ class Products(models.Model):
     date = models.DateTimeField(auto_now_add=True, null=True)
     is_available = models.BooleanField(default=True)
     is_latest = models.BooleanField(default=False)
+
+
+    @property
+    def whatsapp_link(self):
+        # Pull the number from our Admin-controlled SiteSetting model
+        config = SiteSetting.objects.first()
+        phone = config.whatsapp_number if config else "2348000000000"
+        
+        message = f"Hello Beltech, I am interested in '{self.name}' (₦{self.base_price})."
+        encoded_message = urllib.parse.quote(message)
+        return f"https://wa.me/{phone}?text={encoded_message}"
 
     def __str__(self):
         return f"{self.name} - {self.category.name}"
@@ -101,38 +144,9 @@ class Service(models.Model):
 
 class printingHomePageImage(models.Model):
     image = models.ImageField(upload_to='services/')
-    
 
-# 3. ORDERS (Tracking customer uploads and status)
-class Order(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending Review'),
-        ('approved', 'Approved'),
-        ('printing', 'Printing in Progress'),
-        ('ready', 'Ready for Pickup'),
-        ('completed', 'Completed/Delivered'),
-    ]
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    service = models.ForeignKey(Products, on_delete=models.PROTECT)
-    quantity = models.PositiveIntegerField(default=1)
-    
-    # Critical for Beltech: The print-ready file
-    design_file = models.FileField(upload_to='orders/%Y/%m/%d/')
-    special_instructions = models.TextField(blank=True)
-    
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def save(self, *args, **kwargs):
-        # Business Logic: Auto-calculate the price
-        self.total_cost = self.service.base_price * self.quantity
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"Order #{self.id} ({self.service.name})"
-    
+    class Meta:
+        verbose_name = "Breadcrumb images"
 
 class Already_done_project(models.Model):
     title =models.CharField(max_length=50)
@@ -147,6 +161,9 @@ class Already_done_project(models.Model):
 class Logo(models.Model):
     name = models.CharField(max_length=100)
     main_image = models.ImageField(upload_to='logo/', help_text="Logo image")
+
+    def __str__(self):
+        return self.name
 
 class Blog_category(models.Model):
     name = models.CharField(max_length=100)
@@ -217,14 +234,6 @@ class Faq(models.Model):
     def __str__(self):
         return f"Question {self.question}"
     
-from django.db import models
-
-from django.db import models
-from urllib.parse import urlparse, parse_qs
-
-
-from django.db import models
-from urllib.parse import urlparse, parse_qs
 
 
 class ProcessVideo(models.Model):
@@ -315,6 +324,8 @@ class Contact(models.Model):
     phone_number = models.CharField(max_length=20, null=True, help_text="e.g. +234 800 000 0000")
     message = CKEditor5Field('Description', config_name='default')
     date = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=True, help_text="This indicate that you have read this message")
+
 
     class Meta:
         verbose_name = "Contact Message"
@@ -324,4 +335,22 @@ class Contact(models.Model):
     def __str__(self):
         return f"Message from {self.full_name} - {self.email}"
 
+class CompanyInformation(models.Model):
+    name = models.CharField(max_length=100, default="Beltech Printing")
+    address = models.CharField(max_length=255, help_text="e.g. Shop No. A 6, Musty Global Plaza")
+    street = models.CharField(max_length=255, help_text="e.g. Circular Road")
+    landmark = models.CharField(max_length=255, help_text="e.g. Opposite Nanne and Boi")
+    city_state = models.CharField(max_length=100, default="Maiduguri, Borno State")
+    
+    phone_number = models.CharField(max_length=20)
+    email_address = models.EmailField()
+    
+    # This stores the Google Maps Embed URL
+    google_maps_link = models.TextField(help_text="Paste the iframe 'src' link here")
+
+    class Meta:
+        verbose_name_plural = "Company Information"
+
+    def __str__(self):
+        return self.name
     

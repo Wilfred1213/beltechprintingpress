@@ -18,5 +18,10 @@ urlpatterns = [
     path('project/', views.project, name='project' ),
     path('faq/', views.faq, name='faq' ),
     path('contact/', views.contact, name='contact' ),
+    path('inbox/', views.inbox, name='inbox' ),
+    path('inbox_detail/<int:pk>/', views.inbox_detail, name='inbox_detail'),
+    path('message_count/', views.message_count, name='message_count' ),
+    path('delete_message/<int:pk>/delete/', views.delete_message, name='delete_message'),
+    path('category_details/<int:cat_id>/delete/', views.category_details, name='category_details')
     
 ]

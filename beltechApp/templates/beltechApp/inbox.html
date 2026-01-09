@@ -1,0 +1,77 @@
+
+{% extends 'beltechApp/base/base.html' %}
+{% load static %}
+
+{% block title %} Inbox {% endblock %}
+
+{% block content %}
+
+<section class="inbox-area pt-120 pb-120" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="tp-section-title-wrapper mb-40">
+                    <h3 class="tp-section-title">Message Inbox</h3>
+                    <p>Manage your client inquiries from Musty Global Plaza</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="inbox-container" style="background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden;">
+                    <div class="table-responsive">
+                        <table class="table" style="margin-bottom: 0;">
+                            <thead style="background: #fdf2e9;">
+                                <tr>
+                                    <th style="padding: 20px; color: #ff5a01;">Status</th>
+                                    <th style="padding: 20px;">Client Info</th>
+                                    <th style="padding: 20px;">Message Preview</th>
+                                    <th style="padding: 20px;">Date</th>
+                                    <th style="padding: 20px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for msg in contact_messages %}
+                                <tr style="border-bottom: 1px solid #eee; transition: 0.3s;" onmouseover="this.style.backgroundColor='#fff9f5'" onmouseout="this.style.backgroundColor='transparent'">
+                                    <td style="padding: 20px; vertical-align: middle;">
+                                        {% if not msg.is_read %}
+                                            <span style="background: #ff5a01; color: white; padding: 4px 10px; border-radius: 50px; font-size: 10px; font-weight: bold; text-transform: uppercase;">New</span>
+                                        {% else %}
+                                            <span style="color: #999; font-size: 10px; font-weight: bold; text-transform: uppercase;">Read</span>
+                                        {% endif %}
+                                    </td>
+                                    <td style="padding: 20px; vertical-align: middle;">
+                                        <h6 style="margin: 0; font-size: 15px;">{{ msg.full_name }}</h6>
+                                        <small style="color: #777;">{{ msg.email }}</small>
+                                    </td>
+                                    <td style="padding: 20px; vertical-align: middle; color: #555;">
+                                        <p style="margin: 0; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            {{ msg.message }}
+                                        </p>
+                                    </td>
+                                    <td style="padding: 20px; vertical-align: middle; font-size: 13px; color: #888;">
+                                        {{ msg.date|date:"d M, Y" }}
+                                    </td>
+                                    <td style="padding: 20px; vertical-align: middle;">
+                                        <a href="{% url 'inbox_detail' msg.id %}" class="tp-btn-small" style="background: #333; color: white; padding: 8px 15px; border-radius: 5px; font-size: 12px; text-decoration: none;">View Detail</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 50px; color: #999;">
+                                        <i class="fa-light fa-inbox" style="font-size: 40px; display: block; margin-bottom: 10px;"></i>
+                                        No messages found.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

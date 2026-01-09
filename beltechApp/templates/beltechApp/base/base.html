@@ -121,18 +121,39 @@
                 <ul>
                     <li>
                         <i class="fa-solid fa-location-dot"></i>
-                        <a href="https://www.google.com/maps/@23.8223586,90.3661283,15z" target="_blank">Kafanchan, Borno State, Nigeria</a>
+                        <div>{{ settings.business_address|default:"Kafanchan, Borno State, Nigeria" }}</div>
+                        
+                        <div class="mt-10">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.823456345678!2d13.1345!3d11.8321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x11029f0000000001%3A0xabcdefabcdef!2sMusty%20Global%20Plaza!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng" 
+                                width="100%" 
+                                height="150" 
+                                style="border:0; border-radius: 10px;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
                     </li>
                     <li>
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:techubinfo@mail.com"><span class="__cf_email__">presvilainfo@mail.com</span></a>
+                        <a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a>
                     </li>
                     <li>
                         <i class="fa-solid fa-phone-flip"></i>
-                        <a href="tel:+48555223224">(+234) 8134622388</a>
+                        <a href="tel:{{ settings.whatsapp_number }}">(+234) {{ settings.whatsapp_number|slice:"3:" }}</a>
+                    </li>
+                    
+                    <li>
+                        <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+                        <a href="https://wa.me/{{ settings.whatsapp_number }}?text=Hello%20Beltech,%20I'm%20contacting%20you%20from%20your%20website." 
+                        target="_blank" 
+                        style="font-weight: 600; color: #25d366;">
+                        Chat on WhatsApp
+                        </a>
                     </li>
                 </ul>
             </div>
+            
             <div class="tpoffcanvas__input">
                 <div class="tpoffcanvas__input-title">
                     <h4>Get UPdate</h4>
@@ -168,20 +189,28 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4">
                         <div class="tp-header-top-address">
-                            <span><img src="{% static 'beltechApp/assets/img/header/location.svg' %}" alt="location"> <a href="https://www.google.com/maps/@41.6758525,-86.2531698,18.17z">Borno Maiduguri</a></span>
+                            <span><img src="{% static 'beltechApp/assets/img/header/location.svg' %}" alt="location"> <a href="{% url 'contact' %}">{{address.name}} - {{ address.city_state }}</a></span>
                         </div>
                     </div>
                     <div class="col-xl-4">
                         <div class="tp-header-top-text text-center">
-                            <span>Beltch Printing Press Enterprise! </span>
+                            <span>{{address.address}} </span>
                         </div>
                     </div>
                     <div class="col-xl-4">
-                        <div class="tp-header-top-social d-flex justify-content-end">
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#"><i class="fa-light fa-basketball"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
+                        <div class="tp-header-top-social d-flex justify-content-end align-items-center">
+                            <span class="mr-10 d-none d-lg-block" style="font-size: 13px; font-weight: 500; color: #666;">
+                                Chat with us:
+                            </span>
+                            <a href="https://wa.me/{{ settings.whatsapp_number }}?text=Hello%20Beltech,%20I'm%20visiting%20your%20website" 
+                            target="_blank" 
+                            style="background: #25d366; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s;">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                            
+                            {% comment %} <a href="{{ settings.facebook_url|default:'#' }}" class="ml-10">
+                                <i class="fa-brands fa-facebook-f"></i> {% endcomment %}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -267,10 +296,10 @@
                                             <li><a href="{% url 'project' %}">Our Project</a></li>
                                             
                                             <li><a href="{% url 'faq' %}">Our Faq</a></li>
-                                            <li><a href="error.html">Error</a></li>
+                                            
                                         </ul>
                                     </li>
-                                    <li class="has-dropdown"><a href="contact.html">Contact</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'contact' %}">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -279,9 +308,20 @@
                         <div class="tp-header-bottom-item d-flex justify-content-end mt-10">
 
                             <!-- Header Button -->
+                            {% if user.is_superuser %}
                             <div class="tp-header-bottom-button mr-30 d-none d-md-block">
-                                <a class="tp-header-btn" href="contact.html"><span>Get a Quete</span></a>
+                                <a class="tp-header-btn" href="{% url 'inbox' %}" style="position: relative; overflow: visible !important;">
+                                    <span>Message</span>
+                                    {% if unread_messages > 0 %}
+                                        <span class="message-badge">{{ unread_messages }}</span>
+                                    {% endif %}
+                                </a>
                             </div>
+                            {% endif %}
+                            {% comment %} <div class="tp-header-bottom-button mr-30 d-none d-md-block">
+                                
+                                <a class="tp-header-btn" href="contact.html"><span>Message</span></a>
+                            </div> {% endcomment %}
 
                             <!-- Header Button -->
                             <div class="tp-header-bottom-toggle">
@@ -300,7 +340,9 @@
 
 <!-- header area end -->
 <body>
-    
+    {% comment %} <a href="https://wa.me/{{ settings.whatsapp_number }}?text=Hello%20Beltech" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a> {% endcomment %}
     
     {% block content %}
     {% endblock %} 

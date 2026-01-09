@@ -15,6 +15,8 @@ admin.site.register(Homepage_about_area)
 admin.site.register(printingHomePageImage)
 admin.site.register(Logo)
 admin.site.register(Team)
+admin.site.register(CompanyInformation)
+admin.site.register(SiteSetting)
 
 
 @admin.register(CustomUser)
@@ -203,7 +205,7 @@ class TestimonialAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     # This controls which columns appear in the list view
-    list_display = ('full_name', 'email', 'phone_number', 'date')
+    list_display = ('full_name', 'email', 'phone_number', 'date', 'is_read')
     
     # This adds a sidebar to filter messages by date
     list_filter = ('date',)
@@ -220,7 +222,7 @@ class ContactAdmin(admin.ModelAdmin):
             'fields': ('full_name', 'email', 'phone_number')
         }),
         ('Message Content', {
-            'fields': ('message',),
+            'fields': ('message', 'is_read',),
         }),
         ('Metadata', {
             'fields': ('date',),
