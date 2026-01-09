@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/flaticon_presvilla.css' %}">
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/spacing.css' %}">
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'beltechApp/assets/css/beltech.css' %}">
 </head>
 
 <body class="tp-magic-cursor">
@@ -81,299 +82,13 @@
     <!-- Start Search Popup Section -->
 
 
-
-    <!-- product quick view start -->
-    {% comment %} <div class="product-popup__modal modal fade" id="productModal" tabindex="-1" aria-labelledby="productModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="product-popup__modal-wrapper">
-                    <div class="product-popup__modal-close">
-                        <button class="product-popup__modal-close-btn" type="button" data-bs-toggle="modal" data-bs-target="#productModal">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g opacity="0.4">
-                                    <path d="M21 1L1 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M1 1L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </g>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-7 col-lg-6">
-                            <div class="product-popup__details-thumb-tab mr-70">
-                                <div class="product-popup__details-thumb-content w-img">
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
-                                            <img src="{% static 'beltechApp/assets/img/shop/01_Prod.jpg' %}" alt="">
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
-                                            <img src="{% static 'beltechApp/assets/img/shop/02_Prod.jpg' %}" alt="">
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
-                                            <img src="{% static 'beltechApp/assets/img/shop/03_Prod.jpg' %}" alt="">
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-four" role="tabpanel" aria-labelledby="nav-four-tab">
-                                            <img src="{% static 'beltechApp/assets/img/shop/04_Prod.jpg' %}" alt="">
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-five" role="tabpanel" aria-labelledby="nav-five-tab">
-                                            <img src="{% static 'beltechApp/assets/img/shop/05_Prod.jpg' %}" alt="">
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="product-popup__details-thumb-nav tp-tab">
-                                    <nav>
-                                        <div class="nav nav-tabs justify-content-sm-between" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-one-tab" data-bs-toggle="tab" data-bs-target="#nav-one" type="button" role="tab" aria-controls="nav-one" aria-selected="true">
-                                                <img src="{% static 'beltechApp/assets/img/shop/01_Prod.jpg' %}" alt="">
-                                            </button>
-                                            <button class="nav-link" id="nav-two-tab" data-bs-toggle="tab" data-bs-target="#nav-two" type="button" role="tab" aria-controls="nav-two" aria-selected="false">
-                                                <img src="{% static 'beltechApp/assets/img/shop/02_Prod.jpg' %}" alt="">
-                                            </button>
-                                            <button class="nav-link" id="nav-three-tab" data-bs-toggle="tab" data-bs-target="#nav-three" type="button" role="tab" aria-controls="nav-three" aria-selected="false">
-                                                <img src="{% static 'beltechApp/assets/img/shop/03_Prod.jpg' %}" alt="">
-                                            </button>
-                                            <button class="nav-link" id="nav-four-tab" data-bs-toggle="tab" data-bs-target="#nav-four" type="button" role="tab" aria-controls="nav-four" aria-selected="false">
-                                                <img src="{% static 'beltechApp/assets/img/shop/04_Prod.jpg' %}" alt="">
-                                            </button>
-                                            <button class="nav-link" id="nav-five-tab" data-bs-toggle="tab" data-bs-target="#nav-five" type="button" role="tab" aria-controls="nav-five" aria-selected="false">
-                                                <img src="{% static 'beltechApp/assets/img/shop/05_Prod.jpg' %}" alt="">
-                                            </button>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-6">
-                            <div class="product-popup__details-wrapper">
-
-                                <div class="product-popup__details-stock">
-                                    <span>12 In Stock</span>
-                                </div>
-                                <h3 class="product-popup__details-title">Hand Wash</h3>
-
-                                <div class="product-popup__details-rating d-flex align-items-center">
-                                    <div class="product-popup__rating product-popup__rating-2 d-flex">
-                                        <span>
-                                            <i class="fa-solid fa-star-sharp"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa-solid fa-star-sharp"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa-solid fa-star-sharp"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa-solid fa-star-sharp"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa-regular fa-star-half-stroke"></i>
-                                        </span>
-                                    </div>
-                                    <div class="product-popup__details-rating-count">
-                                        <span>(5 customer review)</span>
-                                    </div>
-                                </div>
-
-                                <p>Shop Kleaso.com for every day low prices. Free shipping on orders $35+ or Pickup In-store and get</p>
-
-                                <div class="product-popup__details-price">
-                                    <span class="product-popup__details-ammount old-ammount">$82.00</span>
-                                    <span class="product-popup__details-ammount new-ammount">$54.00</span>
-                                    <span class="product-popup__details-offer">-12%</span>
-                                </div>
-
-                                <div class="product-popup__details-quantity">
-                                    <div class="tp-product-popup-quantity mt-10 mb-10">
-                                        <span class="tp-cart-minus two">
-                                            <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <input class="tp-cart-input two" type="text" value="1">
-                                        <span class="tp-cart-plus two">
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.21924 7H13.3836" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.30176 13V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="product-popup__details-action d-flex flex-wrap align-items-center">
-                                    <button type="button" class="product-popup-add-cart-btn product-popup-add-cart-btn-3">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.54431 4.80484L4.08701 11.2487C4.12661 11.7447 4.53251 12.1167 5.02841 12.1167H5.03201H14.8519H14.8537C15.3227 12.1167 15.7232 11.7681 15.7898 11.3053L16.6448 5.41221C16.6646 5.27205 16.6295 5.13189 16.544 5.01868C16.4594 4.90457 16.3352 4.8309 16.1948 4.81113C16.0067 4.81832 8.20092 4.80754 3.54431 4.80484ZM5.02647 13.4642C3.84117 13.4642 2.83766 12.5405 2.74136 11.359L1.91696 1.57098L0.560653 1.33738C0.192551 1.27269 -0.0531497 0.924974 0.00985058 0.557495C0.0746508 0.190017 0.430152 -0.0489788 0.790154 0.00852392L2.66216 0.331977C2.96366 0.384987 3.19316 0.634765 3.21926 0.940248L3.43076 3.45689C16.2792 3.46228 16.3206 3.46857 16.3827 3.47576C16.884 3.54854 17.325 3.80999 17.6256 4.21251C17.9262 4.61413 18.0522 5.1092 17.9802 5.60516L17.1261 11.4974C16.965 12.6187 15.9894 13.4642 14.8554 13.4642H14.8509H5.03367H5.02647Z" fill="currentColor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4079 8.12567H10.9131C10.5396 8.12567 10.2381 7.82379 10.2381 7.45181C10.2381 7.07984 10.5396 6.77795 10.9131 6.77795H13.4079C13.7805 6.77795 14.0829 7.07984 14.0829 7.45181C14.0829 7.82379 13.7805 8.12567 13.4079 8.12567Z" fill="currentColor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.63943 15.9048C4.91033 15.9048 5.12903 16.1235 5.12903 16.3944C5.12903 16.6653 4.91033 16.8849 4.63943 16.8849C4.36763 16.8849 4.14893 16.6653 4.14893 16.3944C4.14893 16.1235 4.36763 15.9048 4.63943 15.9048Z" fill="currentColor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.63859 16.2097C4.53689 16.2097 4.45409 16.2925 4.45409 16.3942C4.45409 16.5985 4.82399 16.5985 4.82399 16.3942C4.82399 16.2925 4.74029 16.2097 4.63859 16.2097ZM4.6386 17.5569C3.996 17.5569 3.474 17.0349 3.474 16.3933C3.474 15.7518 3.996 15.2307 4.6386 15.2307C5.28121 15.2307 5.80411 15.7518 5.80411 16.3933C5.80411 17.0349 5.28121 17.5569 4.6386 17.5569Z" fill="currentColor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.7918 15.9048C15.0627 15.9048 15.2823 16.1235 15.2823 16.3944C15.2823 16.6653 15.0627 16.8849 14.7918 16.8849C14.52 16.8849 14.3013 16.6653 14.3013 16.3944C14.3013 16.1235 14.52 15.9048 14.7918 15.9048Z" fill="currentColor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.7906 16.2098C14.6898 16.2098 14.607 16.2926 14.607 16.3943C14.6079 16.6004 14.9769 16.5986 14.976 16.3943C14.976 16.2926 14.8923 16.2098 14.7906 16.2098ZM14.7909 17.5569C14.1483 17.5569 13.6263 17.0349 13.6263 16.3933C13.6263 15.7518 14.1483 15.2307 14.7909 15.2307C15.4344 15.2307 15.9573 15.7518 15.9573 16.3933C15.9573 17.0349 15.4344 17.5569 14.7909 17.5569Z" fill="currentColor" />
-                                        </svg>
-                                        Add to Cart
-                                    </button>
-                                    <button type="button" class="product-popup-action-btn">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.60361 7.98635C2.83627 11.8048 7.70625 14.8923 9.00046 15.6565C10.2991 14.8844 15.2042 11.7628 16.3973 7.98985C17.1807 5.55102 16.4536 2.46177 13.5645 1.53473C12.1648 1.08741 10.5321 1.35966 9.4049 2.22804C9.16927 2.40837 8.8422 2.41187 8.60481 2.23329C7.41084 1.33952 5.85111 1.07778 4.42941 1.53473C1.5447 2.4609 0.82023 5.55014 1.60361 7.98635ZM9.00138 17.0711C8.89236 17.0711 8.78421 17.0448 8.68574 16.9914C8.41055 16.8417 1.92808 13.2841 0.348132 8.3872C0.347252 8.3872 0.347252 8.38633 0.347252 8.38633C-0.644504 5.30321 0.459792 1.42874 4.02502 0.284605C5.69904 -0.254635 7.52342 -0.0174044 8.99874 0.909632C10.4283 0.00973263 12.3275 -0.238878 13.9681 0.284605C17.5368 1.43049 18.6446 5.30408 17.6538 8.38633C16.1248 13.2272 9.59485 16.8382 9.3179 16.9896C9.21943 17.0439 9.1104 17.0711 9.00138 17.0711Z" fill="currentColor" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2027 6.67485C13.8625 6.67485 13.5741 6.41486 13.546 6.07171C13.4879 5.35214 13.0044 4.74462 12.3159 4.52315C11.9686 4.4111 11.7787 4.04081 11.8904 3.69678C12.0038 3.35188 12.3722 3.16454 12.7204 3.27309C13.9187 3.65914 14.7584 4.71573 14.8613 5.96491C14.8903 6.32645 14.6204 6.64334 14.2572 6.67222C14.2388 6.67398 14.2212 6.67485 14.2027 6.67485Z" fill="currentColor" />
-                                        </svg>
-                                        <span class="product-popup-action-tooltip">Add To Wishlist</span>
-                                    </button>
-                                    <button type="button" class="product-popup-action-btn">
-                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11.4144 6.16828L14 3.58412L11.4144 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1.48883 3.58386L14 3.58386" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M4.07452 8.32166L1.4889 10.9058L4.07452 13.4899" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M14 10.906H1.48883" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <span class="product-popup-action-tooltip">Add To Compare</span>
-                                    </button>
-                                </div>
-                                <div class="product-popup__details-sku product__details-more">
-                                    <p>SKU:</p>
-                                    <span>29045-SB-8</span>
-                                </div>
-                                <div class="product-popup__details-categories product-popup__details-more">
-                                    <p>Categories:</p>
-                                    <span>
-                                        <a href="#">Hand wash,</a>
-                                    </span>
-                                    <span>
-                                        <a href="#">Product</a>
-                                    </span>
-                                </div>
-                                <div class="product-popup__details-tags">
-                                    <span>Tags:</span>
-                                    <a href="#">Hand Wash</a>
-                                    <a href="#">Cleaning dirt</a>
-                                    <a href="#">Product</a>
-                                </div>
-                                <div class="product-popup__details-share">
-                                    <span>Share:</span>
-
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- product quick view end --> {% endcomment %}
-
-
-
-    <!-- cart mini area start -->
-    {% comment %} <div class="cartmini__area">
-        <div class="cartmini__wrapper d-flex justify-content-between flex-column">
-            <div class="cartmini__top-wrapper ">
-                <div class="cartmini__top p-relative">
-                    <div class="cartmini__title">
-                        <h4>Shopping cart</h4>
-                    </div>
-                    <div class="cartmini__close">
-                        <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="cartmini__widget">
-                    <div class="cartmini__widget-item">
-                        <div class="cartmini__thumb">
-                            <a href="product-details.html">
-                                <img src="{% static 'beltechApp/assets/img/cart/product-1.jpg' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="cartmini__content">
-                            <h5><a href="product-details.html">Level Bolt Smart Lock</a></h5>
-                            <div class="cartmini__price-wrapper">
-                                <span class="cartmini__price">$46.00</span>
-                                <span class="cartmini__quantity">x2</span>
-                            </div>
-                        </div>
-                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
-                    </div>
-                    <div class="cartmini__widget-item">
-                        <div class="cartmini__thumb">
-                            <a href="product-details.html">
-                                <img src="{% static 'beltechApp/assets/img/cart/product-2.jpg' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="cartmini__content">
-                            <h5><a href="product-details.html">Trademil for younger</a></h5>
-                            <div class="cartmini__price-wrapper">
-                                <span class="cartmini__price">$78.00</span>
-                                <span class="cartmini__quantity">x1</span>
-                            </div>
-                        </div>
-                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
-                    </div>
-                    <div class="cartmini__widget-item">
-                        <div class="cartmini__thumb">
-                            <a href="product-details.html">
-                                <img src="{% static 'beltechApp/assets/img/cart/product-3.jpg' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="cartmini__content">
-                            <h5><a href="product-details.html">ViewSonic VP2756-2K</a></h5>
-                            <div class="cartmini__price-wrapper">
-                                <span class="cartmini__price">$98.00</span>
-                                <span class="cartmini__quantity">x3</span>
-                            </div>
-                        </div>
-                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
-                    </div>
-                </div>
-                <!-- for wp -->
-                <!-- if no item in cart -->
-                <div class="cartmini__empty text-center d-none">
-                    <p>Your Cart is empty</p>
-                    <a href="shop.html" class="cartmini-btn">Go to Shop</a>
-                </div>
-            </div>
-            <div class="cartmini__checkout">
-                <div class="cartmini__checkout-title mb-30">
-                    <h4>Subtotal:</h4>
-                    <span>$113.00</span>
-                </div>
-                <div class="cartmini__checkout-btn">
-                    <a href="cart.html" class="cartmini-btn mb-10 w-100"> <span></span> view cart</a>
-                    <a href="checkout.html" class="cartmini-btn-border w-100"> <span></span> checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="cartmini-overlay"></div> {% endcomment %}
-    <!-- cart mini area end -->
-
-
-
     <!-- tp-offcanvus-area-start -->
     <div class="tpoffcanvas-area">
         <div class="tpoffcanvas">
             <div class="tpoffcanvas__close-btn">
                 <button class="close-btn"><i class="fal fa-times"></i></button>
             </div>
-            {% comment %} <div class="tpoffcanvas__logo">
-                <a href="index.html">
-                    <img src="" alt="{{ logo.name }}">
-                </a>
-            </div> {% endcomment %}
-            {% comment %} <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
-                <a href="{% url 'home' %}" style="display: block;"> 
-                    {% if logo %}
-                        <img src="{{ logo.main_image.url }}" 
-                            alt="{{ logo.name }}" 
-                            style="max-width: 180px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
-                            width="150" 
-                            height="50" 
-                            onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
-                    {% else %}
-                        <span style="font-weight: bold; font-size: 24px;">BELTECH</span>
-                    {% endif %}
-                </a>
-            </div> {% endcomment %}
+            
             <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
                 <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;"> 
                     {% if logo %}
@@ -544,14 +259,14 @@
                                     </li>
                                     <li class="has-dropdown"><a href="index.html">Pages</a>
                                         <ul class="submenu tp-submenu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="team.html">Our Team</a></li>
-                                            <li><a href="team-details.html">Team Details</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                            <li><a href="project.html">Our Project</a></li>
-                                            <li><a href="project-details.html">Project Details</a></li>
-                                            <li><a href="faq.html">Our Faq</a></li>
+                                            <li><a href="{% url 'about' %}">About Us</a></li>
+                                            <li><a href="{% url 'team' %}">Our Team</a></li>
+                                            
+                                            <li><a href="{% url 'testimonial' %}">Testimonials</a></li>
+                                            
+                                            <li><a href="{% url 'project' %}">Our Project</a></li>
+                                            
+                                            <li><a href="{% url 'faq' %}">Our Faq</a></li>
                                             <li><a href="error.html">Error</a></li>
                                         </ul>
                                     </li>
@@ -578,244 +293,14 @@
                 </div>
             </div>
         </div>
+
     </header>
 
 
 
-    <style>
-        /* Force the background shape container to be visible */
-        .tp-breadcrumb-bg-shape {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        /* Ensure images within that container don't get hidden */
-        .tp-breadcrumb-bg-shape img {
-            display: block !important;
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Prevent text from becoming unreadable on mobile if images overlap */
-        @media (max-width: 768px) {
-            .tp-breadcrumb-area {
-                padding-top: 80px;
-                padding-bottom: 80px;
-                overflow: hidden; /* prevents side-scrolling on mobile */
-            }
-            .tp-breadcrumb-bg-shape {
-                z-index: -1; /* puts images behind the text */
-            }
-        }
-
-
-        {% comment %} service image control {% endcomment %}
-        /* Control the icon container size */
-    .tp-service-2-icon {
-        width: 110px !important;  /* Increased size */
-        height: 110px !important; /* Increased size */
-        background: #fff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        transition: all 0.4s ease; /* Smooth transition for the container */
-        border: 1px solid #eee; /* Optional: adds a soft border */
-    }
-
-    /* The actual image logic */
-    .tp-service-2-icon img {
-        max-width: 80%; /* Fits nicely with some padding */
-        height: auto;
-        transition: transform 0.4s ease; /* Smooth zoom for the image */
-    }
-
-    /* Grow effect on Hover */
-    .tp-service-2-wrapper:hover .tp-service-2-icon img {
-        transform: scale(1.15); /* Grows by 15% when you hover the card */
-    }
-
-    /* Optional: Slight lift effect for the whole icon box */
-    .tp-service-2-wrapper:hover .tp-service-2-icon {
-        box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
-        border-color: #ff5a01; /* Uses your brand orange on hover */
-    }
-
-        /* Smooth hover effect for FAQ cards */
-    .tp-faq-2-accordion-item:hover {
-        border-color: #ff5a01 !important; /* Your brand color */
-        box-shadow: 0 10px 25px rgba(255, 90, 1, 0.1);
-    }
-    
-    /* Better styling for the active question */
-    .accordion-button:not(.collapsed) {
-        background-color: transparent !important;
-        color: #ff5a01 !important;
-        box-shadow: none !important;
-    }
-
-        /* Create a safe zone for the +/- icon */
-    .tp-faq-2-accordion-title.accordion-button {
-        padding-right: 70px !important; /* Increase this if the icon is still touching */
-        text-align: left;
-        display: block; /* Ensures long text wraps correctly */
-        position: relative;
-    }
-
-    /* Ensure the icon stays centered vertically even if the text is multi-line */
-    .tp-faq-2-accordion-btn {
-        position: absolute;
-        right: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 5;
-    }
-
-    /* Prevent text overflow from getting messy */
-    .tp-faq-2-accordion-title {
-        line-height: 1.4;
-        word-wrap: break-word;
-    }
-
-    /* Card Elevation & Smoothness */
-.tp-testimonial-2-wrapper {
-    background: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f0f0f0;
-    transition: all 0.3s ease;
-}
-
-.tp-testimonial-2-wrapper:hover {
-    transform: translateY(-10px);
-    border-color: #ff5a01;
-}
-
-/* Fix for the big image problem */
-.testimonial-avatar {
-    width: 60px !important;
-    height: 60px !important;
-    border-radius: 50% !important;
-    object-fit: cover !important; /* This ensures the face isn't stretched */
-    border: 2px solid #ff5a01;
-    margin-right: 15px;
-}
-
-/* Star Spacing */
-.tp-testimonial-rating i {
-    margin-right: 2px;
-}
-
-/* Quote Polish */
-.tp-testimonial-2-content p {
-    font-style: italic;
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-    .testimonial-logo {
-    max-width: 120px;
-    max-height: 60px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-
-
-    {% comment %} testimonial form  {% endcomment %}
-    /* Card Styling */
-.testimonial-form-card {
-    background: #ffffff;
-    padding: 60px;
-    border-radius: 30px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255, 90, 1, 0.1);
-}
-
-.form-title {
-    font-size: 36px;
-    font-weight: 800;
-    margin-top: 10px;
-}
-
-/* Custom Labels */
-.custom-label {
-    font-weight: 600;
-    font-size: 15px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Input Wrapper Styling */
-.input-wrapper {
-    position: relative;
-}
-.input-wrapper i {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #ff5a01;
-}
-.input-wrapper input {
-    padding-left: 50px !important;
-}
-
-/* Star Rating Aesthetic */
-.star-rating-container {
-    background: #fff5f0;
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 50px;
-}
-.star-rating {
-    display: flex;
-    flex-direction: row-reverse;
-    font-size: 30px;
-}
-.star-rating input { display: none; }
-.star-rating label {
-    color: #ddd;
-    cursor: pointer;
-    transition: 0.3s;
-    margin: 0 5px;
-}
-.star-rating label:hover,
-.star-rating label:hover ~ label,
-.star-rating input:checked ~ label {
-    color: #ff5a01;
-    transform: scale(1.1);
-}
-
-/* Custom File Upload Styling */
-.file-drop-area {
-    border: 2px dashed #ff5a01;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    background: rgba(255, 90, 1, 0.02);
-    transition: 0.3s;
-}
-.file-drop-area:hover {
-    background: rgba(255, 90, 1, 0.05);
-}
-.file-drop-area i {
-    font-size: 40px;
-    display: block;
-    margin-bottom: 10px;
-    color: #ff5a01;
-}
-.file-drop-area input { display: none; }
-}
-    </style>
-
-    <!-- header area end -->
+<!-- header area end -->
 <body>
+    
     
     {% block content %}
     {% endblock %} 
@@ -942,6 +427,107 @@
 
     </div>
 </div>
+{% comment %} testimonial form begins {% endcomment %}
+<div class="modal fade" id="testimonialPopUp" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border-radius: 30px; border: none; overflow: hidden;">
+            <div class="modal-body p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                        style="position: absolute; right: 25px; top: 25px; z-index: 10;"></button>
+                
+                <div id="testimonial-form-container" class="testimonial-form-card" style="padding: 50px; border: none; box-shadow: none;">
+                    <div class="form-header text-center mb-30">
+                        <span class="tp-section-sub-title">WE VALUE YOU</span>
+                        <h2 class="form-title">Share Your Experience</h2>
+                        <p>How has Beltech helped your business?</p>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data" id="pop-up-testimonial-form" action="{% url 'submit_testimonial' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12 mb-20">
+                                <label class="custom-label">Your Name</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-light fa-user"></i>
+                                    {{ testimonial_form.name }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-20 text-center">
+                                <label class="custom-label d-block mb-10">Overall Rating</label>
+                                <div class="star-rating-container">
+                                    <div class="star-rating">
+                                        {% for radio in testimonial_form.rating %}
+                                            {{ radio.tag }}
+                                            <label for="{{ radio.id_for_label }}">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-20">
+                                <label class="custom-label">Your Review</label>
+                                {{ testimonial_form.message }}
+                            </div>
+                            <div class="col-md-12 mb-30">
+                                <label class="custom-label">Profile Picture</label>
+                                {{ testimonial_form.main_image }}
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" id="submit-btn" class="tp-btn w-100">Submit Review</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="testimonial-success-message" class="testimonial-form-card text-center d-none" style="padding: 80px 50px; border: none; box-shadow: none;">
+                    <div class="success-icon mb-25">
+                        <i class="fa-solid fa-circle-check" style="font-size: 70px; color: #ff5a01;"></i>
+                    </div>
+                    <h2 class="form-title">Review Submitted!</h2>
+                    <p>Thank you for your feedback. Your rating is under review.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% comment %} cookie start {% endcomment %}
+<div id="cookie-consent-bar" class="cookie-bar-wrapper">
+    <div class="cookie-content">
+        <p>We use cookies to improve your experience. Do you agree to our cookie policy?</p>
+        <div class="cookie-btns">
+            <button id="accept-cookies" class="tp-btn-inner">Accept Cookies</button>
+        </div>
+    </div>
+</div>
+
+{% comment %} <div class="modal fade" id="testimonialPopUp" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border-radius: 30px; border: none;">
+            <div class="modal-body p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                        style="position: absolute; right: 25px; top: 25px; z-index: 10;"></button>
+                
+                <div class="testimonial-form-card" style="box-shadow: none;">
+                    <div class="form-header text-center mb-30">
+                        <h2 class="form-title">Tell us what you think!</h2>
+                        <p>We value your feedback. Please share your experience.</p>
+                    </div>
+                    
+                    <form id="pop-up-testimonial-form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.name }}
+                        <div class="star-rating-container mb-20 mt-20">
+                             </div>
+                        {{ form.message }}
+                        <button type="submit" class="tp-btn w-100">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
 
 
 
@@ -974,6 +560,7 @@
     <script src="{% static 'beltechApp/assets/js/slider-active.js' %}"></script>
     <script src="{% static 'beltechApp/assets/js/main.js' %}"></script>
     <script src="{% static 'beltechApp/assets/js/tp-cursor.js' %}"></script>
+    <script src="{% static 'beltechApp/assets/js/beltech.js' %}"></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -48,31 +48,7 @@
 
                 
                 <!-- faq area start -->
-                <div class="row justify-content-center mb-80">
-                    {% comment %} <div class="col-xl-10">
-                    {% if process_video %}
-                    <div class="tp-section-title-wrapper mb-40 text-center">
-                        <h6 class="tp-section-sub-title">{{ process_video.sub_title }}</h6>
-                        <h3 class="tp-section-title">{{ process_video.title }}</h3>
-                    </div>
-                    
-                    <div class="tp-faq-video-wrapper p-relative wow fadeInUp" data-wow-delay=".3s">
-                        <div class="video-responsive-container" 
-                            style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; box-shadow: 0px 30px 60px rgba(0,0,0,0.15); background: #000;">
-                            
-                            <iframe 
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                                src="{{ process_video.get_embed_url }}?autoplay=0&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3" 
-                                title="{{ process_video.title }}" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                            </iframe>
-                            
-                        </div>
-                    </div>
-                    {% endif %}
-                </div> {% endcomment %}
-                </div>
+                
                 <section class="tp-faq-2-area fix pt-120 pb-120 p-relative z-index-1">
                     <div class="tp-faq-2-bg-shape">
                         <img class="tp-faq-2-bg-shape-1" src="assets/img/faq/faq-2-bg-shape1.png" alt="">
@@ -111,40 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col-xl-8 col-lg-10">
-                                <div class="tp-faq-2-right-wrapper wow fadeInUp" data-wow-delay=".5s">
-                                    <div class="tp-section-title-wrapper mb-50 text-center">
-                                        <h6 class="tp-section-sub-title">FREQUENTLY ASKED QUESTION</h6>
-                                        <h3 class="tp-section-title tp-split-text">What Our Clients Ask About Beltech</h3>
-                                    </div>
-
-                                    <div class="tp-faq-2-accordion accordion-flush" id="accordionFlushExample">
-                                        {% for faq in faqs %}
-                                        <div class="tp-faq-2-accordion-item accordion-item mb-20" style="border: 1px solid #ebebeb; border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
-                                            <h2 class="accordion-header tp-faq-2-accordion-header">
-                                                <button class="tp-faq-2-accordion-title accordion-button {% if not forloop.first %}collapsed{% endif %}" 
-                                                        type="button" 
-                                                        data-bs-toggle="collapse" 
-                                                        data-bs-target="#flush-collapse-{{ forloop.counter }}" 
-                                                        style="padding-right: 80px;"> {{ faq.question }}
-                                                    <span class="tp-faq-2-accordion-btn"></span>
-                                                </button>
-                                            </h2>
-                                            
-                                            <div id="flush-collapse-{{ forloop.counter }}" 
-                                                class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="tp-faq-2-accordion-pera accordion-body" style="padding: 0 25px 25px 25px; line-height: 1.8; color: #666;">
-                                                    {{ faq.answer | safe }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'beltechApp/refactors/faq.html' %}
                     </div>
                 </section>
  
@@ -166,186 +109,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-lg-4">
-                                <div class="tp-team-btn-wrapper d-flex justify-content-end">
-                                    <a class="tp-btn" href="team-details.html"><span>View all Team</span></a>
-                                </div>
-                            </div>
+                            
                         </div>
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="tp-team-wrapper fix p-relative mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-                                    <div class="tp-team-img">
-                                        <div class="tp-team-img-inner">
-                                            <a href="team-details.html"><img src="assets/img/team/team-img1.jpg" alt=""></a>
-                                        </div>
-                                        <div class="tp-team-content">
-                                            <h4 class="tp-team-title"><a href="team-details.html">Shajib Hasan</a></h4>
-                                            <p>Designer</p>
-                                            <div class="tp-team-social">
-                                                <div class="tp-team-btn">
-                                                    <button><i class="fa-sharp fa-regular fa-share-nodes"></i></button>
-                                                </div>
-                                                <div class="tp-team-icon">
-                                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="tp-team-wrapper mb-30 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
-                                    <div class="tp-team-img p-relative">
-                                        <a href="team-details.html"><img src="assets/img/team/team-img2.jpg" alt=""></a>
-                                        <div class="tp-team-content">
-                                            <h4 class="tp-team-title"><a href="team-details.html">Janes Cooper</a></h4>
-                                            <p>Consultant</p>
-                                            <div class="tp-team-social">
-                                                <div class="tp-team-btn">
-                                                    <button><i class="fa-sharp fa-regular fa-share-nodes"></i></button>
-                                                </div>
-                                                <div class="tp-team-icon">
-                                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="tp-team-wrapper mb-30 wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
-                                    <div class="tp-team-img p-relative">
-                                        <a href="team-details.html"><img src="assets/img/team/team-img3.jpg" alt=""></a>
-                                        <div class="tp-team-content">
-                                            <h4 class="tp-team-title"><a href="team-details.html">Leana Dcruz</a></h4>
-                                            <p>Content Creator</p>
-                                            <div class="tp-team-social">
-                                                <div class="tp-team-btn">
-                                                    <button><i class="fa-sharp fa-regular fa-share-nodes"></i></button>
-                                                </div>
-                                                <div class="tp-team-icon">
-                                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        {% include 'beltechApp/refactors/team.html'%}
                     </div>
                 </section>
                 <!-- team area end -->
 
 
 
-                <!-- testimonial area start -->
-                <section class="tp-testimonial-2-area pt-120 pb-120 p-relative z-index-1">
-                    <div class="tp-testimonial-2-bg-shape">
-                        <img src="assets/img/testimonial/testimonial-bg-shape.png" alt="">
-                    </div>
-                    <div class="container">
-                        <div class="row align-items-end mb-60">
-                            <div class="col-xl-6 col-lg-9">
-                                <div class="tp-section-title-wrapper">
-                                    <h6 class="tp-section-sub-title">FREQUENTLY ASKED QUESTION</h6>
-                                    <h3 class="tp-section-title tp-split-text right">What Our Clients Ask
-                                        About Presvila</h3>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-3">
-                                <div class="tp-testimonial-2-arrow-box">
-                                    <button class="slider-prev" tabindex="0" aria-label="Previous slide">
-                                        <i class="fa-sharp fa-light fa-arrow-left"></i>
-                                    </button>
-                                    <button class="slider-next" tabindex="0" aria-label="Next slide">
-                                        <i class="fa-sharp fa-light fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xxl-12">
-                                <div class="tp-testimonial-2-slider p-relative">
-                                    <div class="tp-testimonial-2-active swiper-container wow fadeInUp">
-                                        <div class="swiper-wrapper">
-                                            <!-- Slide 1 -->
-                                            <div class="tp-testimonial-2-wrapper swiper-slide p-relative z-index-1">
-                                                <div class="tp-testimonial-2-review">
-                                                    <img src="assets/img/testimonial/testimonial-2-review.png" alt="">
-                                                </div>
-                                                <div class="tp-testimonial-2-content">
-                                                    <p>Pension schemes ensu security during retirement years for eligible individua. Retirement pensions provide fina</p>
-                                                </div>
-                                                <div class="tp-testimonial-2-bio">
-                                                    <div class="tp-testimonial-2-member">
-                                                        <img src="assets/img/testimonial/testimonial-2-member1.png" alt="">
-                                                    </div>
-                                                    <div class="tp-testimonial-2-name">
-                                                        <h4>Hazard Will</h4>
-                                                        <p>Delivery Man</p>
-                                                    </div>
-                                                </div>
-                                                <div class="tp-testimonial-2-wrapper-shape">
-                                                    <img src="assets/img/testimonial/testimonial-2-box-shape.png" alt="">
-                                                </div>
-                                            </div>
-                                            <!-- Slide 2 -->
-                                            <div class="tp-testimonial-2-wrapper swiper-slide p-relative z-index-1">
-                                                <div class="tp-testimonial-2-review">
-                                                    <img src="assets/img/testimonial/testimonial-2-review.png" alt="">
-                                                </div>
-                                                <div class="tp-testimonial-2-content">
-                                                    <p>Pension schemes ensu security during retirement years for eligible individua. Retirement pensions provide fina</p>
-                                                </div>
-                                                <div class="tp-testimonial-2-bio">
-                                                    <div class="tp-testimonial-2-member">
-                                                        <img src="assets/img/testimonial/testimonial-2-member1.png" alt="">
-                                                    </div>
-                                                    <div class="tp-testimonial-2-name">
-                                                        <h4>Muhammad IK</h4>
-                                                        <p>Printer</p>
-                                                    </div>
-                                                </div>
-                                                <div class="tp-testimonial-2-wrapper-shape">
-                                                    <img src="assets/img/testimonial/testimonial-2-box-shape.png" alt="">
-                                                </div>
-                                            </div>
-                                            <!-- Slide 3 -->
-                                            <div class="tp-testimonial-2-wrapper swiper-slide p-relative z-index-1">
-                                                <div class="tp-testimonial-2-review">
-                                                    <img src="assets/img/testimonial/testimonial-2-review.png" alt="">
-                                                </div>
-                                                <div class="tp-testimonial-2-content">
-                                                    <p>Pension schemes ensu security during retirement years for eligible individua. Retirement pensions provide fina</p>
-                                                </div>
-                                                <div class="tp-testimonial-2-bio">
-                                                    <div class="tp-testimonial-2-member">
-                                                        <img src="assets/img/testimonial/testimonial-2-member1.png" alt="">
-                                                    </div>
-                                                    <div class="tp-testimonial-2-name">
-                                                        <h4>Richard Piko</h4>
-                                                        <p>Printer</p>
-                                                    </div>
-                                                </div>
-                                                <div class="tp-testimonial-2-wrapper-shape">
-                                                    <img src="assets/img/testimonial/testimonial-2-box-shape.png" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- testimonial area end -->
+                
 
 
 {% endblock %}

@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from beltechApp.models import *
 from django.db.models import Count
-from beltechApp.forms import BlogCommentForm, BlogSearchForm, TestimonialForm
+from beltechApp.forms import BlogCommentForm, BlogSearchForm, TestimonialForm, ContactForm
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -13,12 +14,15 @@ def home(request):
     home_page_feature = Homepage_feature_area.objects.all()[:3]
     homepage_service = Homepage_service_area.objects.all()[:3]
     homepage_about = Homepage_about_area.objects.first()
+    teams = Team.objects.all()
 
     latest_product = Already_done_project.objects.all().order_by('-date')[:2]
     recent_project_done = Products.objects.filter(is_latest =True)
     products = Products.objects.all()
 
     recent_blogs =BlogPost.objects.all().order_by('-created_at')[:3]
+
+    testimony = Testimonial.objects.all()[:3]
     logo = Logo.objects.first()
     context = {
         'carousels': carousel,
@@ -29,7 +33,9 @@ def home(request):
         'recents': recent_project_done,
         'products':products,
         'recent_blogs':recent_blogs,
-        'logo': logo
+        'logo': logo,
+        'teams': teams,
+        'paginators':testimony
         
     }
     return render(request, 'beltechApp/index.html', context)
@@ -64,8 +70,12 @@ def blog(request):
     blog = BlogPost.objects.all()
     products = Products.objects.all()
 
+    paginator = Paginator(blog, 6) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context ={
-        'blogs':blog,
+        'paginators':page_obj,
         'navs':breadcrumb,
         'products':products,
     }
@@ -208,7 +218,7 @@ def shop(request):
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'products': page_obj,
+        'paginators': page_obj,
         'navs': breadcrumb,
         'categorys': category,
         'recent_products': recent_product
@@ -221,6 +231,7 @@ def about(request):
     # blog = BlogPost.objects.all()
     breadcrumb = printingHomePageImage.objects.all()
     faq = Faq.objects.all()[:3]
+    team = Team.objects.all()[:3]
 
     process_video = ProcessVideo.objects.first()
 
@@ -230,32 +241,100 @@ def about(request):
         'navs': breadcrumb,
         'faqs':faq,
         'process_video': process_video,
+        'teams':team
     }
     return render(request, 'beltechApp/about.html', context)
 
 def testimonial(request):
     testimony = Testimonial.objects.all()
     breadcrumb = printingHomePageImage.objects.all()
+    unapproved_count = Testimonial.objects.filter(is_approve=False).count()
+    # testimony = Testimonial.objects.all()
 
+    paginator = Paginator(testimony, 6) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'testimonys': testimony,
+        'paginators': page_obj,
         'navs': breadcrumb,
+        'unapproved_count': unapproved_count
     }
 
     return render(request, 'beltechApp/testimonials.html', context)
 
 
-
 def submit_testimonial(request):
     if request.method == 'POST':
         form = TestimonialForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            # 1. Save the form but don't commit to DB yet
+            testimony = form.save(commit=False)
+            
+            # 2. Assign the Logo (Grabbing the first one available)
+            logo = Logo.objects.first() 
+            testimony.logo_image = logo
+            
+            # 3. Force unapproved status for admin review
+            testimony.is_approve = False
+            
+            # 4. Now save to database
+            testimony.save()
+
+            # If AJAX request, send JSON
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'status': 'success'}, status=200)
+            
+            return redirect('testimonial')
+        else:
+            # If form is invalid (e.g. missing name), send errors
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+                
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+def team(request):
+    teams = Team.objects.all()
+    breadcrumb = printingHomePageImage.objects.all()
+
+    context = {
+        'teams': teams,
+        'navs':breadcrumb
+    }
+    return render(request, 'beltechApp/team.html', context)
+
+def project(request):
+    projects = Already_done_project.objects.all()
+    breadcrumb = printingHomePageImage.objects.all()
+    context = {
+        'projects': projects,
+        'navs':breadcrumb
+    }
+    return render(request, 'beltechApp/project.html', context)
+
+def faq(request):
+    breadcrumb = printingHomePageImage.objects.all()
+    faqs = Faq.objects.all()[:3]
+    context = {
+        'faqs': faqs,
+        'navs':breadcrumb
+    }
+    return render(request, 'beltechApp/faq.html', context)
+
+
+
+def contact(request):
+    breadcrumb = printingHomePageImage.objects.all()
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Thank you! Your testimonial has been submitted.')
-            return redirect('testimonial') # Redirect to your testimonial list
+            # This 'success' tag is what 'message.tags' looks for in HTML
+            messages.success(request, 'Your message for Beltech Printing has been sent! We will call you shortly.')
+            return redirect(reverse('contact') + '#contacts-form')
+        else:
+            messages.error(request, 'Please check your phone number or email format.')
     else:
-        form = TestimonialForm()
+        form = ContactForm()
     
-    return render(request, 'beltechApp/testimonial_form.html', {'form': form})
-    
-   
+    return render(request, 'beltechApp/contact.html', {'contact_form': form, 'navs':breadcrumb})

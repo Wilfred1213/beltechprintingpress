@@ -295,8 +295,9 @@ class Testimonial(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(5)], null=True,
         help_text="Rate from 1 to 5"
     )
-    main_image = models.ImageField(upload_to='blog/main/', null=True, help_text="Featured image at the top")
+    main_image = models.ImageField(upload_to='blog/main/', null=True, blank=True, help_text="Featured image at the top")
     is_active = models.BooleanField(default=True, help_text="Show or hide this testimonial on the site")
+    is_approve = models.BooleanField(default=True, help_text="Admin approve or decline the testimony")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -306,5 +307,21 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.rating}★)"
+    
+
+class Contact(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254, help_text="User's email address")
+    phone_number = models.CharField(max_length=20, null=True, help_text="e.g. +234 800 000 0000")
+    message = CKEditor5Field('Description', config_name='default')
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Contact Message"
+        verbose_name_plural = "Contact Messages"
+        ordering = ['-date']
+
+    def __str__(self):
+        return f"Message from {self.full_name} - {self.email}"
 
     

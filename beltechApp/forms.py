@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogComment, Testimonial
+from .models import BlogComment, Testimonial, Contact
 
 class BlogCommentForm(forms.ModelForm):
     class Meta:
@@ -48,3 +48,29 @@ class TestimonialForm(forms.ModelForm):
             'main_image': forms.FileInput(attrs={'class': 'form-control'}), # File inputs need form-control
         }
 
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        # These MUST match the names in models.py exactly
+        fields = ['full_name', 'email', 'phone_number', 'message']
+        
+        widgets = {
+            'full_name': forms.TextInput(attrs={
+                'placeholder': 'Your Name*', 
+                'class': 'form-control'
+            }),
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'Your E-mail*', 
+                'class': 'form-control'
+            }),
+            'phone_number': forms.TextInput(attrs={
+                'placeholder': 'Phone Number*', 
+                'class': 'form-control'
+            }),
+            'message': forms.Textarea(attrs={
+                'placeholder': 'Write Your Message*', 
+                'class': 'form-control', 
+                'rows': 4
+            }),
+        }

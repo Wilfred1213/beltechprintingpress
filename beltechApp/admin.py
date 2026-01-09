@@ -196,6 +196,36 @@ class FAQAdmin(admin.ModelAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('name', 'rating', 'is_active', 'created_at' )
+    list_display = ('name', 'rating', 'is_active', 'created_at', 'is_approve' )
     list_filter = ('is_active', 'rating')
     search_fields = ('name', 'message')
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    # This controls which columns appear in the list view
+    list_display = ('full_name', 'email', 'phone_number', 'date')
+    
+    # This adds a sidebar to filter messages by date
+    list_filter = ('date',)
+    
+    # This allows you to search for specific people or emails
+    search_fields = ('full_name', 'email', 'message')
+    
+    # This makes the "date" field read-only in the details view
+    readonly_fields = ('date',)
+    
+    # This organizes the details view into sections
+    fieldsets = (
+        ('Sender Information', {
+            'fields': ('full_name', 'email', 'phone_number')
+        }),
+        ('Message Content', {
+            'fields': ('message',),
+        }),
+        ('Metadata', {
+            'fields': ('date',),
+        }),
+    )
+
+    # Optional: Display newest messages first
+    ordering = ('-date',)

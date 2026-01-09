@@ -6,47 +6,80 @@
 {% block content %}
     <div id="smooth-wrapper">
         {% include 'beltechApp/refactors/service_blog_nav_breadcrumb.html' %}
+
+        {% if user.is_superuser and unapproved_count > 0 %}
+        <div class="container mt-50">
+            <div class="tp-admin-notification p-relative z-index-1 d-flex align-items-center justify-content-between" 
+                style="background: #fff0e6; border-left: 5px solid #ff5a01; padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <div class="d-flex align-items-center">
+                    <div class="notification-icon mr-20" style="font-size: 30px; color: #ff5a01;">
+                        <i class="fa-solid fa-bell animate-bounce"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0" style="font-size: 18px; font-weight: 700; color: #1a1a1a;">
+                            Pending Reviews Action Required
+                        </h4>
+                        <p class="mb-0" style="color: #666; font-size: 14px;">
+                            There are <strong>{{ unapproved_count }}</strong> new reviews waiting for your approval.
+                        </p>
+                    </div>
+                </div>
+                <div class="notification-btn">
+                    <a href="/admin/beltechApp/testimonial/" class="tp-btn-sm" 
+                    style="background: #ff5a01; color: #fff; padding: 10px 20px; border-radius: 5px; font-weight: 600; font-size: 13px;">
+                        Go to Admin Site <i class="fa-solid fa-arrow-right ml-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <section class="tp-testimonial-inner-area pt-120 pb-90">
             <div class="container">
                 <div class="row">
-                    {% for testimonial in testimonys %}
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="tp-testimonial-2-wrapper mb-30 p-relative z-index-1 wow fadeInUp" data-wow-delay=".3s">
-                            
-                            <div class="tp-testimonial-rating mb-10" style="color: #ff5a01; font-size: 14px;">
-                                {% with ''|center:testimonial.rating as range %}
-                                    {% for _ in range %}
-                                        <i class="fa-solid fa-star"></i>
-                                    {% endfor %}
-                                {% endwith %}
-                            </div>
-
-                            <div class="tp-testimonial-2-content">
-                                <p>"{{ testimonial.message }}"</p>
-                            </div>
-
-                            <div class="tp-testimonial-2-bio d-flex align-items-center">
-                                <div class="tp-testimonial-2-member">
-                                    {% if testimonial.logo_image.main_image %}
-                                        <img src="{{ testimonial.logo_image.main_image.url }}" alt="{{ testimonial.name }}" class="testimonial-avatar">
-                                    {% else %}
-                                        <img src="{% static 'assets/img/testimonial/testimonial-2-member1.png' %}" alt="default" class="testimonial-avatar">
-                                    {% endif %}
+                    {% for testimonial in paginators %}
+                        <div class="col-xl-4 col-lg-6 col-md-6">
+                            <div class="tp-testimonial-2-wrapper mb-30 p-relative z-index-1 wow fadeInUp" data-wow-delay=".3s">
+                                
+                                <div class="tp-testimonial-rating mb-10" style="color: #ff5a01; font-size: 14px;">
+                                    {% with ''|center:testimonial.rating as range %}
+                                        {% for _ in range %}
+                                            <i class="fa-solid fa-star"></i>
+                                        {% endfor %}
+                                    {% endwith %}
                                 </div>
-                                <div class="tp-testimonial-2-name">
-                                    <h4 class="mb-0">{{ testimonial.name }}</h4>
-                                    <span style="font-size: 13px; color: #666;">Verified Client</span>
-                                </div>
-                            </div>
 
-                            <div class="tp-testimonial-2-wrapper-shape">
-                                <img src="{% static 'assets/img/testimonial/testimonial-2-box-shape.png' %}" alt="shape">
+                                <div class="tp-testimonial-2-content">
+                                    <p>"{{ testimonial.message }}"</p>
+                                </div>
+
+                                <div class="tp-testimonial-2-bio d-flex align-items-center">
+                                    <div class="tp-testimonial-2-member">
+                                        {% if testimonial.main_image %}
+                                            <img src="{{ testimonial.main_image.url }}" alt="{{ testimonial.name }}" class="testimonial-avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                        {% else %}
+                                            <img src="{{ testimonial.logo_image.main_image.url }}" alt="{{testimonial.logo_image.name}}" class="testimonial-avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                        {% endif %}
+                                    </div>
+                                    <div class="tp-testimonial-2-name ml-15">
+                                        <h4 class="mb-0" style="font-size: 16px;">{{ testimonial.name }}</h4>
+                                        <span style="font-size: 13px; color: #666;">Verified Client</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% empty %}
+                        <div class="col-12 text-center pt-50 pb-50">
+                            <div class="mb-20">
+                                <i class="fa-light fa-comment-slash" style="font-size: 60px; color: #eee;"></i>
+                            </div>
+                            <h3>No Testimonials Yet</h3>
+                            <p>Be the first to share your experience with Beltech!</p>
+                        </div>
                     {% endfor %}
                 </div>
+                {% include 'beltechApp/refactors/paginator.html' %}
             </div>
         </section>
-        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,282 @@
+/* Force the background shape container to be visible */
+        .tp-breadcrumb-bg-shape {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Ensure images within that container don't get hidden */
+        .tp-breadcrumb-bg-shape img {
+            display: block !important;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Prevent text from becoming unreadable on mobile if images overlap */
+        @media (max-width: 768px) {
+            .tp-breadcrumb-area {
+                padding-top: 80px;
+                padding-bottom: 80px;
+                overflow: hidden; /* prevents side-scrolling on mobile */
+            }
+            .tp-breadcrumb-bg-shape {
+                z-index: -1; /* puts images behind the text */
+            }
+        }
+
+
+        /* {% comment %} service image control {% endcomment %} */
+        /* Control the icon container size */
+    .tp-service-2-icon {
+        width: 110px !important;  /* Increased size */
+        height: 110px !important; /* Increased size */
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.4s ease; /* Smooth transition for the container */
+        border: 1px solid #eee; /* Optional: adds a soft border */
+    }
+
+    /* The actual image logic */
+    .tp-service-2-icon img {
+        max-width: 80%; /* Fits nicely with some padding */
+        height: auto;
+        transition: transform 0.4s ease; /* Smooth zoom for the image */
+    }
+
+    /* Grow effect on Hover */
+    .tp-service-2-wrapper:hover .tp-service-2-icon img {
+        transform: scale(1.15); /* Grows by 15% when you hover the card */
+    }
+
+    /* Optional: Slight lift effect for the whole icon box */
+    .tp-service-2-wrapper:hover .tp-service-2-icon {
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        border-color: #ff5a01; /* Uses your brand orange on hover */
+    }
+
+        /* Smooth hover effect for FAQ cards */
+    .tp-faq-2-accordion-item:hover {
+        border-color: #ff5a01 !important; /* Your brand color */
+        box-shadow: 0 10px 25px rgba(255, 90, 1, 0.1);
+    }
+    
+    /* Better styling for the active question */
+    .accordion-button:not(.collapsed) {
+        background-color: transparent !important;
+        color: #ff5a01 !important;
+        box-shadow: none !important;
+    }
+
+        /* Create a safe zone for the +/- icon */
+    .tp-faq-2-accordion-title.accordion-button {
+        padding-right: 70px !important; /* Increase this if the icon is still touching */
+        text-align: left;
+        display: block; /* Ensures long text wraps correctly */
+        position: relative;
+    }
+
+    /* Ensure the icon stays centered vertically even if the text is multi-line */
+    .tp-faq-2-accordion-btn {
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+    }
+
+    /* Prevent text overflow from getting messy */
+    .tp-faq-2-accordion-title {
+        line-height: 1.4;
+        word-wrap: break-word;
+    }
+
+    /* Card Elevation & Smoothness */
+.tp-testimonial-2-wrapper {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.tp-testimonial-2-wrapper:hover {
+    transform: translateY(-10px);
+    border-color: #ff5a01;
+}
+
+/* Fix for the big image problem */
+.testimonial-avatar {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important; /* This ensures the face isn't stretched */
+    border: 2px solid #ff5a01;
+    margin-right: 15px;
+}
+
+/* Star Spacing */
+.tp-testimonial-rating i {
+    margin-right: 2px;
+}
+
+/* Quote Polish */
+.tp-testimonial-2-content p {
+    font-style: italic;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+    .testimonial-logo {
+    max-width: 120px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+
+
+    /* {% comment %} testimonial form  {% endcomment %} */
+    /* Card Styling */
+.testimonial-form-card {
+    background: #ffffff;
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255, 90, 1, 0.1);
+}
+
+.form-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+/* Custom Labels */
+.custom-label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Input Wrapper Styling */
+.input-wrapper {
+    position: relative;
+}
+.input-wrapper i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff5a01;
+}
+.input-wrapper input {
+    padding-left: 50px !important;
+}
+
+/* Star Rating Aesthetic */
+.star-rating-container {
+    background: #fff5f0;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 50px;
+}
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 30px;
+}
+.star-rating input { display: none; }
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0 5px;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #ff5a01;
+    transform: scale(1.1);
+}
+
+/* Custom File Upload Styling */
+.file-drop-area {
+    border: 2px dashed #ff5a01;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    background: rgba(255, 90, 1, 0.02);
+    transition: 0.3s;
+}
+.file-drop-area:hover {
+    background: rgba(255, 90, 1, 0.05);
+}
+.file-drop-area i {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 10px;
+    color: #ff5a01;
+}
+.file-drop-area input { display: none; }
+}
+
+/* {% comment %} cookie start  {% endcomment %} */
+.cookie-bar-wrapper {
+    position: fixed;
+    bottom: -100px; /* Hidden by default */
+    left: 0;
+    width: 100%;
+    background: #1a1a1a;
+    color: white;
+    padding: 20px 0;
+    z-index: 9999;
+    transition: bottom 0.5s ease-in-out;
+}
+
+.cookie-bar-wrapper.show {
+    bottom: 0;
+}
+
+.cookie-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cookie-content p { margin: 0; color: #ddd; }
+
+.tp-btn-inner {
+    background: #ff5a01;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.project-img-uniform {
+    width: 100%;
+    /* Set the height you want (e.g., 400px) OR use aspect-ratio */
+    height: 400px; 
+    
+    /* This ensures the image isn't squashed or stretched */
+    object-fit: cover; 
+    
+    /* Ensures the focus remains on the center of the image */
+    object-position: center; 
+    
+    border-radius: 15px; /* Optional: matches your theme's curves */
+}
+
