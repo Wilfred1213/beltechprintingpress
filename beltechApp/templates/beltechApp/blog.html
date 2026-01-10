@@ -20,33 +20,65 @@
 
 
                 <!-- blog area start -->
-                <section class="tp-blog-4-area pt-120 pb-90">
+                <section class="tp-blog-4-area pt-120 pb-90" style="background-color: #f9f9f9;">
                     <div class="container">
                         <div class="row">
                             {% for blog in paginators %}
-                            <div class="col-lg-4 col-md-6">
-                                <div class="tp-blog-wrapper tp-blog-4-wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-                                    <div class="tp-blog-thumb tp-blog-4-thumb not-hide-cursor" data-cursor="View<br>Detail">
-                                        <a class="cursor-hide" href="{% url 'blog_detail' blog.id %}"><img src="{{ blog.main_image.url}}" alt=""></a>
-                                    </div>
-                                    <div class="tp-blog-4-content">
-                                        <div class="tp-blog-4-meta">
-                                            <span>Printing</span>
-                                            <span>{{ blog.created_at|date:"M d, Y" }}</span>
+                            <div class="col-lg-4 col-md-6 mb-40">
+                                <div class="tp-blog-wrapper tp-blog-4-wrapper wow fadeInUp" data-wow-delay=".3s" 
+                                    style="background: #fff; border-radius: 20px; overflow: hidden; height: 100%; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; border: 1px solid #eee;">
+                                    
+                                    <div class="tp-blog-thumb tp-blog-4-thumb" style="position: relative; height: 240px; overflow: hidden;">
+                                        <a href="{% url 'blog_detail' blog.id %}">
+                                            <img src="{{ blog.main_image.url }}" alt="{{ blog.title }}" 
+                                                style="width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease;">
+                                        </a>
+                                        <div style="position: absolute; top: 15px; left: 15px; background: #ff5a01; color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase;">
+                                            Printing
                                         </div>
-                                        <h4 class="tp-blog-4-title"><a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></h4>
-                                        <div class="tp-blog-4-btn">
-                                            <a href="{% url 'blog_detail' blog.id %}">Read More <span><i class="fa-regular fa-plus"></i></span></a>
+                                    </div>
+
+                                    <div class="tp-blog-4-content" style="padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                        <div>
+                                            <div class="tp-blog-4-meta mb-10" style="font-size: 13px; color: #777; display: flex; align-items: center; gap: 10px;">
+                                                <span><i class="fa-light fa-calendar-days" style="color: #ff5a01;"></i> {{ blog.created_at|date:"M d, Y" }}</span>
+                                                <span style="height: 4px; width: 4px; background: #ccc; border-radius: 50%;"></span>
+                                                <span><i class="fa-light fa-user" style="color: #ff5a01;"></i> Beltech Team</span>
+                                            </div>
+
+                                            <h4 class="tp-blog-4-title" style="font-size: 19px; font-weight: 700; line-height: 1.4; margin-bottom: 20px;">
+                                                <a href="{% url 'blog_detail' blog.id %}" style="color: #111; text-decoration: none; transition: 0.3s;">
+                                                    {{ blog.title|truncatechars:55 }}
+                                                </a>
+                                            </h4>
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-between" style="border-top: 1px solid #f0f0f0; padding-top: 20px;">
+                                            <div class="tp-blog-4-btn">
+                                                <a href="{% url 'blog_detail' blog.id %}" style="font-weight: 700; font-size: 13px; color: #111; text-decoration: none; text-transform: uppercase;">
+                                                    Read More <i class="fa-regular fa-plus" style="margin-left: 5px; color: #ff5a01;"></i>
+                                                </a>
+                                            </div>
+
+                                            <a href="https://wa.me/?text=Check out this post from Beltech: {{ blog.title }} - {{ request.build_absolute_uri }}{% url 'blog_detail' blog.id %}" 
+                                            target="_blank" 
+                                            style="color: #25d366; font-size: 18px;" title="Share on WhatsApp">
+                                                <i class="fa-brands fa-whatsapp"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+                            {% empty %}
+                            <div class="col-12 text-center py-5">
+                                <p>No blog posts found.</p>
+                            </div>
                             {% endfor %}
-                            
                         </div>
                     </div>
-                    {% include 'beltechApp/refactors/paginator.html' %}
+                    <div class="container mt-50">
+                        {% include 'beltechApp/refactors/paginator.html' %}
+                    </div>
                 </section>
                 <!-- blog area end -->
 

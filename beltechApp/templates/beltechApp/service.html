@@ -25,30 +25,38 @@
 
     <!-- service area start -->
     <div class="row">
-        {% for service in services %}
-        <div class="col-xl-6 col-lg-6">
-            <div class="tp-service-2-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s">
-                <div class="tp-service-2-icon-box">
-                    <div class="tp-service-2-icon">
-                        <span>
-                            <img src="{{ service.image.url }}" alt="{{ service.name }}">
-                        </span>
-                    </div>
-                    <div class="tp-service-2-number">
-                        <span>0{{ forloop.counter }}</span>
+    {% for service in services %}
+    <div class="col-xl-6 col-lg-12 mb-30">
+        <div class="tp-service-fancy-card wow fadeInUp h-100" data-wow-delay=".3s">
+            <div class="row align-items-center g-0">
+                <div class="col-md-4">
+                    <div class="service-fancy-img">
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}">
+                        <div class="service-count">0{{ forloop.counter }}</div>
                     </div>
                 </div>
-                <div class="tp-service-2-content">
-                    <h4 class="tp-service-2-title"><a href="service-details.html">{{ service.name }}</a></h4>
-                    <p class="tp-service-2-paragraph">{{ service.description | safe }}</p>
-                    <div class="tp-service-2-button">
-                        <a class="tp-service-2-btn" href="service-details.html">Contact us</a>
+                <div class="col-md-8">
+                    <div class="service-fancy-content">
+                        <h4 class="service-fancy-title">
+                            <a href="service-details.html">{{ service.name }}</a>
+                        </h4>
+                        <div class="service-fancy-text">
+                            {{ service.description|striptags|truncatewords:20 }}
+                        </div>
+                        <div class="service-fancy-actions">
+                            <a href="service-details.html" class="read-more">Learn More <i class="fa-solid fa-plus"></i></a>
+                            <a href="https://wa.me/{{ settings.whatsapp_number }}?text=Hello%20Beltech,%20I'm%20interested%20in%20your%20{{ service.name }}%20service." 
+                               class="whatsapp-btn-mini">
+                                <i class="fa-brands fa-whatsapp"></i> Inquiry
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
     <!-- service area end -->
 
 
@@ -82,7 +90,7 @@
                                     </div>
                                     <div class="tp-product-2-content text-center">
                                         <h4 class="tp-product-2-title" style="font-size: 18px; font-weight: 600; margin-top: 10px;">
-                                            <a href="shop-details.html" style="transition: 0.3s; color: #333;">{{ category.name }}</a>
+                                            <a href="{% url 'category_details' category.id %}" style="transition: 0.3s; color: #333;">{{ category.name }}</a>
                                         </h4>
                                         <p style="color: #ff5a01; font-size: 14px; font-weight: 500;">Explore Collection</p>
                                     </div>

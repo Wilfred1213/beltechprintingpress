@@ -2,6 +2,69 @@
     <div class="container">
         <div class="row">
             <div class="tp-section-title-wrapper mb-45 text-center">
+                <h6 class="tp-section-sub-title" style="color: #ff5a01; font-weight: 700; letter-spacing: 2px;">OUR LATEST BLOGS</h6>
+                <h3 class="tp-section-title mb-35 tp-split-text right">Read Our Latest Blog Post</h3>
+            </div>
+        </div>
+        <div class="row">
+            {% for blog in recent_blogs %}
+            <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+                <div class="tp-blog-3-wrapper wow fadeInUp" data-wow-delay=".3s" 
+                     style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; transition: 0.4s; border: 1px solid #f1f1f1;">
+                    
+                    <div class="tp-blog-3-thumb p-relative z-index-1" style="position: relative; height: 250px; overflow: hidden;">
+                        <a href="{% url 'blog_detail' blog.id %}">
+                            <img src="{{ blog.main_image.url }}" alt="{{ blog.title }}" 
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: 0.6s;">
+                        </a>
+                        <div class="tp-blog-3-date" style="position: absolute; bottom: 20px; left: 20px; background: #ff5a01; color: #fff; padding: 8px 15px; border-radius: 12px; text-align: center; line-height: 1.2; box-shadow: 0 5px 15px rgba(255,90,1,0.3);">
+                            <span style="display: block; font-size: 18px; font-weight: 800;">{{ blog.created_at|date:"d" }}</span>
+                            <span style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase;">{{ blog.created_at|date:"M" }}</span>
+                        </div>
+                    </div>
+
+                    <div class="tp-blog-3-content-wrapper" style="padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div class="tp-blog-3-tag mb-15" style="display: flex; gap: 10px;">
+                                <span style="background: #fdf2e9; color: #ff5a01; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase;">Printing</span>
+                                <span style="background: #f0f0f0; color: #555; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase;">Beltech</span>
+                            </div>
+
+                            <h4 class="tp-blog-3-title" style="font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px;">
+                                <a href="{% url 'blog_detail' blog.id %}" style="color: #111; text-decoration: none; transition: 0.3s;">
+                                    {{ blog.title|truncatechars:60 }}
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div class="tp-blog-3-member-details d-flex align-items-center" style="border-top: 1px solid #f1f1f1; padding-top: 20px;">
+                            <div class="tp-blog-3-member-thumb mr-15">
+                                <img src="{{ blog.author.profile_image.url|default:'https://cdn-icons-png.flaticon.com/512/149/149071.png' }}" 
+                                     alt="{{ blog.author }}"
+                                     style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                            </div>
+                            <div class="tp-blog-3-name">
+                                <h5 style="margin-bottom: 2px; font-size: 15px; font-weight: 700; color: #111;">
+                                    {{ blog.author.get_full_name|default:blog.author.username }}
+                                </h5>
+                                <span style="font-size: 12px; color: #888;">
+                                    <i class="fa-light fa-clock-rotate-left"></i> {{ blog.created_at|date:"M d, Y" }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+{% comment %} <section class="tp-blog-3-area pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="tp-section-title-wrapper mb-45 text-center">
                 <h6 class="tp-section-sub-title">OUR LATEST BLOGS</h6>
                 <h3 class="tp-section-title mb-35 tp-split-text right">Read Our Latest Blog Post</h3>
             </div>
@@ -42,4 +105,4 @@
             {% endfor %}
         </div>
     </div>
-</section>
+</section> {% endcomment %}
