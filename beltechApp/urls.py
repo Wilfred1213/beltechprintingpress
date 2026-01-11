@@ -22,6 +22,11 @@ urlpatterns = [
     path('inbox_detail/<int:pk>/', views.inbox_detail, name='inbox_detail'),
     path('message_count/', views.message_count, name='message_count' ),
     path('delete_message/<int:pk>/delete/', views.delete_message, name='delete_message'),
-    path('category_details/<int:cat_id>/delete/', views.category_details, name='category_details')
+    path('category_details/<int:cat_id>/delete/', views.category_details, name='category_details'),
+    path('shop_detail/<int:shop_id>/', views.shop_detail, name='shop_detail'),
+    path('service_detail/<int:service_id>/', views.service_detail, name='service_detail'),
+    path('newsletter/', views.newsletter, name='newsletter' ),
+    path('send_newsletter_page/', views.send_newsletter_page, name='send_newsletter_page' ),
+    path('newsletter/unsubscribe/<str:email>/', views.unsubscribe, name='unsubscribe'),
     
 ]

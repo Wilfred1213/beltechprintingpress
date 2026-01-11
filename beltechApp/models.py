@@ -12,7 +12,7 @@ import urllib.parse
 
 
 class CustomUser(AbstractUser):
-    # Ensure the class name is exactly 'CustomUser'
+    image = models.ImageField(upload_to='customUser/', null=True, blank=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     
     def __str__(self):
@@ -22,10 +22,15 @@ class Carousel(models.Model):
     discount = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='carousel/')
     # image2 = models.ImageField(upload_to='media/', null = True, blank=False)
 
-
+    @property
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
+   
     def __str__(self):
         return self.title
     
@@ -38,24 +43,49 @@ class Homepage_feature_area(models.Model):
 class Homepage_service_area(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='service/')
 
     def __str__(self):
         return self.title
+    
+    @property
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
 
 class Homepage_about_area(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='media/', null=True)
+    image = models.ImageField(upload_to='about_image/', null=True)
     icon1 = models.CharField(max_length=100)
     description1 = models.CharField(max_length=200, null=True)
     icon2 = models.CharField(max_length=100)
     description2 = models.CharField(max_length=200, null=True)
-    image1 = models.ImageField(upload_to='media/')
-    image2 = models.ImageField(upload_to='media/')
-    image3 = models.ImageField(upload_to='media/')
-    image_expert= models.ImageField(upload_to='media/')
+    image1 = models.ImageField(upload_to='about_image/')
+    image2 = models.ImageField(upload_to='about_image/')
+    image3 = models.ImageField(upload_to='about_image/')
+    image_expert= models.ImageField(upload_to='about_image/')
     phone = models.CharField(max_length=50)
+
+
+    @property
+    def imageUrl1(self):
+        if self.image1 and hasattr(self.image1, 'url'):
+            return self.image1.url
+        return ""
+    def imageUrl2(self):
+        if self.image2 and hasattr(self.image2, 'url'):
+            return self.image2.url
+        return ""
+    def imageUrl3(self):
+        if self.image3 and hasattr(self.image3, 'url'):
+            return self.image3.url
+        return ""
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
 
     def __str__(self):
         return self.title
@@ -81,6 +111,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
     
 class SiteSetting(models.Model):
     site_name = models.CharField(max_length=100, default="Beltech Printing")
@@ -116,6 +150,11 @@ class Products(models.Model):
     is_available = models.BooleanField(default=True)
     is_latest = models.BooleanField(default=False)
 
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
+
 
     @property
     def whatsapp_link(self):
@@ -141,12 +180,22 @@ class Service(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
 
 class printingHomePageImage(models.Model):
     image = models.ImageField(upload_to='services/')
 
     class Meta:
         verbose_name = "Breadcrumb images"
+
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
 
 class Already_done_project(models.Model):
     title =models.CharField(max_length=50)
@@ -158,12 +207,22 @@ class Already_done_project(models.Model):
     def __str__(self):
         return f"already done #{self.id} ({self.title})"
     
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
+    
 class Logo(models.Model):
     name = models.CharField(max_length=100)
     main_image = models.ImageField(upload_to='logo/', help_text="Logo image")
 
     def __str__(self):
         return self.name
+    
+    def imageUrl(self):
+        if self.main_image and hasattr(self.main_image, 'url'):
+            return self.main_image.url
+        return ""
 
 class Blog_category(models.Model):
     name = models.CharField(max_length=100)
@@ -178,7 +237,7 @@ class BlogPost(models.Model):
     # Basic Info
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Blog_category, on_delete=models.CASCADE, related_name='blopPost', null=True)
     
     # Images
@@ -203,11 +262,18 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+    
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+    
+    @property
+    def imageUrl(self):
+        if self.main_image and hasattr(self.main_image, 'url'):
+            return self.main_image.url
+        return ""
 
 class BlogComment(models.Model):
     name = models.CharField(max_length=100)
@@ -291,9 +357,11 @@ class Team(models.Model):
      def __str__(self):
          return self.name
      
-from django.db import models
-
-
+     def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
+     
 class Testimonial(models.Model):
     name = models.CharField(max_length=100, help_text="Client or customer name")
     message = models.TextField(help_text="Client testimonial message")
@@ -316,6 +384,15 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.rating}★)"
+    
+    def logImageUrl(self):
+        if self.logo_image and hasattr(self.logo_image, 'url'):
+            return self.logo_image.url
+        return ""
+    def mainImageUrl(self):
+        if self.main_image and hasattr(self.main_image, 'url'):
+            return self.main_image.url
+        return ""
     
 
 class Contact(models.Model):
@@ -354,3 +431,9 @@ class CompanyInformation(models.Model):
     def __str__(self):
         return self.name
     
+class NewsLetter(models.Model):
+    email = models.EmailField(max_length=254)
+    is_active = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return self.email

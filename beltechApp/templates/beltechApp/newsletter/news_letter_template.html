@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .email-container { font-family: 'Arial', sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; }
+        .header { background: #111; padding: 20px; text-align: center; }
+        .body { padding: 40px; color: #444; line-height: 1.6; }
+        .footer { background: #f9f9f9; padding: 20px; text-align: center; font-size: 12px; color: #888; }
+        .btn { background: #ff5a01; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
+        .unsub-link { color: #ff5a01; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1 style="color: #ff5a01; margin: 0;">BELTECH</h1>
+        </div>
+        <div class="body">
+            <h2>{{ subject }}</h2>
+            <p>{{ message|linebreaks }}</p>
+            <p>If you have any questions, reply to this email or contact us on WhatsApp.</p>
+        </div>
+        <div class="footer">
+            <p>© 2024 Beltech Printing & Packaging. All Rights Reserved.</p>
+            <p>You are receiving this because you subscribed at beltech.com</p>
+            <p><a href="{{ unsubscribe_url }}" class="unsub-link">Unsubscribe from this list</a></p>
+        </div>
+    </div>
+</body>
+</html>

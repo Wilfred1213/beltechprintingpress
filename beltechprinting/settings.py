@@ -167,7 +167,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mathiaswilfred7@gmail.com'  # Your actual Gmail address
 EMAIL_HOST_PASSWORD = 'rhno myrl okmw uarc' # The 16-character App Password
-DEFAULT_FROM_EMAIL = 'Beltech Printing <your-email@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Beltech Printing <mathiaswilfred7@gmail.com>'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

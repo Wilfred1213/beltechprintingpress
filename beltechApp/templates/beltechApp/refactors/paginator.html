@@ -4,6 +4,46 @@
         <nav>
             <ul>
                 {# Previous Page Link #}
+                {% if blopaginators.has_previous %}
+                    <li>
+                        <a href="?page={{ blopaginators.previous_page_number }}">
+                            <i class="fa-solid fa-arrow-left-long"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {# Page Numbers #}
+                {% for num in blopaginators.paginator.page_range %}
+                    {% if blopaginators.number == num %}
+                        <li>
+                            <a class="active" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% elif num > blopaginators.number|add:'-3' and num < blopaginators.number|add:'3' %}
+                        <li>
+                            <a href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {# Next Page Link #}
+                {% if blopaginators.has_next %}
+                    <li>
+                        <a href="?page={{ blopaginators.next_page_number }}">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+
+{% comment %} <div class="row">
+                           
+    <div class="tp-postbox-pagination text-center wow fadeInUp" data-wow-delay=".3s">
+        <nav>
+            <ul>
+                {# Previous Page Link #}
                 {% if paginators.has_previous %}
                     <li>
                         <a href="?page={{ paginators.previous_page_number }}">
@@ -36,4 +76,4 @@
             </ul>
         </nav>
     </div>
-</div>
+</div>  {% endcomment %}

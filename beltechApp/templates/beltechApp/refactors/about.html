@@ -6,22 +6,22 @@
                 <div class="tp-about-left-wrapper mt-100 wow fadeInLeft" data-wow-delay=".3s">
                     <div class="tp-about-thumb p-relative" data-tilt style="perspective: 1000px;">
                         
-                        <img src="{{ about.image.url }}" alt="Background" class="main-img" 
+                        <img src="{{ about.imageUrl }}" alt="Background" class="main-img" 
                             style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
 
                         <div class="tp-about-thumb-shape">
-                            {% if about.image1 %}
-                                <img class="tp-about-thumb-shape-1" src="{{ about.image1.url }}" alt="man"
+                            {% if about.imageUrl1 %}
+                                <img class="tp-about-thumb-shape-1" src="{{ about.imageUrl }}" alt="man"
                                     style="max-width: 80%; height: auto; bottom: -20px; right: -10px;">
                             {% endif %}
                             
-                            {% if about.image2 %}
-                                <img class="tp-about-thumb-shape-2" src="{{ about.image2.url }}" alt="shape"
+                            {% if about.imageUrl2 %}
+                                <img class="tp-about-thumb-shape-2" src="{{ about.imageUrl2 }}" alt="shape"
                                     style="max-width: 100px; opacity: 0.8;">
                             {% endif %}
                             
-                            {% if about.image3 %}
-                                <img class="tp-about-thumb-shape-3" src="{{ about.image3.url }}" alt="shape"
+                            {% if about.imageUrl3 %}
+                                <img class="tp-about-thumb-shape-3" src="{{ about.imageUrl3 }}" alt="shape"
                                     style="max-width: 80px; opacity: 0.6;">
                             {% endif %}
                         </div>
@@ -69,7 +69,7 @@
 
                     <div class="tp-about-button-item d-flex align-items-center">
                         <div class="tp-about-btn">
-                            <a class="tp-btn" href="about.html" style="padding: 15px 35px; border-radius: 50px;">
+                            <a class="tp-btn" href="{% url 'service' %}" style="padding: 15px 35px; border-radius: 50px;">
                                 <span>Discover More</span>
                             </a>
                         </div>

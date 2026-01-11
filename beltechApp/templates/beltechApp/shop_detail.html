@@ -1,0 +1,98 @@
+
+{% extends 'beltechApp/base/base.html' %}
+{% load static %}
+
+{% block title %} Shop detail {% endblock %}
+
+{% block content %}
+
+<section class="product-details-area pt-120 pb-120">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-xl-6 col-lg-6">
+                <div class="product-details-img-wrapper p-relative mb-30">
+                    <div style="border-radius: 30px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid #eee;">
+                        <img src="{{ product.imageUrl }}" alt="{{ product.name }}" 
+                             style="width: 100%; height: auto; display: block; object-fit: cover;">
+                    </div>
+                    <div style="position: absolute; top: 20px; right: 20px; background: #25d366; color: white; padding: 6px 15px; border-radius: 50px; font-size: 12px; font-weight: 700; letter-spacing: 1px;">
+                        READY FOR PRINT
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6">
+                <div class="product-details-content-wrapper pl-50">
+                    <div class="mb-20">
+                        <span style="color: #ff5a01; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 2px;">
+                            {{ product.category.name }}
+                        </span>
+                        <h2 style="font-size: 42px; font-weight: 800; color: #111; margin-top: 10px; line-height: 1.2;">
+                            {{ product.name }}
+                        </h2>
+                    </div>
+                    {% if 'shop_detail/' in request.path %}
+                    <div class="price-box mb-30" style="background: #fdf2e9; padding: 20px; border-radius: 15px; display: inline-block; width: 100%;">
+                        <span style="color: #777; font-size: 14px; display: block; margin-bottom: 5px;">Starting Price</span>
+                        <h3 style="color: #ff5a01; font-weight: 900; font-size: 32px; margin: 0;">₦{{ product.base_price }}</h3>
+                    </div>
+                    {% else %}
+                    <div class="price-box mb-30" style="background: #fdf2e9; padding: 20px; border-radius: 15px; display: inline-block; width: 100%;">
+                        <span style="color: #777; font-size: 14px; display: block; margin-bottom: 5px;">Starting Price</span>
+                        <h3 style="color: #ff5a01; font-weight: 900; font-size: 32px; margin: 0;">Beltech can do alot for you</h3>
+                    </div>
+                    {% endif %}
+
+                    <div class="description-box mb-40">
+                        <h5 style="font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #111; border-bottom: 2px solid #ff5a01; display: inline-block;">
+                            Description
+                        </h5>
+                        <div style="font-size: 16px; color: #555; line-height: 1.8;">
+                            {{ product.description|safe }}
+                        </div>
+                    </div>
+
+                    <div class="action-buttons d-flex flex-column gap-3">
+                        <a href="{{ product.whatsapp_link }}" target="_blank" 
+                           style="background: #25d366; color: white; display: flex; align-items: center; justify-content: center; padding: 18px; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);">
+                            <i class="fa-brands fa-whatsapp" style="font-size: 24px; margin-right: 12px;"></i>
+                            ORDER VIA WHATSAPP
+                        </a>
+                        
+                        <div style="display: flex; gap: 15px;">
+                             <div style="flex: 1; border: 1px solid #ddd; border-radius: 15px; padding: 12px; text-align: center;">
+                                <i class="fa-light fa-truck" style="color: #ff5a01; display: block; font-size: 20px; margin-bottom: 5px;"></i>
+                                <span style="font-size: 12px; font-weight: 600;">Fast Delivery</span>
+                             </div>
+                             <div style="flex: 1; border: 1px solid #ddd; border-radius: 15px; padding: 12px; text-align: center;">
+                                <i class="fa-light fa-shield-check" style="color: #ff5a01; display: block; font-size: 20px; margin-bottom: 5px;"></i>
+                                <span style="font-size: 12px; font-weight: 600;">Quality Print</span>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-80">
+            <div class="col-12">
+                <div style="background: #fafafa; border-radius: 30px; padding: 40px;">
+                    <h4 style="font-weight: 800; margin-bottom: 25px;">Why Order {{ product.name }} from Beltech?</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><strong>Design Support:</strong> We help you adjust your artwork for the best printing results.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Material Quality:</strong> We use only premium paper and ink for long-lasting prints.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Bulk Discount:</strong> Chat with us on WhatsApp for special pricing on large orders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

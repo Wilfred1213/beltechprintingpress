@@ -6,6 +6,10 @@ from django.utils.html import strip_tags
 from django.conf import settings
 from .models import Contact  # Replace with your actual model name
 
+# signals.py
+from django.core.mail import send_mail
+from .models import NewsLetter
+
 @receiver(post_save, sender=Contact)
 def send_contact_email_notification(sender, instance, created, **kwargs):
     if created:  # Only send email when a new record is created
@@ -31,3 +35,26 @@ def send_contact_email_notification(sender, instance, created, **kwargs):
             email.send()
         except Exception as e:
             print(f"Signal Email Error: {e}")
+
+
+
+# @receiver(post_save, sender=NewsLetter)
+# def send_welcome_email(sender, instance, created, **kwargs):
+#     if created: # Only send if a new subscription is created
+#         subject = "Welcome to Beltech Printing!"
+#         message = f"Hi {instance.email},\n\nThank you for subscribing to our newsletter. We will keep you updated on our latest printing deals!"
+#         from_email = 'your-email@gmail.com'
+        
+#         send_mail(subject, message, from_email, [instance.email])
+
+@receiver(post_save, sender=NewsLetter)
+def send_welcome_email(sender, instance, created, **kwargs):
+    if created:
+        subject = "Welcome to Beltech Printing!"
+        message = f"Hi {instance.email},\n\nThank you for subscribing to our newsletter. We will keep you updated on our latest printing deals!"
+        from_email = 'mathiaswilfred7@gmail.com'
+        # ... your subject/message code ...
+        try:
+            send_mail(subject, message, from_email, [instance.email])
+        except Exception as e:
+            print(f"Welcome Email Failed: {e}") # This prevents the crash

@@ -1,0 +1,50 @@
+<section class="tp-product-2-area pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="tp-section-title-wrapper mb-30">
+                {% comment %} <h6 class="tp-section-sub-title">WE ALWYAS BELIEVE IN QUALITY</h6> {% endcomment %}
+                <h3 class="tp-section-title mb-35 tp-split-text right">Explore All Catagories</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xxl-12">
+                <div class="tp-product-2-slider p-relative">
+                    <div class="tp-product-2-active swiper-container wow fadeInUp">
+                        <div class="swiper-wrapper">
+                            <!-- Slide  -->
+                            {% for category in categories %}
+                            <div class="tp-product-2-wrapper tp-costom-wrapper-hover fix swiper-slide">
+                                <div class="tp-product-2-thumb mb-20" style="border-radius: 15px; overflow: hidden; background: #f9f9f9;">
+                                    <div class="tp-costom-inner-hover" style="position: relative;">
+                                        <a href="{% url 'category_details' category.id %}">
+                                            <img src="{{ category.image.url }}" alt="{{ category.name }}" 
+                                                style="width: 100%; height: 320px; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+                                        </a>
+                                        
+                                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; background: linear-gradient(to top, rgba(0,0,0,0.4), transparent); pointer-events: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="tp-product-2-content text-center">
+                                    <h4 class="tp-product-2-title" style="font-size: 18px; font-weight: 600; margin-top: 10px;">
+                                        <a href="{% url 'category_details' category.id %}" style="transition: 0.3s; color: #333;">{{ category.name }}</a>
+                                    </h4>
+                                    <p style="color: #ff5a01; font-size: 14px; font-weight: 500;">Explore Collection</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                    <div class="tp-product-2-arrow-box">
+                        <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+                            <i class="fa-sharp fa-regular fa-arrow-left"></i>
+                        </button>
+                        <button class="slider-next" tabindex="0" aria-label="Next slide">
+                            <i class="fa-sharp fa-regular fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

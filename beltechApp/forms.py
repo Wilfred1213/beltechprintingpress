@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogComment, Testimonial, Contact
+from .models import BlogComment, Testimonial, Contact, NewsLetter
 
 class BlogCommentForm(forms.ModelForm):
     class Meta:
@@ -74,3 +74,18 @@ class ContactForm(forms.ModelForm):
                 'rows': 4
             }),
         }
+
+class NewsLetterForm(forms.ModelForm):
+
+    class Meta:
+        model = NewsLetter
+        fields = ['email']
+        widgets = {'email': forms.EmailInput(attrs={
+                'placeholder': 'enter your E-mail*', 
+                'class': 'form-control'
+            }),}
+        
+
+class SendNewsletterForm(forms.Form):
+    subject = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email Subject'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Write your newsletter content here...'}))

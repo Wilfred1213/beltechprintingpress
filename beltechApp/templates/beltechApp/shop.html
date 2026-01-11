@@ -38,7 +38,7 @@
                                 <div class="tp-shop-sidebar-category-wrap">
                                     {% for category in categorys %}
                                     <div class="tp-shop-sidebar-category-item">
-                                        <a href="shop-details.html">{{ category.name }}</a>
+                                        <a href="{% url 'category_details' category.id %}">{{ category.name }}</a>
                                     </div>
                                     {% endfor %}
                                     
@@ -51,7 +51,7 @@
                                     {% for recent in recent_products %}
                                     <div class="tp-shop-sidebar-sell-item d-flex mb-20">
                                        <div class="tp-shop-sidebar-sell-item-thumb">
-                                          <a href="shop-details.html">
+                                          <a href="{% url 'shop_detail' recent.id %}">
                                              <img src="{{recent.image.url}}" alt="{{recent.name}}">
                                           </a>
                                        </div>
@@ -71,50 +71,15 @@
                                     
                                 </div>
                             </div>
-                            {% comment %} <div class="tp-shop-sidebar-tag tagcloud wow fadeInUp">
-                                <h4 class="tp-shop-sidebar-title mb-25">Tag</h4>
-                                <a href="shop-details.html">Design</a>
-                                <a href="shop-details.html">Content</a>
-                                <a href="shop-details.html">Development</a>
-                                <a href="shop-details.html">Ui/Ux</a>
-                                <a href="shop-details.html">Tech</a>
-                                <a href="shop-details.html">Innovation</a>
-                            </div> {% endcomment %}
+                           
                         </div>
                     </div>
                     <div class="col-xl-9 col-lg-8">
-                        {% comment %} <div class="row align-items-center"> {% endcomment %}
-                            {% comment %} <div class="col-xl-6 col-lg-6 col-md-6 mb-30">
-                                <div class="tp-product__filter-box tp-shop-filter-box flex-xs-wrap d-md-flex justify-content-end">
-                                   <div class="tp-product__filter tp-shop-filter">
-                                      <select style="display: none;">
-                                         <option>Default sorting</option>
-                                         <option>Low to Hight</option>
-                                         <option>High to Low</option>
-                                         <option>New Added</option>
-                                         <option>On Sale</option>
-                                      </select><div class="nice-select" tabindex="0"><span class="current">Default Sorting</span><ul class="list"><li data-value="Default Sorting" class="option selected focus">Default Sorting</li><li data-value="Low to Hight" class="option">Low to Hight</li><li data-value="High to Low" class="option">High to Low</li><li data-value="New Added" class="option">New Added</li><li data-value="On Sale" class="option">On Sale</li></ul></div>
-                                   </div>
-                                </div>
-                             </div>
-                             <div class="col-xl-6 col-lg-6 col-md-6 mb-30">
-                                <div class="tp-product__filter-box tp-shop-filter-box flex-xs-wrap d-md-flex justify-content-end">
-                                   <div class="tp-product__filter tp-shop-filter">
-                                      <select style="display: none;">
-                                         <option>Showing 12 of 120 results</option>
-                                         <option>Low to Hight</option>
-                                         <option>High to Low</option>
-                                         <option>New Added</option>
-                                         <option>On Sale</option>
-                                      </select><div class="nice-select" tabindex="0"><span class="current">12 Product of Per Page</span><ul class="list"><li data-value="12 Product of Per Page" class="option selected focus">12 Product of Per Page</li><li data-value="Low to Hight" class="option">Low to Hight</li><li data-value="High to Low" class="option">High to Low</li><li data-value="New Added" class="option">New Added</li><li data-value="On Sale" class="option">On Sale</li></ul></div>
-                                   </div>
-                                </div>
-                             </div>
-                          </div> {% endcomment %}
+
                         <div class="row align-items-end mb-30">
                             <div class="container">
                               <div class="row">
-                                    {% for product in paginators %}
+                                    {% for product in shoppaginators %}
                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                                           {% include 'beltechApp/refactors/item_list.html' %}
                                        </div>
@@ -123,7 +88,47 @@
                            </div>
                             
                         </div>
-                        {% include 'beltechApp/refactors/paginator.html' %}
+                        {% comment %} {% include 'beltechApp/refactors/paginator.html' %} {% endcomment %}
+                        <div class="row">
+                                                
+                            <div class="tp-postbox-pagination text-center wow fadeInUp" data-wow-delay=".3s">
+                                <nav>
+                                    <ul>
+                                        {# Previous Page Link #}
+                                        {% if shoppaginators.has_previous %}
+                                            <li>
+                                                <a href="?page={{ shoppaginators.previous_page_number }}">
+                                                    <i class="fa-solid fa-arrow-left-long"></i>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+
+                                        {# Page Numbers #}
+                                        {% for num in shoppaginators.paginator.page_range %}
+                                            {% if shoppaginators.number == num %}
+                                                <li>
+                                                    <a class="active" href="?page={{ num }}">{{ num }}</a>
+                                                </li>
+                                            {% elif num > shoppaginators.number|add:'-3' and num < shoppaginators.number|add:'3' %}
+                                                <li>
+                                                    <a href="?page={{ num }}">{{ num }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {# Next Page Link #}
+                                        {% if shoppaginators.has_next %}
+                                            <li>
+                                                <a href="?page={{ shoppaginators.next_page_number }}">
+                                                    <i class="fa-solid fa-arrow-right-long"></i>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

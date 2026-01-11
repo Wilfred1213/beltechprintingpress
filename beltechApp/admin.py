@@ -17,6 +17,7 @@ admin.site.register(Logo)
 admin.site.register(Team)
 admin.site.register(CompanyInformation)
 admin.site.register(SiteSetting)
+admin.site.register(NewsLetter)
 
 
 @admin.register(CustomUser)

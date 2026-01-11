@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from beltechApp.models import *
 from django.db.models import Count
-from beltechApp.forms import BlogCommentForm, BlogSearchForm, TestimonialForm, ContactForm
+from beltechApp.forms import BlogCommentForm, BlogSearchForm, TestimonialForm, ContactForm, NewsLetterForm,SendNewsletterForm
+
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+
+from django.core.mail import send_mail
+from django.contrib.auth.decorators import user_passes_test
+
+
 
 # Create your views here.
 def home(request):
@@ -19,12 +25,14 @@ def home(request):
 
     latest_product = Already_done_project.objects.all().order_by('-date')[:2]
     recent_project_done = Products.objects.filter(is_latest =True)
-    products = Products.objects.all()
+    # products = Products.objects.all()
 
     recent_blogs =BlogPost.objects.all().order_by('-created_at')[:3]
 
     testimony = Testimonial.objects.all()[:3]
     logo = Logo.objects.first()
+    category = Category.objects.all()
+    all_products = Products.objects.all().order_by('-date')[:3]
     context = {
         'carousels': carousel,
         'features': home_page_feature,
@@ -32,11 +40,13 @@ def home(request):
         'about': homepage_about,
         'latests':latest_product,
         'recents': recent_project_done,
-        'products':products,
-        'recent_blogs':recent_blogs,
+        # 'products':products,
+        'blopaginators':recent_blogs,
         'logo': logo,
         'teams': teams,
-        'paginators':testimony
+        'paginators':testimony,
+        'categories': category,
+        'shoppaginators': all_products
         
     }
     return render(request, 'beltechApp/index.html', context)
@@ -58,13 +68,20 @@ def service(request):
         'navs':breadcrumb,
         'products':products,
         'latests':latest_product,
-        'recent_blogs':recent_blogs,
+        'blopaginators':recent_blogs,
         'logo': logo,
         'features':features,
         'services':service
         
     }
     return render(request, 'beltechApp/service.html', context)
+def service_detail(request, service_id):
+    products = Service.objects.get(id =service_id)
+
+    context = {
+        'product':products
+    }
+    return render(request, 'beltechApp/shop_detail.html', context)
 
 def blog(request):
     breadcrumb = printingHomePageImage.objects.all()
@@ -74,11 +91,13 @@ def blog(request):
     paginator = Paginator(blog, 6) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    all_products = Products.objects.all().order_by('-date')[:3]
 
     context ={
-        'paginators':page_obj,
+        'blopaginators':page_obj,
         'navs':breadcrumb,
         'products':products,
+        'shoppaginators': all_products
     }
     return render(request, 'beltechApp/blog.html', context)
 
@@ -219,13 +238,23 @@ def shop(request):
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'paginators': page_obj,
+        'shoppaginators': page_obj,
         'navs': breadcrumb,
         'categorys': category,
         'recent_products': recent_product
     }
 
     return render(request, 'beltechApp/shop.html', context)
+
+def shop_detail(request, shop_id):
+    products = Products.objects.get(id =shop_id)
+
+    context = {
+        'product':products
+    }
+    return render(request, 'beltechApp/shop_detail.html', context)
+
+
 
 def about(request):
     about = Homepage_about_area.objects.first()
@@ -396,3 +425,132 @@ def category_details(request, cat_id):
     }
 
     return render(request, 'beltechApp/category_detail.html', context)
+
+
+
+
+def newsletter(request):
+    if request.method == 'POST':
+        news_letter_form = NewsLetterForm(request.POST)
+        # Get the return URL once at the top
+        return_url = request.META.get('HTTP_REFERER', '/')
+        
+        if news_letter_form.is_valid():
+            # GET the email from the form data, not the database first()
+            email = news_letter_form.cleaned_data.get('email')
+
+            # Check if THIS specific email exists
+            if NewsLetter.objects.filter(email=email).exists():
+                messages.info(request, f'{email} is already a subscriber!')
+            else:
+                news_letter_form.save()
+                messages.success(request, 'Thank you for subscribing to our newsletter!')
+            
+            return redirect(return_url)
+        else:
+            messages.error(request, 'Please enter a valid email address.')
+            return redirect(return_url)
+            
+    return redirect('/')
+
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+@user_passes_test(lambda u: u.is_superuser) 
+def send_newsletter_page(request):
+    if request.method == 'POST':
+        form = SendNewsletterForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            message_text = form.cleaned_data['message']
+            
+            # Get all subscriber objects (not just the email strings)
+            subscribers = NewsLetter.objects.all()
+            
+            if subscribers.exists():
+                success_count = 0
+                error_occurred = False
+
+                for sub in subscribers:
+                    # Data to send into the HTML file
+                    context = {
+                        'message': message_text,
+                        'email': sub.email,
+                        'domain': request.get_host() # Dynamically gets 127.0.0.1:8000 or your live site
+                    }
+                    
+                    # Create the HTML and Plain Text versions
+                    html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
+                    text_content = strip_tags(html_content)
+
+                    # Setup the email
+                    email = EmailMultiAlternatives(
+                        subject=subject,
+                        body=text_content,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        to=[sub.email],
+                    )
+                    email.attach_alternative(html_content, "text/html")
+
+                    try:
+                        email.send()
+                        success_count += 1
+                    except Exception as e:
+                        print(f"Failed for {sub.email}: {e}")
+                        error_occurred = str(e)
+
+                if success_count > 0:
+                    messages.success(request, f"Successfully sent to {success_count} subscribers.")
+                if error_occurred:
+                    messages.error(request, f"Some emails failed. Last error: {error_occurred}")
+            
+            return redirect('send_newsletter_page')
+    
+    form = SendNewsletterForm()
+    return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
+
+def unsubscribe(request, email):
+    try:
+        subscriber = NewsLetter.objects.get(email=email)
+        subscriber.delete()
+        messages.success(request, "You have been successfully unsubscribed.")
+    except NewsLetter.DoesNotExist:
+        messages.error(request, "Email not found in our list.")
+    
+    return redirect('home')
+# @user_passes_test(lambda u: u.is_superuser) 
+# def send_newsletter_page(request):
+#     if request.method == 'POST':
+#         form = SendNewsletterForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             message = form.cleaned_data['message']
+            
+#             subscribers = NewsLetter.objects.values_list('email', flat=True)
+            
+#             if subscribers:
+#                 # --- START SAFETY NET ---
+#                 try:
+#                     send_mail(
+#                         subject=subject,
+#                         message=message,
+#                         from_email = 'mathiaswilfred7@gmail.com', 
+#                         recipient_list=list(subscribers),
+#                         fail_silently=False,
+#                     )
+#                     messages.success(request, f"Newsletter sent successfully to {len(subscribers)} subscribers!")
+#                 except Exception as e:
+#                     # If it fails, we tell the admin WHY but don't crash the site
+#                     print(f"SMTP Error: {e}")
+#                     messages.error(request, f"Failed to send emails. Connection timed out. Error: {e}")
+#                 # --- END SAFETY NET ---
+#             else:
+#                 messages.info(request, "You don't have any subscribers yet.")
+                
+#             return redirect('send_newsletter_page')
+#     else:
+#         form = SendNewsletterForm()
+    
+#     return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
