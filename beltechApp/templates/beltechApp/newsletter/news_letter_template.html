@@ -1,30 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .email-container { font-family: 'Arial', sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; }
-        .header { background: #111; padding: 20px; text-align: center; }
-        .body { padding: 40px; color: #444; line-height: 1.6; }
-        .footer { background: #f9f9f9; padding: 20px; text-align: center; font-size: 12px; color: #888; }
-        .btn { background: #ff5a01; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
-        .unsub-link { color: #ff5a01; text-decoration: underline; }
+        body { margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif; }
+        .wrapper { width: 100%; background-color: #f4f4f4; padding: 20px 0; }
+        .main { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 600px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .header { background-color: #111111; padding: 30px; text-align: center; border-bottom: 4px solid #ff5a01; }
+        .logo { color: #ff5a01; font-size: 28px; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
+        .content { padding: 40px 30px; line-height: 1.8; color: #444; }
+        .btn-container { text-align: center; padding-bottom: 40px; }
+        .btn { background-color: #ff5a01; color: #ffffff !important; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .footer { background-color: #f9f9f9; padding: 30px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #eee; }
+        .unsub { color: #ff5a01; text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="email-container">
-        <div class="header">
-            <h1 style="color: #ff5a01; margin: 0;">BELTECH</h1>
-        </div>
-        <div class="body">
-            <h2>{{ subject }}</h2>
-            <p>{{ message|linebreaks }}</p>
-            <p>If you have any questions, reply to this email or contact us on WhatsApp.</p>
-        </div>
-        <div class="footer">
-            <p>© 2024 Beltech Printing & Packaging. All Rights Reserved.</p>
-            <p>You are receiving this because you subscribed at beltech.com</p>
-            <p><a href="{{ unsubscribe_url }}" class="unsub-link">Unsubscribe from this list</a></p>
+    <div class="wrapper">
+        <div class="main">
+            <div class="header">
+                <a href="http://{{ domain }}" class="logo">BELTECH</a>
+            </div>
+            <div class="content">
+                <h2 style="color: #111;">{{ subject }}</h2>
+                <p>{{ message|linebreaks }}</p>
+            </div>
+            <div class="btn-container">
+                <a href="http://{{ domain }}" class="btn">Visit Our Site</a>
+            </div>
+            <div class="footer">
+                <p>© 2026 Beltech Printing & Packaging</p>
+                <p>You are receiving this because you subscribed to our newsletter.</p>
+                <p><a href="{{ unsubscribe_url }}" class="unsub">Unsubscribe from this list</a></p>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset styles for email clients */
+        body { margin: 0; padding: 0; background-color: #f4f4f4; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        table { border-spacing: 0; width: 100%; }
+        td { padding: 0; }
+        img { border: 0; }
+
+        .wrapper { width: 100%; table-layout: fixed; background-color: #f4f4f4; padding-bottom: 40px; }
+        .main { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 600px; border-spacing: 0; color: #4a4a4a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        /* Header */
+        .header { background-color: #111111; padding: 30px; text-align: center; border-bottom: 4px solid #ff5a01; }
+        .logo { color: #ff5a01; font-size: 28px; font-weight: 900; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; }
+
+        /* Body Content */
+        .content { padding: 40px 30px; line-height: 1.8; font-size: 16px; }
+        .content h2 { color: #111111; font-size: 22px; margin-bottom: 20px; font-weight: 700; }
+        .content p { margin-bottom: 20px; color: #555555; }
+
+        /* Button */
+        .button-container { text-align: center; padding: 10px 0 30px; }
+        .btn { background-color: #ff5a01; color: #ffffff !important; padding: 15px 35px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; font-size: 16px; transition: background-color 0.3s; }
+
+        /* Footer */
+        .footer { background-color: #f9f9f9; padding: 30px; text-align: center; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; }
+        .footer p { margin: 5px 0; }
+        .unsub-link { color: #ff5a01; text-decoration: underline; font-weight: 600; }
+        
+        .social-links a { color: #111111; text-decoration: none; margin: 0 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <center class="wrapper">
+        <table class="main" width="100%">
+            <tr>
+                <td class="header">
+                    <a href="http://{{ domain }}" class="logo">BELTECH</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="content">
+                    <h2>{{ subject }}</h2>
+                    <div>
+                        {{ message|linebreaks }}
+                    </div>
+                    <p>We are committed to providing the best printing and packaging solutions for your business. If you have any inquiries, feel free to reach out to us directly.</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="button-container">
+                    <a href="http://{{ domain }}" class="btn">Visit Our Website</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="footer">
+                    <div class="social-links" style="margin-bottom: 20px;">
+                        <a href="#">Facebook</a> | <a href="#">LinkedIn</a> | <a href="#">WhatsApp</a>
+                    </div>
+                    <p><strong>Beltech Printing & Packaging</strong></p>
+                    <p>Nigeria's Premium Printing Service</p>
+                    <p style="margin-top: 15px;">You received this email because you subscribed to our updates.</p>
+                    <p><a href="{{ unsubscribe_url }}" class="unsub-link">Unsubscribe from this list</a></p>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html> {% endcomment %}

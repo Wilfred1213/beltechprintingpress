@@ -464,52 +464,37 @@ def send_newsletter_page(request):
         form = SendNewsletterForm(request.POST)
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            message_text = form.cleaned_data['message']
-            
-            # Get all subscriber objects (not just the email strings)
+            message_body = form.cleaned_data['message']
             subscribers = NewsLetter.objects.all()
             
             if subscribers.exists():
-                success_count = 0
-                error_occurred = False
-
+                domain = request.get_host()
                 for sub in subscribers:
-                    # Data to send into the HTML file
                     context = {
-                        'message': message_text,
+                        'subject': subject,
+                        'message': message_body,
                         'email': sub.email,
-                        'domain': request.get_host() # Dynamically gets 127.0.0.1:8000 or your live site
+                        'domain': domain,
+                        'unsubscribe_url': f"http://{domain}/newsletter/unsubscribe/{sub.email}/"
                     }
-                    
-                    # Create the HTML and Plain Text versions
                     html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
                     text_content = strip_tags(html_content)
 
-                    # Setup the email
-                    email = EmailMultiAlternatives(
-                        subject=subject,
-                        body=text_content,
-                        from_email=settings.DEFAULT_FROM_EMAIL,
-                        to=[sub.email],
-                    )
+                    email = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [sub.email])
                     email.attach_alternative(html_content, "text/html")
-
+                    
                     try:
                         email.send()
-                        success_count += 1
                     except Exception as e:
-                        print(f"Failed for {sub.email}: {e}")
-                        error_occurred = str(e)
+                        print(f"Error sending to {sub.email}: {e}")
 
-                if success_count > 0:
-                    messages.success(request, f"Successfully sent to {success_count} subscribers.")
-                if error_occurred:
-                    messages.error(request, f"Some emails failed. Last error: {error_occurred}")
-            
-            return redirect('send_newsletter_page')
+                messages.success(request, f"Newsletter sent to {subscribers.count()} subscribers!")
+                return redirect('send_newsletter_page')
+    else:
+        form = SendNewsletterForm()
     
-    form = SendNewsletterForm()
     return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
+
 
 def unsubscribe(request, email):
     try:
@@ -520,6 +505,59 @@ def unsubscribe(request, email):
         messages.error(request, "Email not found in our list.")
     
     return redirect('home')
+# @user_passes_test(lambda u: u.is_superuser) 
+# def send_newsletter_page(request):
+#     if request.method == 'POST':
+#         form = SendNewsletterForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             message_text = form.cleaned_data['message']
+            
+#             # Get all subscriber objects (not just the email strings)
+#             subscribers = NewsLetter.objects.all()
+            
+#             if subscribers.exists():
+#                 success_count = 0
+#                 error_occurred = False
+
+#                 for sub in subscribers:
+#                     # Data to send into the HTML file
+#                     context = {
+#                         'message': message_text,
+#                         'email': sub.email,
+#                         'domain': request.get_host() # Dynamically gets 127.0.0.1:8000 or your live site
+#                     }
+                    
+#                     # Create the HTML and Plain Text versions
+#                     html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
+#                     text_content = strip_tags(html_content)
+
+#                     # Setup the email
+#                     email = EmailMultiAlternatives(
+#                         subject=subject,
+#                         body=text_content,
+#                         from_email=settings.DEFAULT_FROM_EMAIL,
+#                         to=[sub.email],
+#                     )
+#                     email.attach_alternative(html_content, "text/html")
+
+#                     try:
+#                         email.send()
+#                         success_count += 1
+#                     except Exception as e:
+#                         print(f"Failed for {sub.email}: {e}")
+#                         error_occurred = str(e)
+
+#                 if success_count > 0:
+#                     messages.success(request, f"Successfully sent to {success_count} subscribers.")
+#                 if error_occurred:
+#                     messages.error(request, f"Some emails failed. Last error: {error_occurred}")
+            
+#             return redirect('send_newsletter_page')
+    
+#     form = SendNewsletterForm()
+#     return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
+
 # @user_passes_test(lambda u: u.is_superuser) 
 # def send_newsletter_page(request):
 #     if request.method == 'POST':

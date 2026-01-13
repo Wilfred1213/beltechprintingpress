@@ -110,8 +110,7 @@
                 </a>
             </div>
             <div class="tpoffcanvas__title">
-                <p>Beltech is the partner of choice for many of the world’s leading enterprises.
-                    We help businesses development.</p>
+                <p>{{address.about}}</p>
             </div>
             <div class="tp-main-menu-mobile d-xl-none"></div>
             <div class="tpoffcanvas__contact-info">
@@ -121,7 +120,7 @@
                 <ul>
                     <li>
                         <i class="fa-solid fa-location-dot"></i>
-                        <div>{{ settings.business_address|default:"Kafanchan, Borno State, Nigeria" }}</div>
+                        <div>{{ settings.business_address|default:"Shop No. A 6, Musty Global Plaza, Borno Maiduguri" }}</div>
                         
                         <div class="mt-10">
                             <iframe 
@@ -158,14 +157,25 @@
                 <div class="tpoffcanvas__input-title">
                     <h4>Get UPdate</h4>
                 </div>
-                <form action="#">
+                <div class="tp-footer-2-widget-input">
+                    <form class="tp-footer-2-form" method="post" action="{% url 'newsletter' %}">
+                        {% csrf_token %}
+                        {{ news_letter_form.email }}
+                        <span class="tp-footer-2-input-arrow">
+                            <button type="submit">
+                                <img src="{% static 'beltechApp/assets/img/footer/footer-2-input-arrow.svg' %}" alt="">
+                            </button>
+                        </span>
+                    </form>
+                </div>
+                {% comment %} <form action="#">
                     <div class="p-relative">
                         <input type="text" placeholder="Enter mail">
                         <button>
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
-                </form>
+                </form> {% endcomment %}
             </div>
             <div class="tpoffcanvas__social">
                 <div class="social-icon">
@@ -234,7 +244,7 @@
                         <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
                             <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
                                 {% if logo %}
-                                    <img src="{{ logo.main_image.url }}" 
+                                    <img src="{{ logo.imageUrl }}" 
                                         alt="{{ logo.name }}" 
                                         style="max-width: 55px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
                                         width="55" 
@@ -260,10 +270,33 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
-                        <div class="tp-header-center-logo">
-                            <a href="index.html"><img src="{% static 'beltechApp/assets/img/logo/logo.png' %}" alt=""></a>
+                        <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
+                            <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                                {% if logo %}
+                                    <img src="{{ logo.main_image.url }}" 
+                                        alt="{{ logo.name }}" 
+                                        style="max-width: 55px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
+                                        width="55" 
+                                        height="55"
+                                        onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
+                                    
+                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; color: #111; letter-spacing: -1px; text-transform: uppercase; line-height: 1; white-space: nowrap;">
+                                        Bel<span style="color: #ff5a01;">tech</span> printing & ict hub
+                                        <span style="font-weight: 400; color: #666; font-size: 16px; display: none; display: sm-inline;">printing & ict hub</span>
+                                    </span>
+                                {% else %}
+                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; color: #111; text-transform: uppercase; white-space: nowrap;">
+                                        BEL<span style="color: #ff5a01;">TECH</span>printing & ict hub
+                                    </span>
+                                {% endif %}
+                            </a>
                         </div>
                     </div>
+                    {% comment %} <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
+                        <div class="tp-header-center-logo">
+                            <a href="index.html"><img src="{{logo.imageUrl}}" alt=""></a>
+                        </div>
+                    </div> {% endcomment %}
                     <div class="col-xl-8 d-none d-xl-block">
                         <div class="tp-header-main-menu">
                             <nav class="tp-main-menu-content">
@@ -308,6 +341,12 @@
                                     {% if unread_messages > 0 %}
                                         <span class="message-badge">{{ unread_messages }}</span>
                                     {% endif %}
+                                </a>
+                            </div>
+                            <div class="tp-header-bottom-button mr-30 d-none d-md-block">
+                                <a class="tp-header-btn" href="{% url 'send_newsletter_page' %}" style="position: relative; overflow: visible !important;">
+                                    <span>news</span>
+                                    
                                 </a>
                             </div>
                             {% endif %}

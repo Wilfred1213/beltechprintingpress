@@ -49,10 +49,10 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Products)
 class PrintingServiceAdmin(admin.ModelAdmin):
     # Show key details and a small image preview in the list
-    list_display = ('display_image', 'name', 'category', 'base_price', 'is_available', 'is_latest')
-    list_filter = ('category', 'is_available', 'is_latest')
+    list_display = ('display_image', 'name', 'category', 'base_price', 'is_available', 'is_latest', 'unit')
+    list_filter = ('category', 'is_available', 'is_latest', 'unit')
     search_fields = ('name', 'category__name')
-    list_editable = ('base_price', 'is_available', 'is_latest') # Edit prices directly from the list
+    list_editable = ('base_price', 'is_available', 'is_latest', 'unit', 'name', 'category') # Edit prices directly from the list
     autocomplete_fields = ('category',) # Useful if you eventually have many categories
 
     # Method to display a small thumbnail in the admin list
@@ -69,7 +69,7 @@ class PrintingServiceAdmin(admin.ModelAdmin):
             'fields': ('name', 'category', 'is_available', 'is_latest')
         }),
         ('Pricing & Media', {
-            'fields': ('base_price', 'image'),
+            'fields': ('base_price', 'unit', 'image'),
         }),
         ('Content', {
             'fields': ('description',),

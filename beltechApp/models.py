@@ -145,6 +145,7 @@ class Products(models.Model):
     # Using CKEditor for rich descriptions (bullet points for specs, etc.)
     description = CKEditor5Field('Description', config_name='default')
     base_price = models.DecimalField(max_digits=10, decimal_places=2)
+    unit =models.CharField(max_length= 50, null=True, blank=True)
     image = models.ImageField(upload_to='services/')
     date = models.DateTimeField(auto_now_add=True, null=True)
     is_available = models.BooleanField(default=True)
@@ -418,7 +419,7 @@ class CompanyInformation(models.Model):
     street = models.CharField(max_length=255, help_text="e.g. Circular Road")
     landmark = models.CharField(max_length=255, help_text="e.g. Opposite Nanne and Boi")
     city_state = models.CharField(max_length=100, default="Maiduguri, Borno State")
-    
+    about = models.CharField(max_length=200, default='Beltech Printing & ICT Hub (commonly referred to as Beltech Printing Press) is a multi-service business that bridges the gap between traditional high-quality printing and modern digital technology.')
     phone_number = models.CharField(max_length=20)
     email_address = models.EmailField()
     

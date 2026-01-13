@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!alreadyDone && !isOpen) {
                 testimonialModal.show();
             }
-        }, 60000); // 1 minute
+        }, 120000); // 1 minute
     }
 
     // --- STEP 4: AJAX FORM SUBMISSION ---

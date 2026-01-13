@@ -39,6 +39,8 @@ DJANGO_APPS = [
     # 'beltechApp',
 ]
 
+LOGIN_URL = '/admin/login/'
+
 THIRD_PARTY_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
