@@ -483,7 +483,42 @@
     transform: scale(1.08);
 }
 
-        </style>
+
+{% comment %} sticky rate us  {% endcomment %}
+.btn-sticky-rate {
+        position: fixed;
+        right: -40px; /* Hidden slightly to rotate better */
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: right bottom;
+        background-color: #ff5a01;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 10px 10px 0 0;
+        font-weight: 800;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .btn-sticky-rate:hover {
+        right: 0; /* Pulls out slightly on hover */
+        background-color: #111;
+        color: #ff5a01;
+    }
+    .btn-sticky-rate i {
+        transform: rotate(90deg); /* Counter-rotate the star icon */
+    }
+    @media (max-width: 768px) {
+        .btn-sticky-rate span { display: none; } /* On mobile, just show the star icon */
+        .btn-sticky-rate { right: -15px; padding: 10px 15px; }
+    }
+
+</style>
 
     </header>
 
@@ -521,6 +556,12 @@
         {% endfor %}
     {% endif %}
 </div>
+{% comment %} rate us button {% endcomment %}
+<button type="button" class="btn-sticky-rate" data-bs-toggle="modal" data-bs-target="#testimonialPopUp">
+    <i class="fa-solid fa-star"></i>
+    <span>Rate Us</span>
+</button>
+
     
     {% block content %}
     {% endblock %} 

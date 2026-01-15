@@ -56,12 +56,12 @@ class Homepage_service_area(models.Model):
 
 class Homepage_about_area(models.Model):
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
     image = models.ImageField(upload_to='about_image/', null=True)
     icon1 = models.CharField(max_length=100)
-    description1 = models.CharField(max_length=200, null=True)
+    description1 = models.CharField(max_length=500, null=True)
     icon2 = models.CharField(max_length=100)
-    description2 = models.CharField(max_length=200, null=True)
+    description2 = models.CharField(max_length=500, null=True)
     image1 = models.ImageField(upload_to='about_image/')
     image2 = models.ImageField(upload_to='about_image/')
     image3 = models.ImageField(upload_to='about_image/')
