@@ -35,7 +35,7 @@ SECRET_KEY = env('SECRET_KEY')
 # DEBUG = True
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 DJANGO_APPS = [
@@ -81,6 +81,7 @@ AUTH_USER_MODEL = 'beltechApp.CustomUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # 'beltechApp.middleware.AllowYouTubeEmbeddingMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Add this!
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -160,6 +161,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 
 
