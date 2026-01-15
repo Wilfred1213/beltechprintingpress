@@ -6,7 +6,10 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 
-# Register your models here.
+
+admin.site.site_header = "Beltech Printing Administration"
+admin.site.site_title = "Beltech Printing Admin Portal"
+admin.site.index_title = "Welcome to Beltech Printing"
 
 admin.site.register(Carousel)
 admin.site.register(Homepage_feature_area)
