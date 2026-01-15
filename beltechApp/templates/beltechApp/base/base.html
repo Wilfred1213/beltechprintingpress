@@ -239,8 +239,33 @@
                             </form>
                         </div>
                     </div>
+                    <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
+                        <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                            
+                            {% if logo %}
+                                <img src="{{ logo.imageUrl }}" 
+                                    alt="{{ logo.name }}" 
+                                    style="max-width: 50px; height: auto; display: block;"
+                                    width="50" 
+                                    height="50"
+                                    onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
+                                
+                                <span class="beltech-title">
+                                    Bel<span style="color: #ff5a01;">tech</span> 
+                                    <span class="beltech-subtext">printing & ict hub</span>
+                                </span>
+                            {% else %}
+                                <span class="beltech-title">
+                                    BEL<span style="color: #ff5a01;">TECH</span> 
+                                    <span class="beltech-subtext">PRINTING & ICT HUB</span>
+                                </span>
+                            {% endif %}
+                            
+                        </a>
+                    </div>
+                </div>
                    
-                    <div class="col-xl-8">
+                    {% comment %} <div class="col-xl-8">
                         <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
                             <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
                                 {% if logo %}
@@ -261,7 +286,7 @@
                                 {% endif %}
                             </a>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
 
                 </div>
             </div>
@@ -518,6 +543,69 @@
         .btn-sticky-rate { right: -15px; padding: 10px 15px; }
     }
 
+
+    #cookie-banner, .cookie-container {
+    position: fixed;
+    bottom: 20px !important; /* Lifts it up from the very bottom edge */
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    max-height: 80vh; /* Prevents it from covering the whole screen */
+    overflow-y: auto; /* Allows scrolling inside the banner if text is long */
+    padding: 20px;
+    z-index: 9999; /* Ensures it's on top of everything */
+    background: #fff;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+/* Fix for the "Accept" button on mobile */
+@media (max-width: 576px) {
+    .cookie-buttons {
+        display: flex;
+        flex-direction: column; /* Stacks buttons vertically so they aren't squashed */
+        gap: 10px;
+        width: 100%;
+    }
+    .cookie-buttons button {
+        width: 100%; /* Makes button easy to tap with a thumb */
+        padding: 12px;
+    }
+}
+
+
+
+.beltech-title {
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 800; 
+            font-size: 26px; /* Slightly smaller base size */
+            color: #111; 
+            letter-spacing: -0.5px; 
+            text-transform: uppercase; 
+            line-height: 1.1;
+            display: inline-block;
+        }
+        .beltech-subtext {
+            font-weight: 400; 
+            color: #666; 
+            font-size: 20px;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .beltech-title {
+                font-size: 20px; /* Shrink main text on mobile */
+                white-space: normal; /* Allow wrapping so it doesn't cut off */
+                text-align: left;
+            }
+            .beltech-subtext {
+                font-size: 16px; /* Shrink subtext */
+                display: block; /* Move subtext to a new line on small screens */
+            }
+            .tp-header-center-logo {
+                padding: 10px 0;
+            }
+        }
 </style>
 
     </header>
