@@ -265,28 +265,7 @@
                     </div>
                 </div>
                    
-                    {% comment %} <div class="col-xl-8">
-                        <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
-                            <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-                                {% if logo %}
-                                    <img src="{{ logo.imageUrl }}" 
-                                        alt="{{ logo.name }}" 
-                                        style="max-width: 55px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
-                                        width="55" 
-                                        height="55"
-                                        onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
-                                    
-                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 28px; color: #111; letter-spacing: -1px; text-transform: uppercase; line-height: 1; white-space: nowrap;">
-                                        Bel<span style="color: #ff5a01;">tech</span> <span style="font-weight: 400; color: #666; font-size: 24px;">printing & ict hub</span>
-                                    </span>
-                                {% else %}
-                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 28px; color: #111; text-transform: uppercase; white-space: nowrap;">
-                                        BEL<span style="color: #ff5a01;">TECH</span> PRINTING & ICT HUB
-                                    </span>
-                                {% endif %}
-                            </a>
-                        </div>
-                    </div> {% endcomment %}
+                    
 
                 </div>
             </div>
@@ -295,6 +274,37 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
+                        <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                            <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 8px; text-decoration: none; width: 100%; max-width: 100%;">
+                                {% if logo %}
+                                    <img src="{{ logo.main_image.url }}" 
+                                        alt="{{ logo.name }}" 
+                                        style="max-width: 40px; height: auto; flex-shrink: 0; display: block;"
+                                        width="40" 
+                                        height="40">
+                                    
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1;">
+                                        <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 15px; color: #111; text-transform: uppercase; white-space: normal;">
+                                            Bel<span style="color: #ff5a01;">tech</span>
+                                        </span>
+                                        <span style="font-family: 'Poppins', sans-serif; font-weight: 400; color: #666; font-size: 10px; text-transform: uppercase; white-space: normal;">
+                                            printing & ict hub
+                                        </span>
+                                    </div>
+                                {% else %}
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1;">
+                                        <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 15px; color: #111; text-transform: uppercase; white-space: normal;">
+                                            BEL<span style="color: #ff5a01;">TECH</span>
+                                        </span>
+                                        <span style="font-family: 'Poppins', sans-serif; font-weight: 400; color: #666; font-size: 10px; text-transform: uppercase; white-space: normal;">
+                                            printing & ict hub
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                    {% comment %} <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
                         <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
                             <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
                                 {% if logo %}
@@ -316,7 +326,7 @@
                                 {% endif %}
                             </a>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     {% comment %} <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
                         <div class="tp-header-center-logo">
                             <a href="index.html"><img src="{{logo.imageUrl}}" alt=""></a>
