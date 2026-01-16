@@ -667,16 +667,16 @@
         <section class="tp-cta-2-area">
             <div class="container-fluid">
                 <div class="row justify-content-center tp-cta-2-row pt-90 pb-90 p-relative z-index-1">
-                    <div class="tp-cta-2-bg-shape">
-                        <img class="tp-cta-2-bg-shape-1" src="assets/img/cta/cta-2-shape1.png" alt="">
-                        <img class="tp-cta-2-bg-shape-2" src="assets/img/cta/cta-2-shape2.png" alt="">
-                    </div>
+                    {% comment %} <div class="tp-cta-2-bg-shape">
+                        <img class="tp-cta-2-bg-shape-1" src="{% static 'beltechApp/assets/img/cta/cta-2-shape1.png' %}" alt="">
+                        <img class="tp-cta-2-bg-shape-2" src="{% static 'beltechApp/assets/img/cta/cta-2-shape2.png' %}" alt="">
+                    </div> {% endcomment %}
                     <div class="col-xl-5">
                         <div class="tp-cta-2-wrapper text-center">
                             <h3 class="tp-cta-2-title tp-split-text right">Ready to Create Some
                                 Custome Products?</h3>
                             <div class="tp-cta-2-btn">
-                                <a class="tp-btn" href="contact.html"><span>Contact Us</span></a>
+                                <a class="tp-btn" href="{% url 'contact' %}"><span>Contact Us</span></a>
                             </div>
                         </div>
                     </div>

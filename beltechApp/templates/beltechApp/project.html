@@ -33,13 +33,13 @@
                                         <div class="tp-project-4-item">
                                             <div class="tp-project-4-content">
                                                 <span>{{ project.title }}</span>
-                                                <h4 class="tp-project-4-title"><a href="project-details.html">{{ project.description|safe }}</a></h4>
+                                                <h4 class="tp-project-4-title"><a href="{% url 'project_detail' project.id %}">{{ project.description|safe }}</a></h4>
                                             </div>
                                             <div class="tp-project-4-icon">
-                                                <a href="project-details.html"><i class="flaticon-next"></i></a>
+                                                <a href="{% url 'project_detail' project.id %}"><i class="flaticon-next"></i></a>
                                             </div>
                                             <div class="tp-project-4-shape">
-                                                <img src="assets/img/project/project-4-box-shape.png" alt="">
+                                                <img src="{% static 'beltechApp/assets/img/project/project-4-box-shape.png' %}" alt="">
                                             </div>
                                         </div>
                                     </div>

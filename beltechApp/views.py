@@ -12,6 +12,9 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import user_passes_test
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 
@@ -342,6 +345,19 @@ def project(request):
     }
     return render(request, 'beltechApp/project.html', context)
 
+def project_detail(request, proj_id):
+    try:
+        projectid = Already_done_project.objects.get(id =proj_id)
+    except Already_done_project.DoesNotExist:
+        messages.info(request, 'This project is no longer existing!')
+    # product = Products.objects.first()
+    context = {
+        'project':projectid,
+        # 'product':product
+    }
+    return render(request, 'beltechApp/shop_detail.html', context)
+    
+
 def faq(request):
     breadcrumb = printingHomePageImage.objects.all()
     faqs = Faq.objects.all()[:3]
@@ -454,9 +470,7 @@ def newsletter(request):
     return redirect('/')
 
 
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
+
 
 @user_passes_test(lambda u: u.is_superuser) 
 def send_newsletter_page(request):

@@ -16,6 +16,7 @@ urlpatterns = [
     path('submit_testimonial/', views.submit_testimonial, name='submit_testimonial' ),
     path('team/', views.team, name='team' ),
     path('project/', views.project, name='project' ),
+    path('project_detail/<int:proj_id>/', views.project_detail, name='project_detail'),
     path('faq/', views.faq, name='faq' ),
     path('contact/', views.contact, name='contact' ),
     path('inbox/', views.inbox, name='inbox' ),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('newsletter/', views.newsletter, name='newsletter' ),
     path('send_newsletter_page/', views.send_newsletter_page, name='send_newsletter_page' ),
     path('newsletter/unsubscribe/<str:email>/', views.unsubscribe, name='unsubscribe'),
+
     
 ]
