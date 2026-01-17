@@ -202,8 +202,16 @@ class FAQAdmin(admin.ModelAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('name', 'rating', 'is_active', 'created_at', 'is_approve' )
-    list_filter = ('is_active', 'rating')
+    # What columns to show in the list
+    list_display = ('name', 'rating', 'is_approve', 'is_active', 'created_at')
+    
+    # This makes the checkbox clickable directly in the list!
+    list_editable = ('is_approve', 'is_active')
+    
+    # Optional: Add filters on the right side
+    list_filter = ('is_approve', 'is_active', 'rating')
+    
+    # Optional: Add a search bar
     search_fields = ('name', 'message')
 
 @admin.register(Contact)

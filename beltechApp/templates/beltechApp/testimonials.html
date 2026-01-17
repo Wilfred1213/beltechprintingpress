@@ -7,7 +7,7 @@
     <div id="smooth-wrapper">
         {% include 'beltechApp/refactors/service_blog_nav_breadcrumb.html' %}
 
-        {% if user.is_superuser and unapproved_count > 0 %}
+        {% if user.is_staff and unapproved_count > 0 %}
         <div class="container mt-50">
             <div class="tp-admin-notification p-relative z-index-1 d-flex align-items-center justify-content-between" 
                 style="background: #fff0e6; border-left: 5px solid #ff5a01; padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
