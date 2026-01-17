@@ -470,7 +470,10 @@ def newsletter(request):
     return redirect('/')
 
 
-
+from django.core.mail import get_connection, EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
+from django.conf import settings
 
 @user_passes_test(lambda u: u.is_staff) 
 def send_newsletter_page(request):
@@ -482,32 +485,83 @@ def send_newsletter_page(request):
             subscribers = NewsLetter.objects.all()
             
             if subscribers.exists():
-                domain = request.get_host()
+                # Use our SITE_DOMAIN from settings.py
+                domain = getattr(settings, 'SITE_DOMAIN', 'beltechprintingpress.onrender.com')
+                
+                # Open ONE connection for all emails (Huge speed boost!)
+                connection = get_connection()
+                email_messages = []
+
                 for sub in subscribers:
                     context = {
                         'subject': subject,
                         'message': message_body,
                         'email': sub.email,
                         'domain': domain,
-                        'unsubscribe_url': f"http://{domain}/newsletter/unsubscribe/{sub.email}/"
+                        'unsubscribe_url': f"https://{domain}/newsletter/unsubscribe/{sub.email}/"
                     }
                     html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
                     text_content = strip_tags(html_content)
 
-                    email = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [sub.email])
+                    email = EmailMultiAlternatives(
+                        subject, 
+                        text_content, 
+                        settings.DEFAULT_FROM_EMAIL, 
+                        [sub.email],
+                        connection=connection # Link to the shared connection
+                    )
                     email.attach_alternative(html_content, "text/html")
-                    
-                    try:
-                        email.send()
-                    except Exception as e:
-                        print(f"Error sending to {sub.email}: {e}")
+                    email_messages.append(email)
 
-                messages.success(request, f"Newsletter sent to {subscribers.count()} subscribers!")
+                # Send all emails at once
+                try:
+                    connection.send_messages(email_messages)
+                    messages.success(request, f"Successfully sent to {len(email_messages)} subscribers!")
+                except Exception as e:
+                    messages.error(request, f"SMTP Error: {e}")
+                
                 return redirect('send_newsletter_page')
     else:
         form = SendNewsletterForm()
     
     return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
+
+# @user_passes_test(lambda u: u.is_staff) 
+# def send_newsletter_page(request):
+#     if request.method == 'POST':
+#         form = SendNewsletterForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             message_body = form.cleaned_data['message']
+#             subscribers = NewsLetter.objects.all()
+            
+#             if subscribers.exists():
+#                 domain = request.get_host()
+#                 for sub in subscribers:
+#                     context = {
+#                         'subject': subject,
+#                         'message': message_body,
+#                         'email': sub.email,
+#                         'domain': domain,
+#                         'unsubscribe_url': f"http://{domain}/newsletter/unsubscribe/{sub.email}/"
+#                     }
+#                     html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
+#                     text_content = strip_tags(html_content)
+
+#                     email = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [sub.email])
+#                     email.attach_alternative(html_content, "text/html")
+                    
+#                     try:
+#                         email.send()
+#                     except Exception as e:
+#                         print(f"Error sending to {sub.email}: {e}")
+
+#                 messages.success(request, f"Newsletter sent to {subscribers.count()} subscribers!")
+#                 return redirect('send_newsletter_page')
+#     else:
+#         form = SendNewsletterForm()
+    
+#     return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
 
 
 def unsubscribe(request, email):
