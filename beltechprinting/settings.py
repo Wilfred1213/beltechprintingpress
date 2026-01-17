@@ -174,13 +174,34 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # settings.py
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+import os
+from pathlib import Path
+
+# Use the environment variable if it exists, otherwise use the insecure local one
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$v19c0)0w$#o6)!68geyuipgib-#(hs2m-^8m7c=4=nrtx(5=r')
+
+# DEBUG should be False on Render
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+
+ALLOWED_HOSTS = ['beltechprintingpress.onrender.com', '127.0.0.1', 'localhost']
+
+# Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# Site Domain for Newsletters/Links
+SITE_DOMAIN = os.environ.get('SITE_DOMAIN', 'http://127.0.0.1:8000')
 
 
 DEFAULT_FROM_EMAIL = 'Beltech Printing <mathiaswilfred7@gmail.com>'
@@ -190,4 +211,4 @@ DEFAULT_FROM_EMAIL = 'Beltech Printing <mathiaswilfred7@gmail.com>'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SITE_DOMAIN = env('SITE_DOMAIN', default='127.0.0.1:8000')
+# SITE_DOMAIN = env('SITE_DOMAIN', default='127.0.0.1:8000')
