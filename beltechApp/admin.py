@@ -30,6 +30,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'email', 'is_staff', 'is_active']
 
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     # Display slug and description in the list view

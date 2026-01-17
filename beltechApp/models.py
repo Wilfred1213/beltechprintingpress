@@ -15,6 +15,9 @@ class CustomUser(AbstractUser):
     image = models.ImageField(upload_to='customUser/', null=True, blank=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     
+    class Meta:
+        verbose_name = 'Account Management Staff'
+    
     def __str__(self):
         return self.username
 
