@@ -369,7 +369,7 @@
                         <div class="tp-header-bottom-item d-flex justify-content-end mt-10">
 
                             <!-- Header Button -->
-                            {% if user.is_superuser %}
+                            {% if user.is_staff %}
                             <div class="tp-header-bottom-button mr-30 d-none d-md-block">
                                 <a class="tp-header-btn" href="{% url 'inbox' %}" style="position: relative; overflow: visible !important;">
                                     <span>Message</span>
@@ -385,11 +385,7 @@
                                 </a>
                             </div>
                             {% endif %}
-                            {% comment %} <div class="tp-header-bottom-button mr-30 d-none d-md-block">
-                                
-                                <a class="tp-header-btn" href="contact.html"><span>Message</span></a>
-                            </div> {% endcomment %}
-
+                            
                             <!-- Header Button -->
                             <div class="tp-header-bottom-toggle">
                                 <button class="tp-menu-bar"><img src="{% static 'beltechApp/assets/img/header/toggle.svg' %}" alt=""></button>

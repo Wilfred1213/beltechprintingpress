@@ -472,7 +472,7 @@ def newsletter(request):
 
 
 
-@user_passes_test(lambda u: u.is_superuser) 
+@user_passes_test(lambda u: u.is_staff) 
 def send_newsletter_page(request):
     if request.method == 'POST':
         form = SendNewsletterForm(request.POST)

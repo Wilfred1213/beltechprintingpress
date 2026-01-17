@@ -42,7 +42,7 @@ def send_contact_email_notification(sender, instance, created, **kwargs):
 def send_welcome_email(sender, instance, created, **kwargs):
     if created:
         subject = "Welcome to Beltech Printing!"
-        domain = "127.0.0.1:8000" # Update this to your real domain later
+        domain = "https://beltechprintingpress.onrender.com/" # Update this to your real domain later
         
         context = {
             'subject': subject,
