@@ -35,7 +35,13 @@ SECRET_KEY = env('SECRET_KEY')
 # DEBUG = True
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'beltechprintingpress-1.onrender.com', # The exact URL from your error log
+    'beltechprintingpress.onrender.com',   # Your main domain
+    '127.0.0.1',                           # For local testing
+    'localhost',                           # For local testing
+]
 
 
 DJANGO_APPS = [
