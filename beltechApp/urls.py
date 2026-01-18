@@ -28,7 +28,9 @@ urlpatterns = [
     path('service_detail/<int:service_id>/', views.service_detail, name='service_detail'),
     path('newsletter/', views.newsletter, name='newsletter' ),
     path('send_newsletter_page/', views.send_newsletter_page, name='send_newsletter_page' ),
+    # path('newsletter/unsubscribe/<str:email>/', views.unsubscribe, name='unsubscribe'),
     path('newsletter/unsubscribe/<str:email>/', views.unsubscribe, name='unsubscribe'),
+    # path('unsubscribe/<str:email>/', views.unsubscribe, name='unsubscribe'),
 
     
 ]
