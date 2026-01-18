@@ -36,12 +36,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = [
-    'beltechprintingpress-1.onrender.com', # The exact URL from your error log
-    'beltechprintingpress.onrender.com',   # Your main domain
-    '127.0.0.1',                           # For local testing
-    'localhost',                           # For local testing
-]
+ALLOWED_HOSTS = ['developer7.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 
 DJANGO_APPS = [
@@ -196,7 +191,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$v19c0)0w$#o6)!68geyu
 # DEBUG should be False on Render
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['beltechprintingpress.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['Developer7.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
