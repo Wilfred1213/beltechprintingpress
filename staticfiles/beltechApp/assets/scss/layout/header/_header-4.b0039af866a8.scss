@@ -1,0 +1,83 @@
+@use '../../utils' as *;
+
+
+
+/*----------------------------------------*/
+/*  3.4 Header Style 4
+/*----------------------------------------*/
+
+.tp-header {
+    &-4 {
+        &-transparent {
+            position: absolute !important;
+            left: 0;
+            margin: auto;
+            top: 0;
+            width: 100%;
+            z-index: 99;
+            background: transparent;
+        }
+        &-bottom {
+            background: none;
+            padding: 0 210px;
+            border-bottom: none;
+            @media #{$x3l} {
+                padding: 0 130px;
+            }
+            @media #{$xxl} {
+                padding: 0 40px;
+            }
+            @media #{$xl} {
+                padding: 0 10px;
+            }
+            @media #{$lg,$md} {
+                padding: 0 30px;
+            }
+            @media #{$xs} {
+                padding: 0 0;
+            }
+        }
+        &-logo {
+            @media #{$xs} {
+                margin-left: 0;
+            }
+        }
+        &-search {
+            & button {
+                font-size: 24px;
+                color: var(--tp-common-white);
+                line-height: 67px;
+            }
+        }
+        &-btn {
+            background: #209ffa;
+        }
+        &-shop {
+            & button {
+                font-size: 22px;
+                color: var(--tp-common-white);
+                line-height: 60px;
+            }
+            & span {
+                width: 22px;
+                height: 22px;
+                line-height: 22px;
+                text-align: center;
+                display: inline-block;
+                background-color: #ff4328;
+                color: var(--tp-common-white);
+                border-radius: 50%;
+                font-size: 12px;
+                font-weight: 600;
+                position: absolute;
+                left: 26px;
+                top: 17px;
+            }
+        }
+        &-bottom-toggle {
+            &::before {
+                background: #0c564a;
+            }
+        }
+    }   
+}

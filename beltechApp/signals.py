@@ -42,27 +42,38 @@ def send_contact_email_notification(sender, instance, created, **kwargs):
 def send_welcome_email(sender, instance, created, **kwargs):
     if created:
         subject = "Welcome to Beltech Printing!"
-        domain = "https://beltechprintingpress.onrender.com/" # Update this to your real domain later
+        
+        # Use the domain from settings (the one we fixed in your .env)
+        site_domain = settings.SITE_DOMAIN 
+        
+        # Clean domain for the logo link (removes https:// for display)
+        clean_domain = site_domain.replace('https://', '').replace('http://', '')
         
         context = {
             'subject': subject,
             'message': "Thanks for joining us! We'll keep you updated with our latest deals and printing tips.",
             'email': instance.email,
-            'domain': domain,
-            'unsubscribe_url': f"http://{domain}/newsletter/unsubscribe/{instance.email}/"
+            'domain': clean_domain,
+            # DO NOT add http:// here, site_domain already has it!
+            'unsubscribe_url': f"{site_domain}/newsletter/unsubscribe/{instance.email}/"
         }
 
         html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
         text_content = strip_tags(html_content)
 
-        email = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [instance.email])
+        email = EmailMultiAlternatives(
+            subject, 
+            text_content, 
+            settings.DEFAULT_FROM_EMAIL, 
+            [instance.email]
+        )
         email.attach_alternative(html_content, "text/html")
 
         try:
             email.send()
         except Exception as e:
-            print(f"Welcome signal failed: {e}")
-# @receiver(post_save, sender=NewsLetter)
+            # On PythonAnywhere, it's better to log this or use a logger
+            print(f"Welcome signal failed: {e}")# @receiver(post_save, sender=NewsLetter)
 # def send_welcome_email(sender, instance, created, **kwargs):
 #     if created:
 #         subject = "Welcome to Beltech Printing!"

@@ -18,16 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # Admin Panel
     path('admin/', admin.site.urls),
-    
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # Beltech App Routes
     path('', include('beltechApp.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls')), 
 ]
-# This is the "Magic Link" that makes images work on any device in development
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + urlpatterns

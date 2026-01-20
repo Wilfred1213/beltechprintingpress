@@ -8,7 +8,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
+
 """
+
+import mimetypes
+mimetypes.add_type("image/webp", ".webp", True)
+mimetypes.add_type("image/png", ".png", True)
 
 from pathlib import Path
 import os
@@ -182,8 +187,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-import os
-from pathlib import Path
 
 # Use the environment variable if it exists, otherwise use the insecure local one
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$v19c0)0w$#o6)!68geyuipgib-#(hs2m-^8m7c=4=nrtx(5=r')
@@ -213,3 +216,9 @@ DEFAULT_FROM_EMAIL = 'Beltech Printing <mathiaswilfred7@gmail.com>'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SITE_DOMAIN = env('SITE_DOMAIN', default='127.0.0.1:8000')
+# print(f"DEBUG: Media Root is {MEDIA_ROOT}")
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+LOGIN_URL = '/admin/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -23,11 +23,26 @@ admin.site.register(SiteSetting)
 admin.site.register(NewsLetter)
 
 
+# @admin.register(CustomUser)
+# class CustomUserAdmin(UserAdmin):
+#     # This keeps the layout looking like the standard Django User admin
+#     model = CustomUser
+#     list_display = ['username', 'email', 'is_staff', 'is_active', 'image', 'phone_number']
+
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    # This keeps the layout looking like the standard Django User admin
     model = CustomUser
-    list_display = ['username', 'email', 'is_staff', 'is_active']
+    list_display = ['username', 'email', 'is_staff', 'is_active', 'image', 'phone_number']
+    
+    # This controls the 'Add User' page
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (None, {'fields': ('image', 'phone_number')}),
+    )
+
+    # This controls the 'Change User' (Edit) page
+    fieldsets = UserAdmin.fieldsets + (
+        ('Extra Profile Info', {'fields': ('image', 'phone_number')}),
+    )
 
 
 

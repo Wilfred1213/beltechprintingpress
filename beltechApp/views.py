@@ -167,20 +167,40 @@ def blog_detail(request, blog_id):
     return render(request, 'beltechApp/blog-details.html', context)
 
 def tags(request, category_id):
-    category =Blog_category.objects.get(id =category_id)
-    blog_tags = BlogPost.objects.filter(category =category)
+    # 1. Get the specific category for filtering the blogs
+    current_category = get_object_or_404(Blog_category, id=category_id)
+    blog_tags = BlogPost.objects.filter(category=current_category)
+
+    # 2. Get ALL categories to populate the "Tag" sidebar widget
+    all_categories = Blog_category.objects.all()
 
     breadcrumb = printingHomePageImage.objects.all()
     products = Products.objects.all()
 
-    context ={
-        'blogs':blog_tags,
-        'navs':breadcrumb,
-        'products':products,
-        
-        
+    context = {
+        'blopaginators': blog_tags, # Use the name your 'latest_blog.html' expects
+        'tags': all_categories,     # This is what populates your sidebar loop
+        'category_name': current_category.name,
+        'navs': breadcrumb,
+        'products': products,
     }
     return render(request, 'beltechApp/blog.html', context)
+
+# def tags(request, category_id):
+#     category =Blog_category.objects.get(id =category_id)
+#     blog_tags = BlogPost.objects.filter(category =category)
+
+#     breadcrumb = printingHomePageImage.objects.all()
+#     products = Products.objects.all()
+
+#     context ={
+#         'blogs':blog_tags,
+#         'navs':breadcrumb,
+#         'products':products,
+        
+        
+#     }
+#     return render(request, 'beltechApp/blog.html', context)
 
 def service_tags(request, service_id):
     category =Category.objects.get(id =service_id)
@@ -193,6 +213,7 @@ def service_tags(request, service_id):
     category = Category.objects.all()
     recent_blogs =BlogPost.objects.all().order_by('-created_at')[:3]
     logo = Logo.objects.first()
+    features = Homepage_service_area.objects.all()[:3]
 
     context ={
         'navs':breadcrumb,
@@ -200,7 +221,8 @@ def service_tags(request, service_id):
         'products':blog_tags,
         'latests':latest_product,
         'recent_blogs':recent_blogs,
-        'logo': logo
+        'logo': logo,
+        'features':features
         
         
     }
@@ -470,6 +492,7 @@ def newsletter(request):
     return redirect('/')
 
 
+
 @user_passes_test(lambda u: u.is_staff) 
 def send_newsletter_page(request):
     if request.method == 'POST':
@@ -480,19 +503,32 @@ def send_newsletter_page(request):
             subscribers = NewsLetter.objects.all()
             
             if subscribers.exists():
-                domain = request.get_host()
+                # Use the domain from your .env/settings
+                # e.g., 'https://Developer7.pythonanywhere.com'
+                site_domain = settings.SITE_DOMAIN 
+                
+                # We strip the https:// just for the text display/logo link if needed
+                clean_domain = site_domain.replace('https://', '').replace('http://', '')
+
                 for sub in subscribers:
                     context = {
                         'subject': subject,
                         'message': message_body,
                         'email': sub.email,
-                        'domain': domain,
-                        'unsubscribe_url': f"http://{domain}/newsletter/unsubscribe/{sub.email}/"
+                        'domain': clean_domain,
+                        # This constructs the URL safely using the settings variable
+                        'unsubscribe_url': f"{site_domain}/newsletter/unsubscribe/{sub.email}/"
                     }
+                    
                     html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
                     text_content = strip_tags(html_content)
 
-                    email = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [sub.email])
+                    email = EmailMultiAlternatives(
+                        subject, 
+                        text_content, 
+                        settings.DEFAULT_FROM_EMAIL, 
+                        [sub.email]
+                    )
                     email.attach_alternative(html_content, "text/html")
                     
                     try:
@@ -502,6 +538,8 @@ def send_newsletter_page(request):
 
                 messages.success(request, f"Newsletter sent to {subscribers.count()} subscribers!")
                 return redirect('send_newsletter_page')
+            else:
+                messages.error(request, "No subscribers found.")
     else:
         form = SendNewsletterForm()
     
@@ -509,13 +547,60 @@ def send_newsletter_page(request):
 
 def unsubscribe(request, email):
     try:
-        subscriber = NewsLetter.objects.get(email=email)
+        # We use iexact to avoid case-sensitivity issues with emails
+        subscriber = NewsLetter.objects.get(email__iexact=email)
         subscriber.delete()
         messages.success(request, f"The email {email} has been successfully unsubscribed.")
     except NewsLetter.DoesNotExist:
         messages.error(request, "Email not found in our list.")
     
     return redirect('home')
+# @user_passes_test(lambda u: u.is_staff) 
+# def send_newsletter_page(request):
+#     if request.method == 'POST':
+#         form = SendNewsletterForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             message_body = form.cleaned_data['message']
+#             subscribers = NewsLetter.objects.all()
+            
+#             if subscribers.exists():
+#                 domain = request.get_host()
+#                 for sub in subscribers:
+#                     context = {
+#                         'subject': subject,
+#                         'message': message_body,
+#                         'email': sub.email,
+#                         'domain': domain,
+#                         'unsubscribe_url': f"http://{domain}/newsletter/unsubscribe/{sub.email}/"
+#                     }
+#                     html_content = render_to_string('beltechApp/newsletter/news_letter_template.html', context)
+#                     text_content = strip_tags(html_content)
+
+#                     email = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [sub.email])
+#                     email.attach_alternative(html_content, "text/html")
+                    
+#                     try:
+#                         email.send()
+#                     except Exception as e:
+#                         print(f"Error sending to {sub.email}: {e}")
+
+#                 messages.success(request, f"Newsletter sent to {subscribers.count()} subscribers!")
+#                 return redirect('send_newsletter_page')
+#     else:
+#         form = SendNewsletterForm()
+    
+#     return render(request, 'beltechApp/newsletter/send_news.html', {'form': form})
+
+# def unsubscribe(request, email):
+#     try:
+#         subscriber = NewsLetter.objects.get(email=email)
+#         subscriber.delete()
+#         messages.success(request, f"The email {email} has been successfully unsubscribed.")
+#     except NewsLetter.DoesNotExist:
+#         messages.error(request, "Email not found in our list.")
+    
+#     return redirect('home')
 # from django.core.mail import get_connection, EmailMultiAlternatives
 # from django.utils.html import strip_tags
 # from django.template.loader import render_to_string

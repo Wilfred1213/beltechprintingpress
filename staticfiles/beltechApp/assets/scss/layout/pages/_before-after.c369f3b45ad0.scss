@@ -1,0 +1,136 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.2 Before-After css
+/*----------------------------------------*/
+
+
+.tp-text {
+    @media #{$xs} {
+        display: none;
+    }
+    &-slider {
+        &-active {
+            margin-left: -115px;
+        }
+        &-text {
+            font-size: 88px;
+            letter-spacing: -4px;
+            color: var(--tp-common-black);
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: border-box;
+            background: linear-gradient(90deg, rgb(255, 142, 40) 0%, rgb(150, 198, 153) 54%, rgb(26, 128, 230) 100%);
+            background-clip: border-box;
+            @media #{$x3l} {
+                font-size: 75px;
+            }
+            @media #{$xxl} {
+                font-size: 67px;
+            }
+            @media #{$xl} {
+                font-size: 59px;
+            }
+            @media #{$lg} {
+                font-size: 49px;
+            }
+            @media #{$md} {
+                font-size: 41px;
+            }
+            @media #{$xs} {
+                display: none;
+            }
+        }
+    }
+}
+.beforeAfter {
+    @media #{$xs} {
+        display: none;
+    }
+    height: 570px;
+    @media #{$xs} {
+        height: 500px;
+    }
+    & img {
+        max-width: inherit;
+        height: 570px;
+        object-fit: cover;
+        @media #{$xs} {
+            height: 500px;
+        }
+    }
+}
+.before-after-2 {
+    @media #{$xs} {
+        display: none;
+    }
+    &-thumb {
+        margin-left: -30px;
+        @media #{$lg,$md,$xs} {
+            margin-left: 0;
+        }
+        & .beforeAfter {
+            & img {
+                border-radius:  6px;
+            }
+        }
+    }
+    & .tpsection p {
+        margin-bottom: 40px;
+    }
+}
+.before-after-bg-shape {
+	position: absolute;
+	right: 90px;
+	top: 0;
+	z-index: -1;
+    animation: bounce-thum-2 1s ease-in-out 0.1s forwards infinite alternate;
+    @media #{$xs} {
+        display: none;
+    }
+}
+.beforeAfter div div div {
+	background: var(--tp-common-black) !important;
+	height: 60px !important;
+	width: 60px !important;
+	line-height: 60px !important;
+    z-index: -1 !important;
+    & i {
+        border-color: var(--tp-common-white) !important;
+    }
+}
+.before-servce {
+    position: absolute;
+	top: 3%;
+	left: 20%;
+	z-index: 11;
+    @media #{$xs} {
+        display: none;
+    }
+    & a {
+        background: var(--tp-theme-secondary);
+        color: var(--tp-common-white);
+        padding: 12px 16px;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+    }
+}
+.after-servce {
+    position: absolute;
+    top: 3%;
+    left: 51%;
+    z-index: 11;
+    @media #{$xs} {
+        display: none;
+    }
+    & a {
+        background: var(--tp-common-white);
+        color: var(--tp-common-black);
+        padding: 12px 16px;
+        font-weight: 700;
+        font-family: var(--tp-ff-heading);
+    }
+}
+
+
+

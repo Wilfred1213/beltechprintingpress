@@ -14,6 +14,12 @@ import urllib.parse
 class CustomUser(AbstractUser):
     image = models.ImageField(upload_to='customUser/', null=True, blank=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
+
+    @property
+    def imageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return ""
     
     class Meta:
         verbose_name = 'Account Management Staff'

@@ -1,0 +1,70 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  8.3 Feedback css
+/*----------------------------------------*/
+
+.tp-feedback{
+    &-4 {
+        &-area {
+            background-position: top center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0 217px;
+            @media #{$x3l} {
+                margin: 0 130px;
+            }
+            @media #{$xxl} {
+                margin: 0 50px;
+            }
+            @media #{$xl,$lg,$md,$xs} {
+                margin: 0;
+            }
+        }
+        &-bg-shape {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            @media #{$xl} {
+                right: -65px;
+            }
+            @media #{$lg} {
+                right: -210px;
+            }
+            @media #{$md,$xs} {
+                display: none;
+            }
+            & img {
+                @media #{$xl} {
+                    width: 98%;
+                }
+                @media #{$lg} {
+                    width: 75%;
+                }
+            }
+        }
+        &-section-title {
+            & .tp-section-sub-title {
+                color: #fec931;
+            }
+            & .tp-section-title {
+                color: var(--tp-common-white);
+            }
+        }
+        &-button {
+            & .tp-btn-red {
+                background: #fec931;
+                color: var(--tp-common-black);
+                &::before {
+                    background: var(--tp-theme-secondary);
+                }
+                &:hover {
+                    color: var(--tp-common-white);
+                }
+            }
+        }
+        
+    }
+}

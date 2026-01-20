@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Beltech Printing Press | {% block title%}{% endblock %}</title>
+    <title>Beltech Printing & ICT Hub LTD | {% block title%}{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,8 +29,6 @@
     <!--[if lte IE 9]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
       <![endif]-->
-
-
 
 
 
@@ -100,11 +98,11 @@
                             onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
                         
                         <span style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 26px; color: #111; letter-spacing: -0.5px; text-transform: uppercase;">
-                            Bel<span style="color: #ff5a01;">tech</span>
+                            Bel<span style="color: #ff5a01;">tech printing & ict hub ltd</span>
                         </span>
                     {% else %}
                         <span style="font-weight: 800; font-size: 26px; color: #111; text-transform: uppercase;">
-                            BEL<span style="color: #ff5a01;">TECH</span>
+                            BEL<span style="color: #ff5a01;">TECH Printing & ICT Hub LTD</span>
                         </span>
                     {% endif %}
                 </a>
@@ -168,14 +166,7 @@
                         </span>
                     </form>
                 </div>
-                {% comment %} <form action="#">
-                    <div class="p-relative">
-                        <input type="text" placeholder="Enter mail">
-                        <button>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form> {% endcomment %}
+                
             </div>
             <div class="tpoffcanvas__social">
                 <div class="social-icon">
@@ -252,12 +243,12 @@
                                 
                                 <span class="beltech-title">
                                     Bel<span style="color: #ff5a01;">tech</span> 
-                                    <span class="beltech-subtext">printing & ict hub</span>
+                                    <span class="beltech-subtext">printing & ict hub LTD</span>
                                 </span>
                             {% else %}
                                 <span class="beltech-title">
                                     BEL<span style="color: #ff5a01;">TECH</span> 
-                                    <span class="beltech-subtext">PRINTING & ICT HUB</span>
+                                    <span class="beltech-subtext">PRINTING & ICT HUB LTD</span>
                                 </span>
                             {% endif %}
                             
@@ -332,7 +323,7 @@
                             <a href="index.html"><img src="{{logo.imageUrl}}" alt=""></a>
                         </div>
                     </div> {% endcomment %}
-                    <div class="col-xl-8 d-none d-xl-block">
+                    {% comment %} <div class="col-xl-8 d-none d-xl-block">
                         <div class="tp-header-main-menu">
                             <nav class="tp-main-menu-content">
                                 <ul>
@@ -364,12 +355,110 @@
                                 </ul>
                             </nav>
                         </div>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="col-xl-8 d-none d-xl-block">
+                        <div class="tp-header-main-menu">
+                            <nav class="tp-main-menu-content">
+                                <ul>
+                                    <li class="has-dropdown"><a href="{% url 'home' %}">Home</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'service' %}">Our Services</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'shop' %}">Shop</a>
+                                        <ul class="submenu tp-submenu">
+                                            <li><a href="{% url 'shop' %}">Our Shop</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-dropdown"><a href="{% url 'blog' %}">Blog</a></li>
+                                    <li class="has-dropdown"><a href="">Pages</a>
+                                        <ul class="submenu tp-submenu">
+                                            <li><a href="{% url 'about' %}">About Us</a></li>
+                                            <li><a href="{% url 'team' %}">Our Team</a></li>
+                                            <li><a href="{% url 'testimonial' %}">Testimonials</a></li>
+                                            <li><a href="{% url 'project' %}">Our Project</a></li>
+                                            <li><a href="{% url 'faq' %}">Our Faq</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-dropdown"><a href="{% url 'contact' %}">Contact</a></li>
+
+                                    {% if user.is_staff %}
+                                    <li class="has-dropdown">
+                                        <a href="#" style="color: var(--tp-theme-primary, #ff5a01);">Admin Control</a>
+                                        <ul class="submenu tp-submenu">
+                                            <li>
+                                                <a href="{% url 'inbox' %}">
+                                                    Messages 
+                                                    {% if unread_messages > 0 %}
+                                                        <span style="background: #ff5a01; color: white; padding: 2px 8px; border-radius: 50px; font-size: 10px; margin-left: 5px;">{{ unread_messages }}</span>
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                            <li><a href="{% url 'send_newsletter_page' %}">Send Newsletter</a></li>
+                                            <li><a href="/admin/" target="_blank">Django Admin Panel</a></li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div> {% endcomment %}
+                    <div class="col-xl-8 d-none d-xl-block">
+                        <div class="tp-header-main-menu">
+                            <nav class="tp-main-menu-content">
+                                <ul>
+                                    <li class="has-dropdown"><a href="{% url 'home' %}">Home</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'service' %}">Our Services</a></li>
+                                    <li class="has-dropdown"><a href="{% url 'shop' %}">Shop</a>
+                                        <ul class="submenu tp-submenu">
+                                            <li><a href="{% url 'shop' %}">Our Shop</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-dropdown"><a href="{% url 'blog' %}">Blog</a></li>
+                                    <li class="has-dropdown"><a href="">Pages</a>
+                                        <ul class="submenu tp-submenu">
+                                            <li><a href="{% url 'about' %}">About Us</a></li>
+                                            <li><a href="{% url 'team' %}">Our Team</a></li>
+                                            <li><a href="{% url 'testimonial' %}">Testimonials</a></li>
+                                            <li><a href="{% url 'project' %}">Our Project</a></li>
+                                            <li><a href="{% url 'faq' %}">Our Faq</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-dropdown"><a href="{% url 'contact' %}">Contact</a></li>
+
+                                    {% if user.is_authenticated %}
+                                        {% if user.is_staff %}
+                                            <li class="has-dropdown">
+                                                <a href="#" style="color: #ff5a01; font-weight: bold;">Admin Panel</a>
+                                                <ul class="submenu tp-submenu">
+                                                    <li><a href="{% url 'inbox' %}">Messages ({{ unread_messages }})</a></li>
+                                                    <li><a href="{% url 'send_newsletter_page' %}">Send News</a></li>
+                                                    <li><a href="/admin/">Django Dashboard</a></li>
+                                                    <li>
+                                                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                                                            {% csrf_token %}
+                                                            <button type="submit" style="all: unset; cursor: pointer; padding: 10px 20px; color: red;">Logout</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                                                    {% csrf_token %}
+                                                    <button type="submit" style="all: unset; cursor: pointer;">Logout</button>
+                                                </form>
+                                            </li>
+                                        {% endif %}
+                                    {% else %}
+                                        <li><a href="{% url 'admin:index' %}" style="border: 1px solid #ff5a01; padding: 5px 15px; border-radius: 5px; color: #ff5a01;">Staff Login</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-7 col-7">
                         <div class="tp-header-bottom-item d-flex justify-content-end mt-10">
 
                             <!-- Header Button -->
-                            {% if user.is_staff %}
+                            {% comment %} {% if user.is_staff %}
                             <div class="tp-header-bottom-button mr-30 d-none d-md-block">
                                 <a class="tp-header-btn" href="{% url 'inbox' %}" style="position: relative; overflow: visible !important;">
                                     <span>Message</span>
@@ -384,7 +473,23 @@
                                     
                                 </a>
                             </div>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
+                            {% comment %} {% if user.is_staff %}
+                            <div class="tp-header-bottom-button mr-10 mr-md-30">
+                                <a class="tp-header-btn" href="{% url 'inbox' %}" style="position: relative; overflow: visible !important;">
+                                    <span>Message</span>
+                                    {% if unread_messages > 0 %}
+                                        <span class="message-badge">{{ unread_messages }}</span>
+                                    {% endif %}
+                                </a>
+                            </div>
+
+                            <div class="tp-header-bottom-button mr-10 mr-md-30">
+                                <a class="tp-header-btn" href="{% url 'send_newsletter_page' %}" style="position: relative; overflow: visible !important;">
+                                    <span>News</span>
+                                </a>
+                            </div>
+                        {% endif %} {% endcomment %}
                             
                             <!-- Header Button -->
                             <div class="tp-header-bottom-toggle">
@@ -612,6 +717,67 @@
                 padding: 10px 0;
             }
         }
+
+
+
+        
+
+        /* Base State: Fixed at bottom, hidden initially */
+.cookie-bar-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111111;
+    color: white;
+    padding: 20px;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* This ensures a smooth slide away */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease;
+    
+    /* Start hidden until JS adds .show */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%); 
+}
+
+/* Entrance State */
+.cookie-bar-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dismissed State: Force complete removal from mobile view */
+.cookie-hidden {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    pointer-events: none;
+}
+
+.cookie-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .cookie-content p {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+}
 </style>
 
     </header>
@@ -901,7 +1067,6 @@
         </div>
     </div>
 </div>
-
 
 
     <!-- JS here -->

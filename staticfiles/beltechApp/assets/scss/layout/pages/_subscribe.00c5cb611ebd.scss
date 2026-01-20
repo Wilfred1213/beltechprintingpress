@@ -1,0 +1,183 @@
+@use '../../utils' as *;
+
+
+/*----------------------------------------*/
+/*  9.2 Subscribe css
+/*----------------------------------------*/
+
+
+.tp-subscribe {
+    &-area {
+        background-image: linear-gradient(90deg, #0197fd 0%, #2f5deb 50%, #7501cf 100%);
+        margin: 0 242px;
+        padding-left: 110px;
+        padding-right: 110px;
+        position: relative;
+        z-index: 1;
+        @media #{$xxl} {
+            margin: 0 130px;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        @media #{$lg} {
+            margin: 0 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        @media #{$xl} {
+            margin: 0 40px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        @media #{$md} {
+            margin: 0 28px;
+            padding-left: 20px;
+            padding-right: 0px;
+        }
+        @media #{$xs} {
+            margin: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    &-section {
+        @media #{$md} {
+            margin-bottom: 40px;
+        }
+    }
+    &-title {
+        font-size: 42px;
+        letter-spacing: -2px;
+        color: var(--tp-common-white);
+        margin-bottom: 14px;
+        @media #{$xs} {
+            font-size: 40px;
+        }
+    }
+    &-paragraph {
+        font-size: 18px;
+        color: var(--tp-common-white);
+        margin-bottom: 0;
+    }
+    &-btn {
+        @media #{$md} {
+            justify-content: flex-start !important;
+        }
+        @media #{$xs} {
+            justify-content: flex-start !important;
+            margin-top: 30px;
+        }
+    }
+
+    // Home 3
+
+    &-3 {
+        &-area {
+            background: #eef7fb;
+        }
+        &-bg-shape {
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+            &-1 {
+                position: absolute;
+                top: 0;
+                left: 210px;
+                z-index: -1;
+                @media #{$x3l} {
+                    left: 160px;
+                }
+                @media #{$xxl} {
+                    left: 100px;
+                }
+                @media #{$xl} {
+                    left: 20px;
+                }
+            }
+            &-2 {
+                position: absolute;
+                left: 0;
+                bottom: 84px;
+                z-index: -1;
+            }
+            &-3 {
+                position: absolute;
+                left: 400px;
+                bottom: 0;
+                z-index: -1;
+                @media #{$x3l} {
+                    left: 300px;
+                }
+                @media #{$xxl} {
+                    left: 280px;
+                }
+                @media #{$xl} {
+                    display: none;
+                }
+            }
+            &-4 {
+                position: absolute;
+                right: 295px;
+                top: 0;
+                z-index: -1;
+                @media #{$x3l} {
+                    right: 200px;
+                }
+                @media #{$xxl} {
+                    right: 120px;
+                }
+            }
+            &-5 {
+                position: absolute;
+                right: 0;
+                bottom: 155px;
+                z-index: -1;
+            }
+            &-6 {
+                position: absolute;
+                bottom: 0;
+                right: 320px;
+                z-index: -1;
+                @media #{$x3l} {
+                    right: 280px;
+                }
+                @media #{$xxl} {
+                    right: 280px;
+                }
+                @media #{$xl} {
+                    display: none;
+                }
+            }
+        }
+        &-btn {
+            & a {
+                margin: 0 10px;
+            }
+            & .tp-btn-white {
+                background: var(--tp-common-black);
+                color: var(--tp-common-white);
+                &::before {
+                    background: var(--tp-theme-primary);
+                }
+            }
+        }
+        &-section {
+            & .tp-section-title {
+                font-size: 60px;
+                letter-spacing: -2px;
+                line-height: 1.2;
+                @media #{$xs} {
+                    font-size: 33px;
+                }
+                @media #{$sm} {
+                    font-size: 47px;
+                }
+            }
+        }
+    }
+
+
+
+
+
+}

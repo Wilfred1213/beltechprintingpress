@@ -235,6 +235,23 @@
                                         </div>
                                     </div>
                                     <div class="sidebar__widget sidebar__widget-last mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                        <h3 class="sidebar__widget-title">Tags</h3>
+                                        
+                                        <div class="sidebar__widget-content">
+                                            <div class="tagcloud">
+                                                {# This loops through 'all_categories' passed as 'tags' from the view #}
+                                                {% for category in tags %}
+                                                    <a href="{% url 'tags' category.id %}" 
+                                                    class="{% if category.name == category_name %}active{% endif %}">
+                                                    {{ category.name }}
+                                                    </a>
+                                                {% empty %}
+                                                    <span>No tags available</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% comment %} <div class="sidebar__widget sidebar__widget-last mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                                         <h3 class="sidebar__widget-title">Tag</h3>
                                         
                                         <div class="sidebar__widget-content">
@@ -247,7 +264,7 @@
                                                 {% endfor %}
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                 </div>
                             </div>
 

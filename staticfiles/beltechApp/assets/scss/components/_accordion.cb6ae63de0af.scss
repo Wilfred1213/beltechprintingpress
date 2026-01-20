@@ -1,0 +1,151 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  2.12 Accordion
+/*----------------------------------------*/
+
+.tp-faq {
+
+    // Home 2
+
+    &-2 {
+        &-area {
+            background: #f3f3f3;
+        }
+        &-accordion-item {
+            background: var(--tp-common-white);
+            box-shadow: 0px 4px 20px 0px rgba(16, 23, 40, 0.06);
+            @media #{$xs} {
+                padding: 0;
+            }
+            @media #{$sm} {
+                padding: 0;
+            } 
+        }
+        &-accordion-title {
+            color: var(--tp-heading-primary);
+            font-size: 18px;
+            padding: 19px 40px 19px 76px;
+            font-weight: 700;
+            font-family: var(--tp-ff-heading);
+            @media #{$xl} {
+                font-size: 16px;
+                font-weight: 600;
+            }
+            @media #{$xs} {
+                font-size: 16px;
+            }
+            &:not(.collapsed) {
+                & .tp-faq-2-accordion-btn {
+                    background: var(--tp-theme-primary);
+                    &::before {
+                        background: var(--tp-theme-primary);
+                        -webkit-transform: translateX(-50%) rotate(90deg);
+                        -moz-transform: translateX(-50%) rotate(90deg);
+                        -ms-transform: translateX(-50%) rotate(90deg);
+                        -o-transform: translateX(-50%) rotate(90deg);
+                        transform: translateX(-50%) rotate(90deg);
+                    }
+                }
+            }
+            &:focus {
+                border: none;
+                box-shadow: none;
+            }
+        }
+        &-accordion-header {
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                width: 88%;
+                height: 1px;
+                bottom: 0;
+                background: #ddd;
+                transform: translate(-50%, 0%);
+                left: 50%;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        &-accordion-btn {
+            position: absolute;
+            top: 50%;
+            left: 30px;
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            -webkit-transition: 0.5s;
+            -moz-transition: 0.5s;
+            -ms-transition: 0.5s;
+            -o-transition: 0.5s;
+            transition: 0.5s;
+            background: var(--tp-common-black);
+            line-height: 25px;
+            text-align: center;
+            border-radius: 50%;
+            &::before {
+                position: absolute;
+                content: "";
+                width: 2px;
+                height: 10px;
+                left: 50%;
+                top: 8px;
+                background-color: var(--tp-common-white);
+                -webkit-transform: translateX(-50%);
+                -moz-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                -o-transform: translateX(-50%);
+                transform: translateX(-50%);
+                border-radius: 2px;
+                -webkit-transition: 0.5s;
+                -moz-transition: 0.5s;
+                -ms-transition: 0.5s;
+                -o-transition: 0.5s;
+                transition: 0.5s;
+            }
+            &::after {
+                position: absolute;
+                content: "";
+                width: 10px;
+                height: 2px;
+                left: 8px;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+                background-color: var(--tp-common-white);
+                border-radius: 2px;
+                -webkit-transition: 0.5s;
+                -moz-transition: 0.5s;
+                -ms-transition: 0.5s;
+                -o-transition: 0.5s;
+                transition: 0.5s;
+            }
+        }
+        &-accordion-pera {
+            padding: 20px 25px 24px 30px;
+            @media #{$lg} {
+                padding: 20px 110px 24px 30px;
+            }
+            @media #{$xs} {
+                font-size: 13px;
+                & br {
+                    display: none;
+                }
+            }
+            @media #{$sm} {
+                font-size: 15px;
+            } 
+        }
+    }
+}
+
+
