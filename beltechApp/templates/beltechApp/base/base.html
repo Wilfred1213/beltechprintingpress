@@ -18,8 +18,18 @@
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/swiper-bundle.css' %}">
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/magnific-popup.css' %}">
-    {% comment %} <link rel="stylesheet" href="{% static 'beltechApp/assets/css/font-awesome-pro.css' %}"> {% endcomment %}
-    <link rel="stylesheet" href="{% static 'beltechApp/assets/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'beltechApp/assets/css/all.min.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'beltechApp/assets/css/font-awesome.css' %}"> {% endcomment %}
+    
+    <!-- Font Awesome Free (CDN) -->
+    {% comment %} <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SzlrxWtvZzR4Zlqz7V4l2uP0Z1bJ7tLkG6FQGZ6Z8lFZl8ZlKz0lJQn5z6l5Zp1U4P7PpFQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    /> {% endcomment %}
+
 
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/flaticon_presvilla.css' %}">
     <link rel="stylesheet" href="{% static 'beltechApp/assets/css/spacing.css' %}">
@@ -69,13 +79,27 @@
 
 
     <!-- Start Search Popup Section -->
-    <div class="search-popup">
+    {% comment %} <div class="search-popup">
         <button class="close-search style-two"><span class="flaticon-multiply"><i class="far fa-times-circle"></i></span></button>
         <button class="close-search"><i class="fa-light fa-arrow-up"></i></button>
         <form method="post" action="#">
             <div class="form-group">
                 <input type="search" name="search-field" value="" placeholder="Search Here" required="">
-                <button type="submit"><i class="fal fa-search"></i></button>
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div> {% endcomment %}
+    <div class="search-popup">
+        <button class="close-search style-two">
+            <span class="flaticon-multiply"><i class="fa-solid fa-circle-xmark"></i></span>
+        </button>
+        
+        <button class="close-search"><i class="fa-solid fa-arrow-up"></i></button>
+        
+        <form method="post" action="#">
+            <div class="form-group">
+                <input type="search" name="search-field" value="" placeholder="Search Here" required="">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
     </div>
@@ -86,7 +110,7 @@
     <div class="tpoffcanvas-area">
         <div class="tpoffcanvas">
             <div class="tpoffcanvas__close-btn">
-                <button class="close-btn"><i class="fal fa-times"></i></button>
+                <button class="close-btn"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
             
             <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
@@ -99,7 +123,7 @@
                             height="50" 
                             onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
                         
-                        <span style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 26px; color: #111; letter-spacing: -0.5px; text-transform: uppercase;">
+                        <span style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; letter-spacing: -0.5px; text-transform: uppercase;">
                             Bel<span style="color: #ff5a01;">tech printing & ict hub ltd</span>
                         </span>
                     {% else %}
@@ -227,7 +251,7 @@
                             <form action="{% url 'search_results_view' %}">
                                 <div class="tp-header-center-search-input">
                                     {{ search_form }}
-                                    <span><i class="flaticon-search"></i></span>
+                                    <button> <span><i class="fa-solid fa-magnifying-glass"></i></span></button>
                                 </div>
                             </form>
                         </div>
@@ -281,7 +305,7 @@
                                             Bel<span style="color: #ff5a01;">tech</span>
                                         </span>
                                         <span style="font-family: 'Poppins', sans-serif; font-weight: 400; color: #666; font-size: 10px; text-transform: uppercase; white-space: normal;">
-                                            printing & ict hub
+                                            printing & ict hub 
                                         </span>
                                     </div>
                                 {% else %}
@@ -297,111 +321,7 @@
                             </a>
                         </div>
                     </div>
-                    {% comment %} <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
-                        <div class="tp-header-center-logo text-center" style="display: flex; justify-content: center; align-items: center;">
-                            <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-                                {% if logo %}
-                                    <img src="{{ logo.main_image.url }}" 
-                                        alt="{{ logo.name }}" 
-                                        style="max-width: 55px; height: auto; display: block; visibility: visible !important; opacity: 1 !important;"
-                                        width="55" 
-                                        height="55"
-                                        onload="if(window.ScrollTrigger) ScrollTrigger.refresh()">
-                                    
-                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; color: #111; letter-spacing: -1px; text-transform: uppercase; line-height: 1; white-space: nowrap;">
-                                        Bel<span style="color: #ff5a01;">tech</span> printing & ict hub
-                                        <span style="font-weight: 400; color: #666; font-size: 16px; display: none; display: sm-inline;">printing & ict hub</span>
-                                    </span>
-                                {% else %}
-                                    <span style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; color: #111; text-transform: uppercase; white-space: nowrap;">
-                                        BEL<span style="color: #ff5a01;">TECH</span>printing & ict hub
-                                    </span>
-                                {% endif %}
-                            </a>
-                        </div>
-                    </div> {% endcomment %}
-                    {% comment %} <div class="col-lg-6 col-md-6 col-sm-5 col-5 d-block d-xl-none">
-                        <div class="tp-header-center-logo">
-                            <a href="index.html"><img src="{{logo.imageUrl}}" alt=""></a>
-                        </div>
-                    </div> {% endcomment %}
-                    {% comment %} <div class="col-xl-8 d-none d-xl-block">
-                        <div class="tp-header-main-menu">
-                            <nav class="tp-main-menu-content">
-                                <ul>
-                                    <li class="has-dropdown"><a href="{% url 'home' %}">Home</a></li>
-                                    <li class="has-dropdown"><a href="{% url 'service' %}">Our Services</a></li>
-                                    <li class="has-dropdown"><a href="{% url 'shop' %}">Shop</a>
-                                        <ul class="submenu tp-submenu">
-                                            <li><a href="{% url 'shop' %}">Our Shop</a></li>
-                                            
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown"><a href="{% url 'blog' %}">Blog</a>
-                                        
-                                    </li>
-                                    <li class="has-dropdown"><a href="">Pages</a>
-                                        <ul class="submenu tp-submenu">
-                                            <li><a href="{% url 'about' %}">About Us</a></li>
-                                            <li><a href="{% url 'team' %}">Our Team</a></li>
-                                            
-                                            <li><a href="{% url 'testimonial' %}">Testimonials</a></li>
-                                            
-                                            <li><a href="{% url 'project' %}">Our Project</a></li>
-                                            
-                                            <li><a href="{% url 'faq' %}">Our Faq</a></li>
-                                            
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown"><a href="{% url 'contact' %}">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div> {% endcomment %}
-                    {% comment %} <div class="col-xl-8 d-none d-xl-block">
-                        <div class="tp-header-main-menu">
-                            <nav class="tp-main-menu-content">
-                                <ul>
-                                    <li class="has-dropdown"><a href="{% url 'home' %}">Home</a></li>
-                                    <li class="has-dropdown"><a href="{% url 'service' %}">Our Services</a></li>
-                                    <li class="has-dropdown"><a href="{% url 'shop' %}">Shop</a>
-                                        <ul class="submenu tp-submenu">
-                                            <li><a href="{% url 'shop' %}">Our Shop</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown"><a href="{% url 'blog' %}">Blog</a></li>
-                                    <li class="has-dropdown"><a href="">Pages</a>
-                                        <ul class="submenu tp-submenu">
-                                            <li><a href="{% url 'about' %}">About Us</a></li>
-                                            <li><a href="{% url 'team' %}">Our Team</a></li>
-                                            <li><a href="{% url 'testimonial' %}">Testimonials</a></li>
-                                            <li><a href="{% url 'project' %}">Our Project</a></li>
-                                            <li><a href="{% url 'faq' %}">Our Faq</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown"><a href="{% url 'contact' %}">Contact</a></li>
-
-                                    {% if user.is_staff %}
-                                    <li class="has-dropdown">
-                                        <a href="#" style="color: var(--tp-theme-primary, #ff5a01);">Admin Control</a>
-                                        <ul class="submenu tp-submenu">
-                                            <li>
-                                                <a href="{% url 'inbox' %}">
-                                                    Messages 
-                                                    {% if unread_messages > 0 %}
-                                                        <span style="background: #ff5a01; color: white; padding: 2px 8px; border-radius: 50px; font-size: 10px; margin-left: 5px;">{{ unread_messages }}</span>
-                                                    {% endif %}
-                                                </a>
-                                            </li>
-                                            <li><a href="{% url 'send_newsletter_page' %}">Send Newsletter</a></li>
-                                            <li><a href="/admin/" target="_blank">Django Admin Panel</a></li>
-                                        </ul>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </nav>
-                        </div>
-                    </div> {% endcomment %}
+                    
                     <div class="col-xl-8 d-none d-xl-block">
                         <div class="tp-header-main-menu">
                             <nav class="tp-main-menu-content">
@@ -505,6 +425,38 @@
         </div>
 
         <style>
+/* Force the mobile dropdown buttons to show FontAwesome Free icons */
+    /* 1. Target the button and the icon specifically */
+    .tp-main-menu-mobile ul li.has-dropdown > a .dropdown-toggle-btn i,
+    .tp-main-menu-mobile ul li.has-dropdown > a .dropdown-toggle-btn i::before {
+        /* We try all possible font names for Free versions */
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", "FontAwesome", sans-serif !important;
+        font-weight: 900 !important; 
+        font-style: normal !important;
+        font-variant: normal !important;
+        text-rendering: auto !important;
+        -webkit-font-smoothing: antialiased !important;
+        
+        /* Set color to Orange so it stands out from the white box */
+        color: #ff5a01 !important; 
+        content: "\f107" !important; /* Down arrow */
+        display: inline-block !important;
+    }
+
+    /* 2. Change icon when the menu is open */
+    .tp-main-menu-mobile ul li.has-dropdown > a .dropdown-toggle-btn.dropdown-opened i::before {
+        content: "\f106" !important; /* Up arrow */
+    }
+
+    /* 3. Ensure the container isn't hiding the icon */
+    .dropdown-toggle-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: #f8f8f8 !important; /* Light grey so white icons show up if they fail */
+    }
+
+            
             /* Card Container */
 .tp-service-fancy-card {
     background: #ffffff;
