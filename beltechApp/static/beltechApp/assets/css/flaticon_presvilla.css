@@ -9,14 +9,7 @@
 *         https://www.flaticon.com
 */
 
-@font-face {
-    font-family: "flaticon_presvilla";
-    src: url("../fonts/flaticon_presvilla.woff2") format("woff2"),
-url("../fonts/flaticon_presvilla.woff") format("woff"),
-url("../fonts/flaticon_presvilla.eot") format("embedded-opentype"),
-url("../fonts/flaticon_presvilla.ttf") format("truetype"),
-url("../fonts/flaticon_presvilla.svg") format("svg")
-}
+
 
 i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
     font-family: flaticon_presvilla !important;
