@@ -165,7 +165,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+    BASE_DIR / 'beltechApp' / 'static',  # make sure this points to your app static folder
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -176,17 +179,6 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-# settings.py
-
-# settings.py
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Use the environment variable if it exists, otherwise use the insecure local one
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$v19c0)0w$#o6)!68geyuipgib-#(hs2m-^8m7c=4=nrtx(5=r')
