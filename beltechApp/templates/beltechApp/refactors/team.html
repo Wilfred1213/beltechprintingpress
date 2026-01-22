@@ -12,13 +12,23 @@
                             <h4 class="tp-team-title">{{ team.name }}</h4>
                             <p>{{ team.role }}</p>
                             <div class="tp-team-social">
-                                <div class="tp-team-btn">
-                                    <button><i class="fa-sharp fa-regular fa-share-nodes"></i></button>
-                                </div>
+                               
                                 <div class="tp-team-icon">
-                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                    {% for handle in team.socialhandlesteam_set.all %}
+                                        <a href="{{ handle.social_link_url }}" target="_blank">
+                                            {% if "facebook.com" in handle.social_link_url %}
+                                                <i class="fa-brands fa-facebook-f"></i>
+                                            {% elif "instagram.com" in handle.social_link_url %}
+                                                <i class="fa-brands fa-instagram"></i>
+                                            {% elif "linkedin.com" in handle.social_link_url %}
+                                                <i class="fa-brands fa-linkedin-in"></i>
+                                            {% elif "twitter.com" in handle.social_link_url or "x.com" in handle.social_link_url %}
+                                                <i class="fa-brands fa-x-twitter"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-link"></i> {% endif %}
+                                        </a>
+                                    {% empty %}
+                                        {% endfor %}
                                 </div>
                             </div>
                         </div>

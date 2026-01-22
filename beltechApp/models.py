@@ -371,7 +371,19 @@ class Team(models.Model):
         if self.image and hasattr(self.image, 'url'):
             return self.image.url
         return ""
-     
+    
+class SocialHandlesTeam(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    social_link_url = models.URLField(max_length=500)
+    
+    class Meta:
+        verbose_name = 'Company Social Handle'
+        verbose_name_plural = 'Company Social Handles'
+    def __str__(self):
+        return self.team.name
+    
+    
+    
 class Testimonial(models.Model):
     name = models.CharField(max_length=100, help_text="Client or customer name")
     message = models.TextField(help_text="Client testimonial message")
@@ -440,7 +452,13 @@ class CompanyInformation(models.Model):
 
     def __str__(self):
         return self.name
+class SocialHandlesCompany(models.Model):
+    company = models.ForeignKey(CompanyInformation, on_delete=models.CASCADE)
+    social_link_url = models.URLField(max_length=500)
     
+    class Meta:
+        verbose_name = 'Company Social Handle'
+        verbose_name_plural = 'Company Social Handles' # Added this for better display    
 class NewsLetter(models.Model):
     email = models.EmailField(max_length=254)
     is_active = models.BooleanField(default=True)

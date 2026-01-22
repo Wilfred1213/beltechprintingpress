@@ -78,17 +78,7 @@
     <!--  magic cursor end-->
 
 
-    <!-- Start Search Popup Section -->
-    {% comment %} <div class="search-popup">
-        <button class="close-search style-two"><span class="flaticon-multiply"><i class="far fa-times-circle"></i></span></button>
-        <button class="close-search"><i class="fa-light fa-arrow-up"></i></button>
-        <form method="post" action="#">
-            <div class="form-group">
-                <input type="search" name="search-field" value="" placeholder="Search Here" required="">
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-    </div> {% endcomment %}
+{% comment %}     
     <div class="search-popup">
         <button class="close-search style-two">
             <span class="flaticon-multiply"><i class="fa-solid fa-circle-xmark"></i></span>
@@ -102,7 +92,7 @@
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
-    </div>
+    </div> {% endcomment %}
     <!-- Start Search Popup Section -->
 
 
@@ -113,7 +103,7 @@
                 <button class="close-btn"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
             
-            <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
+            {% comment %} <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
                 <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;"> 
                     {% if logo %}
                         <img src="{{ logo.main_image.url }}" 
@@ -129,6 +119,27 @@
                     {% else %}
                         <span style="font-weight: 800; font-size: 26px; color: #111; text-transform: uppercase;">
                             BEL<span style="color: #ff5a01;">TECH Printing & ICT Hub LTD</span>
+                        </span>
+                    {% endif %}
+                </a>
+            </div> {% endcomment %}
+            <div class="tpoffcanvas__logo" style="min-height: 60px; display: flex; align-items: center; position: relative; padding-right: 60px; padding-left: 10px;">
+                <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 10px; text-decoration: none; width: 100%;"> 
+                    {% if logo %}
+                        <div style="flex-shrink: 0; width: 45px;">
+                            <img src="{{ logo.main_image.url }}" 
+                                alt="{{ logo.name }}" 
+                                style="width: 100%; height: auto; display: block;"
+                                width="45" 
+                                height="45">
+                        </div>
+                        
+                        <span style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; color: #111; line-height: 1.3; text-transform: uppercase; max-width: 100%;">
+                            Bel<span style="color: #ff5a01;">tech printing &<br>ict hub ltd</span>
+                        </span>
+                    {% else %}
+                        <span style="font-weight: 800; font-size: 18px; color: #111; text-transform: uppercase; line-height: 1.1; max-width: 100%;">
+                            BEL<span style="color: #ff5a01;">TECH Printing &<br>ICT Hub LTD</span>
                         </span>
                     {% endif %}
                 </a>
@@ -194,12 +205,35 @@
                 </div>
                 
             </div>
-            <div class="tpoffcanvas__social">
+            {% comment %} <div class="tpoffcanvas__social">
                 <div class="social-icon">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div> {% endcomment %}
+            <div class="tpoffcanvas__social">
+                <div class="social-icon">
+                    {% for handle in address.socialhandlescompany_set.all %}
+                        <a href="{{ handle.social_link_url }}" target="_blank">
+                            {% if "facebook" in handle.social_link_url %}
+                                <i class="fa-brands fa-facebook-f"></i>
+                            {% elif "instagram" in handle.social_link_url %}
+                                <i class="fa-brands fa-instagram"></i>
+                            {% elif "linkedin" in handle.social_link_url %}
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            {% elif "twitter" in handle.social_link_url or "x.com" in handle.social_link_url %}
+                                <i class="fa-brands fa-x-twitter"></i>
+                            {% elif "pinterest" in handle.social_link_url %}
+                                <i class="fa-brands fa-pinterest-p"></i>
+                            {% else %}
+                                <i class="fa-solid fa-link"></i>
+                            {% endif %}
+                        </a>
+                    {% empty %}
+                        <p>Follow us for updates!</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>

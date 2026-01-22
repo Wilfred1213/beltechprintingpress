@@ -22,12 +22,8 @@ admin.site.register(CompanyInformation)
 admin.site.register(SiteSetting)
 admin.site.register(NewsLetter)
 
+# admin.site.register(SocialHandlesCompany)
 
-# @admin.register(CustomUser)
-# class CustomUserAdmin(UserAdmin):
-#     # This keeps the layout looking like the standard Django User admin
-#     model = CustomUser
-#     list_display = ['username', 'email', 'is_staff', 'is_active', 'image', 'phone_number']
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
@@ -43,7 +39,6 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ('Extra Profile Info', {'fields': ('image', 'phone_number')}),
     )
-
 
 
 @admin.register(Category)
@@ -259,3 +254,21 @@ class ContactAdmin(admin.ModelAdmin):
 
     # Optional: Display newest messages first
     ordering = ('-date',)
+
+
+from beltechApp.models import SocialHandlesCompany, SocialHandlesTeam
+@admin.register(SocialHandlesCompany)
+class CompanySocialHandleAdmin(admin.ModelAdmin):
+    model = SocialHandlesCompany
+    # 'company' is the link, 'social_link_url' is the editable field
+    list_display = ['company', 'social_link_url']
+    list_display_links = ['company']
+    list_editable = ['social_link_url']  # Removed 'company' from here
+
+@admin.register(SocialHandlesTeam)
+class TeamSocialHandleAdmin(admin.ModelAdmin):
+    model = SocialHandlesTeam
+    # 'team' is the link, 'social_link_url' is the editable field
+    list_display = ['team', 'social_link_url']
+    list_display_links = ['team']
+    list_editable = ['social_link_url']
