@@ -190,7 +190,7 @@
                                                 <form action="#">
                                                     <div class="sidebar__search-input-2">
                                                         {{ search_form }}
-                                                        <button type="submit"><i class="far fa-search"></i></button>
+                                                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -213,7 +213,7 @@
                                                             <a href="{% url 'blog_detail' blog.id %}">{{blog.title}}</a>
                                                         </h3>
                                                         <div class="rc__meta">
-                                                            <span><i class="flaticon-clock"></i>
+                                                            <span><i class="fa-regular fa-clock"></i></span>
                                                                 {{ blog.updated_at|date:"M d, Y" }}</span>
                                                         </div>
                                                     </div>
@@ -228,7 +228,13 @@
                                             <h4 class="tp-service-details-box-title">our services</h4>
                                             <ul>
                                                 {% for product in product_count %}
-                                                <li><a href="{% url 'service_tags' product.id %}">{{ product.name }} ({{ product.total_products}}) <span><i class="flaticon-next"></i></span> </a></li>
+                                                {% comment %} <li><a href="{% url 'service_tags' product.id %}">{{ product.name }} ({{ product.total_products}}) <span><i class="fa-solid fa-arrow-right"></i></span></a></li> {% endcomment %}
+                                                <li style="list-style: none; margin-bottom: 10px;">
+                                                    <a href="{% url 'service_tags' product.id %}" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #111; width: 100%; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                                                        <span style="font-size: 15px;">{{ product.name }} ({{ product.total_products }})</span>
+                                                        <span style="color: #ff5a01; font-weight: bold; font-size: 20px; padding-left: 10px;">&rarr;</span>
+                                                    </a>
+                                                </li>
                                                 {% endfor %}
                                                 
                                             </ul>
