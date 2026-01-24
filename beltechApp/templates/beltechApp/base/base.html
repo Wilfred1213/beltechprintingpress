@@ -100,8 +100,10 @@
     <!-- tp-offcanvus-area-start -->
     <div class="tpoffcanvas-area">
         <div class="tpoffcanvas">
-            <div class="tpoffcanvas__close-btn">
-                <button class="close-btn"><i class="fa-solid fa-circle-xmark"></i></button>
+            <div class="tpoffcanvas__close-btn" style="position: absolute; top: 20px; right: 20px; z-index: 999;">
+                <button class="tp-offcanvas-close-btn" style="background: none; border: none; cursor: pointer; padding: 10px;">
+                    <i class="fa-solid fa-circle-xmark" style="font-size: 30px; color: #ff5a01;"></i>
+                </button>
             </div>
             
             {% comment %} <div class="tpoffcanvas__logo" style="min-height: 50px; display: flex; align-items: center;">
@@ -136,11 +138,11 @@
                         </div>
                         
                         <span style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; color: #111; line-height: 1.3; text-transform: uppercase; max-width: 100%;">
-                            Bel<span style="color: #ff5a01;">tech printing &<br>ict hub ltd</span>
+                            Bel<span style="color: #ff5a01;">tech printing &<br>ict hub ltd...</span>
                         </span>
                     {% else %}
                         <span style="font-weight: 800; font-size: 18px; color: #111; text-transform: uppercase; line-height: 1.1; max-width: 100%;">
-                            BEL<span style="color: #ff5a01;">TECH Printing &<br>ICT Hub LTD</span>
+                            BEL<span style="color: #ff5a01;">TECH Printing &<br>ICT Hub LTD......</span>
                         </span>
                     {% endif %}
                 </a>
@@ -1252,6 +1254,38 @@ function showAllComments() {
                 bsAlert.close();
             });
         }, 5000); // 5000ms = 5 seconds
+    });
+
+
+
+    {% comment %} colse icon x {% endcomment %}
+   document.addEventListener('DOMContentLoaded', function() {
+        // We select the button, the menu, and the overlay
+        const closeBtn = document.querySelector('.tp-offcanvas-close-btn');
+        const offcanvas = document.querySelector('.tpoffcanvas');
+        const bodyOverlay = document.querySelector('.body-overlay');
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                // 1. Hide the menu
+                if (offcanvas) {
+                    offcanvas.classList.remove('opened');
+                }
+
+                // 2. Clear the dark screen (overlay)
+                if (bodyOverlay) {
+                    bodyOverlay.classList.remove('opened');
+                    // Force hidden just in case CSS transitions hang
+                    bodyOverlay.style.visibility = 'hidden';
+                    bodyOverlay.style.opacity = '0';
+                }
+
+                // 3. Fix the "Scroll Lock" (the reason you might have to click twice)
+                document.body.classList.remove('offcanvas-opened');
+                document.body.style.overflow = 'auto';
+                document.body.style.paddingRight = '0';
+            });
+        }
     });
 
 </script>
