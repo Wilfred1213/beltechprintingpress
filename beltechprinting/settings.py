@@ -87,7 +87,7 @@ AUTH_USER_MODEL = 'beltechApp.CustomUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # 'beltechApp.middleware.AllowYouTubeEmbeddingMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Add this!
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -189,18 +189,29 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['Developer7.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Email Settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'mail.beltech.com.ng'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# new area
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.zoho.com'  # Usually starts with 'mail.'
+EMAIL_PORT = 465                    # 465 is for SSL, 587 is for TLS
+EMAIL_USE_SSL = True                # Set to True if using port 465
+EMAIL_USE_TLS = False               # Set to True if using port 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
+# end new
 
 # Site Domain for Newsletters/Links
 SITE_DOMAIN = os.environ.get('SITE_DOMAIN', 'http://127.0.0.1:8000')
 
 
-DEFAULT_FROM_EMAIL = 'Beltech Printing <mathiaswilfred7@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
