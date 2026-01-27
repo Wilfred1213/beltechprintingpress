@@ -188,33 +188,57 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['Developer7.pythonanywhere.com', '127.0.0.1', 'localhost']
 
-# Email Settings
+
+# new area
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'mail.beltech.com.ng'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.zoho.com'  # Usually starts with 'mail.'
+# EMAIL_PORT = 465                    # 465 is for SSL, 587 is for TLS
+# EMAIL_USE_SSL = True                # Set to True if using port 465
+# EMAIL_USE_TLS = False               # Set to True if using port 587
 # EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
+# # end new
+
+# # Site Domain for Newsletters/Links
+# SITE_DOMAIN = os.environ.get('SITE_DOMAIN', 'http://127.0.0.1:8000')
+
+
+# DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 # new area
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.zoho.com'  # Usually starts with 'mail.'
-EMAIL_PORT = 465                    # 465 is for SSL, 587 is for TLS
-EMAIL_USE_SSL = True                # Set to True if using port 465
-EMAIL_USE_TLS = False               # Set to True if using port 587
+EMAIL_HOST = 'smtp.zoho.com'
+
+# For Zoho, port 587 with TLS is generally more recommended and widely supported.
+# If you explicitly want to use 465 with SSL, keep EMAIL_PORT = 465 and EMAIL_USE_SSL = True.
+# However, for most modern setups, 587 with TLS is the standard.
+EMAIL_PORT = 587                    # 587 is typically for TLS
+EMAIL_USE_SSL = False               # Set to False if using port 587
+EMAIL_USE_TLS = True                # Set to True if using port 587 (recommended)
+
+# Ensure these are correctly loaded as environment variables in PythonAnywhere's "Web" tab.
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
+
+# This is the email address that appears as the sender.
+# It should match your EMAIL_HOST_USER for authentication with Zoho.
+DEFAULT_FROM_EMAIL = 'info@beltech.com.ng'
+
+# You can also set a SERVER_EMAIL for error notifications if needed
+# SERVER_EMAIL = 'errors@beltech.com.ng' # Optional, for Django error reporting
+
 # end new
 
 # Site Domain for Newsletters/Links
 SITE_DOMAIN = os.environ.get('SITE_DOMAIN', 'http://127.0.0.1:8000')
 
+# This line was duplicated, no need for it twice
+# DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
 
-DEFAULT_FROM_EMAIL = 'Beltech Printing Press <info@beltech.com.ng>'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
